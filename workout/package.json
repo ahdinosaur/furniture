@@ -1,0 +1,10 @@
+{
+  "name": "workout",
+  "version": "0.0.0",
+  "description": "frame for gymnasium rings",
+  "main": "index.js",
+  "license": "CC-BY-SA",
+  "dependencies": {
+    "@jscad/csg": "^0.7.0"
+  }
+}
