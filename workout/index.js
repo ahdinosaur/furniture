@@ -8,93 +8,101 @@ const INSIDE_DIAMETER = 3.20
 const OUTSIDE_DIAMETER = 4.24
 const CIRCLE_RESOLUTION = 16
 
+const ROT_RADS = Math.PI * 2
+const ROT_DEGS = 360
+
 module.exports = { main }
 
 function main () {
   const pipeOutsideDiameter = OUTSIDE_DIAMETER
+  const xLength = 160
+  const yLength = 180
+  const zLength = 300
+  const sideBraceLength = 100
+  const topBraceLength = 40
 
   return [
     // left z
     translate(
       [0, 0, (1/2) * pipeOutsideDiameter], 
-      zPipe({ length: 300 })
+      zPipe({ length: zLength })
     ),
     // right z
     translate(
-      [150, 0, (1/2) * pipeOutsideDiameter], 
-      zPipe({ length: 300 })
+      [xLength, 0, (1/2) * pipeOutsideDiameter], 
+      zPipe({ length: zLength })
     ),
     // top x
     translate(
-      [0, 0, 300 + pipeOutsideDiameter],
-      xPipe({ length: 150 })
+      [0, 0, zLength + pipeOutsideDiameter],
+      xPipe({ length: xLength })
     ),
     // back bottom x
     translate(
-      [0, 90, 0],
-      xPipe({ length: 150 })
+      [0, (1/2) * yLength, 0],
+      xPipe({ length: xLength })
     ),
     // front bottom x
     translate(
-      [0, -90, 0],
-      xPipe({ length: 150 })
+      [0, -(1/2) * yLength, 0],
+      xPipe({ length: xLength })
     ),
     // left bottom y
     translate(
-      [0, -90, 0],
-      yPipe({ length: 180 })
+      [0, -(1/2) * yLength, 0],
+      yPipe({ length: yLength })
     ),
     // right bottom y
     translate(
-      [150, -90, 0],
-      yPipe({ length: 180 })
+      [xLength, -(1/2) * yLength, 0],
+      yPipe({ length: yLength })
     ),
     // left back brace
     translate(
-      [0, -67, (1/2) * pipeOutsideDiameter],
+      [0, -(sideBraceLength / Math.sqrt(2)) - pipeOutsideDiameter, (1/2) * pipeOutsideDiameter],
       rotate(
         [-45, 0, 0],
-        zPipe({ length: 90 })
+        zPipe({ length: sideBraceLength })
       )
     ),
     // left front brace
     translate(
-      [0, 67, (1/2) * pipeOutsideDiameter],
+      [0, (sideBraceLength / Math.sqrt(2)) + pipeOutsideDiameter, (1/2) * pipeOutsideDiameter],
       rotate(
         [45, 0, 0],
-        zPipe({ length: 90 })
+        zPipe({ length: sideBraceLength })
       )
     ),
     // right back brace
     translate(
-      [150, -67, (1/2) * pipeOutsideDiameter],
+      [xLength, -(sideBraceLength / Math.sqrt(2)) - pipeOutsideDiameter, (1/2) * pipeOutsideDiameter],
       rotate(
         [-45, 0, 0],
-        zPipe({ length: 90 })
+        zPipe({ length: sideBraceLength })
       )
     ),
     // right front brace
     translate(
-      [150, 67, (1/2) * pipeOutsideDiameter],
+      [xLength, (sideBraceLength / Math.sqrt(2)) + pipeOutsideDiameter, (1/2) * pipeOutsideDiameter],
       rotate(
         [45, 0, 0],
-        zPipe({ length: 90 })
+        zPipe({ length: sideBraceLength })
       )
     ),
     // top left brace
     translate(
-      [(1/2) * pipeOutsideDiameter, 0, 276 + pipeOutsideDiameter],
+      [(1/2) * pipeOutsideDiameter, 0, zLength - (topBraceLength / Math.sqrt(2))],
       rotate(
         [0, -45, 0],
-        xPipe({ length: 30 })
+        xPipe({ length: topBraceLength })
       )
     ),
     // top right brace
     translate(
-      [150 - (1/2) * pipeOutsideDiameter, 0, 276 + pipeOutsideDiameter],
+      [xLength - (1/2) * pipeOutsideDiameter, 0, zLength - (topBraceLength / Math.sqrt(2))],
       rotate(
         [0, -135, 0],
-        xPipe({ length: 30 })
+        xPipe({ length: topBraceLength })
       )
     ),
   ]
