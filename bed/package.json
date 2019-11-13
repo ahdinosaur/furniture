@@ -1,0 +1,10 @@
+{
+  "name": "bed",
+  "version": "0.0.0",
+  "description": "frame for queen bed",
+  "main": "index.js",
+  "license": "CC-BY-SA",
+  "dependencies": {
+    "@jscad/csg": "^0.7.0"
+  }
+}
