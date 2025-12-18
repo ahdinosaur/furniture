@@ -1,10 +1,13 @@
 beam_size = [45, 90];
 post_height = 1800;
 bed_height = 1200;
-bed_length = 1200;
+bed_length = 1910;
 bed_width = 750;
 ladder_height = 1200;
 ladder_rungs = 5;
+panel_thickness = 12;
+support_bottom = 200;
+support_height = 600;
 
 // beams
 module beam_zy(length) {
@@ -21,6 +24,14 @@ module beam_xz(length) {
 
 module beam_xy(length) {
   cube([length, beam_size[1], beam_size[0]]);
+}
+
+module panel_xy(length, width) {
+  cube([length, width, panel_thickness]);
+}
+
+module panel_xz(length, width) {
+  cube([length, panel_thickness, width]);
 }
 
 module post_front() {
@@ -69,14 +80,14 @@ module bed_frame() {
   beam_xz(bed_length + beam_size[0] * 6);
 }
 
-module support_beam() {
+module support_panel() {
   color("yellow")
   translate([
     -3 * beam_size[0],
-    bed_width - beam_size[0],
-    beam_size[1],
+    bed_width + beam_size[1],
+    support_bottom,
   ])
-  beam_xz(bed_length + 6 * beam_size[0]);
+  panel_xz(bed_length + 6 * beam_size[0], support_height);
 }
 
 module loft() {
@@ -99,6 +110,7 @@ module loft() {
   ])
   bed_frame();
 
+  support_panel();
 }
 
 echo(version=version());
