@@ -1,28 +1,34 @@
-beam_size = [45, 90];
+b2x4 = [45, 90];
+b2x6 = [45, 140];
+b2x8 = [45, 190];
 post_height = 1800;
 bed_height = 1200;
 bed_length = 1910;
 bed_width = 750;
-ladder_height = 1200;
-ladder_rungs = 5;
 panel_thickness = 12;
-support_bottom = 200;
-support_height = 600;
+slat_count = 6;
+slat_width = 200;
+safety_count = 2;
 
 // beams
-module beam_zy(length) {
-  cube([beam_size[0], beam_size[1], post_height]);
+
+module beam_zx(beam_size, length) {
+  cube([beam_size[1], beam_size[0], length]);
 }
 
-module beam_yz(length) {
+module beam_zy(beam_size, length) {
+  cube([beam_size[0], beam_size[1], length]);
+}
+
+module beam_yz(beam_size, length) {
   cube([beam_size[0], length, beam_size[1]]);
 }
 
-module beam_xz(length) {
+module beam_xz(beam_size, length) {
   cube([length, beam_size[0], beam_size[1]]);
 }
 
-module beam_xy(length) {
+module beam_xy(beam_size, length) {
   cube([length, beam_size[1], beam_size[0]]);
 }
 
@@ -34,84 +40,160 @@ module panel_xz(length, width) {
   cube([length, panel_thickness, width]);
 }
 
-module post_front() {
-  color("green")
-  beam_zy(post_height);
-}
+// post
 
-module post_back() {
+module post() {
+  color("green")
+  beam_zx(b2x6, post_height);
+
   color("blue")
   translate([
-    beam_size[0] * 2,
-    0
+    0,
+    b2x6[0],
   ])
-  beam_zy(post_height);
+  beam_zy(b2x6, post_height);
 }
 
-module side_rung(top) {
-  color("red")
-  translate([0, 0, top - 2 * beam_size[0]])
-  beam_yz(bed_width + 2 * beam_size[1]);
-}
-
-module side() {
-  post_front();
-  post_back();
-
-  translate([0, bed_width + beam_size[1]]) {
-    post_front();
-    post_back();
-  }
-
-  for (ladder_index = [0: ladder_rungs]) {
-    top = ladder_height - (ladder_index / ladder_rungs) * (ladder_height - 2 * beam_size[0]);
-
-    translate([beam_size[0], 0])
-    side_rung(top);
-  }
-}
-
-module bed_frame() {
-  color("yellow")
-  beam_xz(bed_length + beam_size[0] * 6);
-
-  color("yellow")
-  translate([0, bed_width - beam_size[0]])
-  beam_xz(bed_length + beam_size[0] * 6);
-}
-
-module support_panel() {
-  color("yellow")
+module posts() {
   translate([
-    -3 * beam_size[0],
-    bed_width + beam_size[1],
-    support_bottom,
+    -b2x6[0],
+    -b2x6[0],
   ])
-  panel_xz(bed_length + 6 * beam_size[0], support_height);
+  post();
+
+  translate([
+    bed_length + b2x6[0],
+    -b2x6[0],
+  ])
+  mirror([1, 0, 0])
+  post();
+
+  translate([
+    -b2x6[0],
+    bed_width + b2x6[0],
+  ])
+  mirror([0, 1, 0])
+  post();
+
+  translate([
+    bed_length + b2x6[0],
+    bed_width + b2x6[0],
+  ])
+  mirror([1, 0, 0])
+  mirror([0, 1, 0])
+  post();
+}
+
+module rails_inner(front) {
+  if (front) {
+    beam_xz(b2x4, bed_length);
+  }
+
+  translate([
+    0,
+    bed_width - b2x4[0],
+  ])
+  beam_xz(b2x4, bed_length);
+
+  translate([
+    0,
+    b2x4[0],
+  ])
+  beam_yz(b2x4, bed_width - 2 * b2x4[0]);
+
+  translate([
+    bed_length - b2x4[0],
+    b2x4[0],
+  ])
+  beam_yz(b2x4, bed_width - 2 * b2x4[0]);
+}
+
+module rails_outer() {
+  translate([
+    -2 * b2x4[0],
+    -2 * b2x4[0],
+  ])
+  beam_xz(b2x4, bed_length + 2 * b2x4[1]);
+
+  translate([
+    -2 * b2x4[0],
+    bed_width + b2x4[0],
+  ])
+  beam_xz(b2x4, bed_length + 2 * b2x4[1]);
+
+  translate([
+    -2 * b2x4[0],
+    -b2x4[0],
+  ])
+  beam_yz(b2x4, bed_width + 2 * b2x4[0]);
+
+  translate([
+    bed_length + b2x4[0],
+    -b2x4[0],
+  ])
+  beam_yz(b2x4, bed_width + 2 * b2x4[0]);
+}
+
+// bed frame
+module bed_frame() {
+  rails_inner(true);
+
+  translate([
+    0,
+    0,
+    b2x4[1],
+  ])
+  bed_slats();
+}
+
+// bed slats
+module bed_slats() {
+  for (slat_index = [0 : slat_count - 1]) {
+    space = (slat_index / (slat_count - 1)) * (bed_length - slat_width);
+
+    translate([
+      space,
+      0,
+    ])
+    panel_xy(slat_width, bed_width);
+  }
+}
+
+// support braces
+module support_braces() {
+  rails_inner(false);
+}
+
+// safety rails
+module safety_rails() {
+  safety_distance = post_height - bed_height;
+
+  for (safety_index = [1 : safety_count]) {
+    space = (safety_index / safety_count) * (safety_distance - b2x4[1]);
+
+    translate([
+      0,
+      0,
+      space,
+    ])
+    rails_outer();
+  }
 }
 
 module loft() {
-  translate([
-    -3 * beam_size[0],
-    -beam_size[1],
-  ])
-  side();
+  posts();
 
   translate([
-    bed_length,
-    -beam_size[1],
-  ])
-  side();
-
-  translate([
-    -3 * beam_size[0],
     0,
-    bed_height
-  ])
-  bed_frame();
+    0,
+    bed_height,
+  ]) {
+    bed_frame();
 
-  support_panel();
+    safety_rails();
+  }
+
+  support_braces();
 }
 
-echo(version=version());
 loft();
