@@ -63,12 +63,14 @@ module post() {
 }
 
 module posts() {
+  // left front
   translate([
     -b2x6[0],
     -b2x6[0],
   ])
   post();
 
+  // right front
   translate([
     bed_length + b2x6[0],
     -b2x6[0],
@@ -76,6 +78,7 @@ module posts() {
   mirror([1, 0, 0])
   post();
 
+  // left back
   translate([
     -b2x6[0],
     bed_width + b2x6[0],
@@ -83,6 +86,7 @@ module posts() {
   mirror([0, 1, 0])
   post();
 
+  // right back
   translate([
     bed_length + b2x6[0],
     bed_width + b2x6[0],
@@ -93,22 +97,30 @@ module posts() {
 }
 
 module rails_inner(front) {
+  // front
   if (front) {
+    color("yellow")
     beam_xz(b2x4, bed_length);
   }
 
+  // back
+  color("yellow")
   translate([
     0,
     bed_width - b2x4[0],
   ])
   beam_xz(b2x4, bed_length);
 
+  // left
+  color("yellow")
   translate([
     0,
     b2x4[0],
   ])
   beam_yz(b2x4, bed_width - 2 * b2x4[0]);
 
+  // right
+  color("yellow")
   translate([
     bed_length - b2x4[0],
     b2x4[0],
@@ -117,18 +129,24 @@ module rails_inner(front) {
 }
 
 module safety_rail() {
+  // front
+  color("pink")
   translate([
     -2 * b2x6[0],
     -2 * b2x6[0],
   ])
   beam_xz(b2x4, bed_length + 3 * b2x6[0]);
 
+  // back
+  color("pink")
   translate([
     -2 * b2x6[0],
     bed_width + b2x6[0],
   ])
   beam_xz(b2x4, bed_length + 3 * b2x6[0]);
 
+  // left
+  color("pink")
   translate([
     -2 * b2x6[0],
     -b2x6[0],
@@ -153,6 +171,7 @@ module bed_slats() {
   for (slat_index = [0 : slat_count - 1]) {
     space = (slat_index / (slat_count - 1)) * (bed_length - slat_width);
 
+    color("purple")
     translate([
       space,
       0,
@@ -185,13 +204,14 @@ module safety_rails() {
 
 module steps() {
   // bottom shelf
+  color("orange")
   beam_yx(b2x12, step_length);
 
   // for each step
   for (step_index = [0 : step_count - 1]) {
-    step_height = (step_length + b2x12[0]) / step_count;
+    step_height = step_length / step_count;
     next_length = (1 - step_index / step_count) * step_length;
-    bottom = (step_index / (step_count - 1)) * bed_height;
+    bottom = ((step_index + 1) / (step_count)) * bed_height;
 
     translate([
       0,
@@ -199,21 +219,22 @@ module steps() {
       bottom,
     ]) {
       // step shelf
+      color("orange")
       beam_yx(b2x12, next_length);
 
       // step front side
-      if (step_index != 0) {
-        translate([
-          0,
-          0,
-          -step_height + b2x12[0],
-        ])
-        beam_zx(b2x12, step_height - b2x12[0]);
-      }
+      color("orange")
+      translate([
+        0,
+        0,
+        -step_height + b2x12[0],
+      ])
+      beam_zx(b2x12, step_height - b2x12[0]);
     }
   }
 
   // back side
+  color("orange")
   translate([
     0,
     step_length,
