@@ -1,8 +1,12 @@
-b2x4 = [45, 90];
-b2x6 = [45, 140];
-b2x8 = [45, 190];
-b2x10 = [45, 240];
-b2x12 = [45, 290];
+b45x90 = [45, 90];
+b45x140 = [45, 140];
+b45x190 = [45, 190];
+b45x240 = [45, 240];
+b45x290 = [45, 290];
+b25x100 = [25, 100];
+b25x150 = [25, 150];
+b25x200 = [25, 200];
+b25x300 = [25, 300];
 post_height = 1800;
 bed_height = 1200;
 bed_length = 1910;
@@ -52,44 +56,51 @@ module panel_xz(length, width) {
 
 module post() {
   color("green")
-  beam_zx(b2x6, post_height);
+  beam_zy(b45x90, post_height);
 
   color("blue")
   translate([
+    b45x140[0],
     0,
-    b2x6[0],
   ])
-  beam_zy(b2x6, post_height);
+  beam_zx(b45x90, post_height);
+
+  color("blue")
+  translate([
+    b45x140[0],
+    b45x140[0],
+  ])
+  beam_zx(b45x90, post_height);
 }
 
 module posts() {
   // left front
   translate([
-    -b2x6[0],
-    -b2x6[0],
+    -b45x140[0],
+    -b45x140[0],
   ])
   post();
 
   // right front
   translate([
-    bed_length + b2x6[0],
-    -b2x6[0],
+    bed_length + b45x140[0],
+    -b45x140[0],
   ])
   mirror([1, 0, 0])
   post();
 
   // left back
   translate([
-    -b2x6[0],
-    bed_width + b2x6[0],
+    -b45x140[0],
+    bed_width + b45x140[0],
   ])
   mirror([0, 1, 0])
   post();
 
   // right back
   translate([
-    bed_length + b2x6[0],
-    bed_width + b2x6[0],
+    bed_length + b45x140[0],
+    bed_width + b45x140[0],
   ])
   mirror([1, 0, 0])
   mirror([0, 1, 0])
@@ -100,58 +111,58 @@ module rails_inner(front) {
   // front
   if (front) {
     color("yellow")
-    beam_xz(b2x4, bed_length);
+    beam_xz(b45x90, bed_length);
   }
 
   // back
   color("yellow")
   translate([
     0,
-    bed_width - b2x4[0],
+    bed_width - b45x90[0],
   ])
-  beam_xz(b2x4, bed_length);
+  beam_xz(b45x90, bed_length);
 
   // left
   color("yellow")
   translate([
     0,
-    b2x4[0],
+    b45x90[0],
   ])
-  beam_yz(b2x4, bed_width - 2 * b2x4[0]);
+  beam_yz(b45x90, bed_width - 2 * b45x90[0]);
 
   // right
   color("yellow")
   translate([
-    bed_length - b2x4[0],
-    b2x4[0],
+    bed_length - b45x90[0],
+    b45x90[0],
   ])
-  beam_yz(b2x4, bed_width - 2 * b2x4[0]);
+  beam_yz(b45x90, bed_width - 2 * b45x90[0]);
 }
 
 module safety_rail() {
   // front
   color("pink")
   translate([
-    -2 * b2x6[0],
-    -2 * b2x6[0],
+    -2 * b45x140[0],
+    -2 * b45x140[0],
   ])
-  beam_xz(b2x4, bed_length + 3 * b2x6[0]);
+  beam_xz(b45x90, bed_length + 3 * b45x140[0]);
 
   // back
   color("pink")
   translate([
-    -2 * b2x6[0],
-    bed_width + b2x6[0],
+    -2 * b45x140[0],
+    bed_width + b45x140[0],
   ])
-  beam_xz(b2x4, bed_length + 3 * b2x6[0]);
+  beam_xz(b45x90, bed_length + 3 * b45x140[0]);
 
   // left
   color("pink")
   translate([
-    -2 * b2x6[0],
-    -b2x6[0],
+    -2 * b45x140[0],
+    -b45x140[0],
   ])
-  beam_yz(b2x4, bed_width + 2 * b2x6[0]);
+  beam_yz(b45x90, bed_width + 2 * b45x140[0]);
 }
 
 // bed frame
@@ -161,7 +172,7 @@ module bed_frame() {
   translate([
     0,
     0,
-    b2x4[1],
+    b45x90[1],
   ])
   bed_slats();
 }
@@ -191,7 +202,7 @@ module safety_rails() {
 
   // for each safety rail
   for (safety_index = [1 : safety_count]) {
-    space = (safety_index / safety_count) * (safety_distance - b2x4[1]);
+    space = (safety_index / safety_count) * (safety_distance - b45x90[1]);
 
     translate([
       0,
@@ -205,7 +216,7 @@ module safety_rails() {
 module steps() {
   // bottom shelf
   color("orange")
-  beam_yx(b2x12, step_length);
+  beam_yx(b45x290, step_length);
 
   // for each step
   for (step_index = [0 : step_count - 1]) {
@@ -220,16 +231,16 @@ module steps() {
     ]) {
       // step shelf
       color("orange")
-      beam_yx(b2x12, next_length);
+      beam_yx(b45x290, next_length);
 
       // step front side
       color("orange")
       translate([
         0,
         0,
-        -step_height + b2x12[0],
+        -step_height + b45x290[0],
       ])
-      beam_zx(b2x12, step_height - b2x12[0]);
+      beam_zx(b45x290, step_height - b45x290[0]);
     }
   }
 
@@ -240,7 +251,7 @@ module steps() {
     step_length,
     0,
   ])
-  beam_zx(b2x12, bed_height + b2x12[0]);
+  beam_zx(b45x290, bed_height + b45x290[0]);
 }
 
 module loft() {
@@ -259,7 +270,7 @@ module loft() {
   support_braces();
 
   translate([
-    bed_length + b2x6[0],
+    bed_length + b45x140[0],
     bed_width - step_length,
     0,
   ])
