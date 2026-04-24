@@ -1,5 +1,31 @@
 /*
 
+TODO:
+
+- Add middle rail under mattress
+- Add plywood sheet on rails under matress
+  - Design ventilation pattern to cut at CNC shop
+    - Hexagon vents?
+- Add plywood sheet on sides for safety
+  - Design something cool for sides to cut at CNC shop
+    - A rainbow?
+  - This will double as the bottom side panel for bracing
+
+IDEA:
+
+- Wait, the sides could also be CNC'd.
+  - See https://www.reddit.com/r/woodworking/comments/mhduhm/i_built_a_modern_lofted_bed_for_my_son_out_of/
+
+Plywood designs:
+
+- Side ladder:
+  - Params
+    - Height
+    - Width
+    - Rung count
+    - Rung width
+    - Rung height
+
 Assembly:
 
 Sides:
@@ -29,13 +55,13 @@ b25x200 = [25, 200];
 b25x300 = [25, 300];
 post_height = 2200;
 bed_height = 1800;
-bed_length = 1910;
+bed_length = 2030;
 bed_width = 1070;
 panel_thickness = 12;
 slat_count = 6;
 slat_width = 200;
 ladder_rungs = 8;
-safety_count = 3;
+safety_rungs = 3;
 support_bottom = 200;
 support_height = 600;
 
@@ -94,7 +120,6 @@ module side_rung(beam_size, top) {
   translate([0, 0, top - beam_size[1]])
   beam_yz(beam_size, bed_width + 2 * b45x90[1]);
 }
-
 module side() {
   post_front();
   post_back();
@@ -104,13 +129,18 @@ module side() {
     post_back();
   }
 
+  rung_gap = (bed_height - 2 * b45x90[1] - (ladder_rungs - 2) * b45x45[1]) / (ladder_rungs - 1);
+
   for (ladder_index = [0: ladder_rungs - 1]) {
     side_rung_beam = (ladder_index == 0 || ladder_index == ladder_rungs - 1) ? b45x90 : b45x45;
-
-    top = bed_height - (ladder_index / (ladder_rungs - 1)) * (bed_height - side_rung_beam[1]);
+    height_above = (ladder_index == 0) ? 0 : b45x90[1] + (ladder_index - 1) * b45x45[1];
+    top = bed_height - height_above - ladder_index * rung_gap;
 
     translate([b45x90[0], 0])
     side_rung(side_rung_beam, top);
+  }
+
+  for (ladder_index = [0: ladder_rungs - 1]) {
   }
 }
 
