@@ -1,3 +1,23 @@
+/*
+
+Assembly:
+
+Sides:
+
+- The rungs and posts should be screwed _and_ glued with polyeurethane glue.
+- The rungs should attach to the posts with 3x screws in a triangle.
+- The screws must be just less than 3 * 45 = 135mm
+- We might want to put wood in the empty slots between rungs
+
+
+
+Bed to sides:
+
+- Use M10 furniture bolts, 4 in a square.
+
+*/
+
+b45x45 = [45, 45];
 b45x90 = [45, 90];
 b45x140 = [45, 140];
 b45x190 = [45, 190];
@@ -7,16 +27,17 @@ b25x100 = [25, 100];
 b25x150 = [25, 150];
 b25x200 = [25, 200];
 b25x300 = [25, 300];
-post_height = 1800;
-bed_height = 1200;
+post_height = 2200;
+bed_height = 1800;
 bed_length = 1910;
-bed_width = 1000;
+bed_width = 1070;
 panel_thickness = 12;
 slat_count = 6;
 slat_width = 200;
+ladder_rungs = 8;
 safety_count = 3;
-step_length = 1400;
-step_count = 6;
+support_bottom = 200;
+support_height = 600;
 
 // beams
 
@@ -54,227 +75,86 @@ module panel_xz(length, width) {
 
 // post
 
-module post() {
+module post_front() {
   color("green")
   beam_zy(b45x90, post_height);
-
-  color("blue")
-  translate([
-    b45x140[0],
-    0,
-  ])
-  beam_zx(b45x90, post_height);
-
-  color("blue")
-  translate([
-    b45x140[0],
-    b45x140[0],
-  ])
-  beam_zx(b45x90, post_height);
 }
 
-module posts() {
-  // left front
+module post_back() {
+  color("blue")
   translate([
-    -b45x140[0],
-    -b45x140[0],
+    b45x90[0] * 2,
+    0
   ])
-  post();
-
-  // right front
-  translate([
-    bed_length + b45x140[0],
-    -b45x140[0],
-  ])
-  mirror([1, 0, 0])
-  post();
-
-  // left back
-  translate([
-    -b45x140[0],
-    bed_width + b45x140[0],
-  ])
-  mirror([0, 1, 0])
-  post();
-
-  // right back
-  translate([
-    bed_length + b45x140[0],
-    bed_width + b45x140[0],
-  ])
-  mirror([1, 0, 0])
-  mirror([0, 1, 0])
-  post();
+  beam_zy(b45x90, post_height);
 }
 
-module rails_inner(front) {
-  // front
-  if (front) {
-    color("yellow")
-    beam_xz(b45x90, bed_length);
+module side_rung(beam_size, top) {
+  color("red")
+  translate([0, 0, top - beam_size[1]])
+  beam_yz(beam_size, bed_width + 2 * b45x90[1]);
+}
+
+module side() {
+  post_front();
+  post_back();
+
+  translate([0, bed_width + b45x90[1]]) {
+    post_front();
+    post_back();
   }
 
-  // back
-  color("yellow")
-  translate([
-    0,
-    bed_width - b45x90[0],
-  ])
-  beam_xz(b45x90, bed_length);
+  for (ladder_index = [0: ladder_rungs - 1]) {
+    side_rung_beam = (ladder_index == 0 || ladder_index == ladder_rungs - 1) ? b45x90 : b45x45;
 
-  // left
-  color("yellow")
-  translate([
-    0,
-    b45x90[0],
-  ])
-  beam_yz(b45x90, bed_width - 2 * b45x90[0]);
+    top = bed_height - (ladder_index / (ladder_rungs - 1)) * (bed_height - side_rung_beam[1]);
 
-  // right
-  color("yellow")
-  translate([
-    bed_length - b45x90[0],
-    b45x90[0],
-  ])
-  beam_yz(b45x90, bed_width - 2 * b45x90[0]);
+    translate([b45x90[0], 0])
+    side_rung(side_rung_beam, top);
+  }
 }
 
-module safety_rail() {
-  // front
-  color("pink")
-  translate([
-    -2 * b45x140[0],
-    -2 * b45x140[0],
-  ])
-  beam_xz(b45x90, bed_length + 3 * b45x140[0]);
-
-  // back
-  color("pink")
-  translate([
-    -2 * b45x140[0],
-    bed_width + b45x140[0],
-  ])
-  beam_xz(b45x90, bed_length + 3 * b45x140[0]);
-
-  // left
-  color("pink")
-  translate([
-    -2 * b45x140[0],
-    -b45x140[0],
-  ])
-  beam_yz(b45x90, bed_width + 2 * b45x140[0]);
-}
-
-// bed frame
 module bed_frame() {
-  rails_inner(true);
+  color("yellow")
+  beam_xz(b45x90, bed_length + b45x90[0] * 6);
 
+  color("yellow")
+  translate([0, bed_width - b45x90[0]])
+  beam_xz(b45x90, bed_length + b45x90[0] * 6);
+}
+
+module support_panel() {
+  color("yellow")
   translate([
-    0,
-    0,
-    b45x90[1],
+    -3 * b45x90[0],
+    bed_width + b45x90[1],
+    support_bottom,
   ])
-  bed_slats();
-}
-
-// bed slats
-module bed_slats() {
-  for (slat_index = [0 : slat_count - 1]) {
-    space = (slat_index / (slat_count - 1)) * (bed_length - slat_width);
-
-    color("purple")
-    translate([
-      space,
-      0,
-    ])
-    panel_xy(slat_width, bed_width);
-  }
-}
-
-// support braces
-module support_braces() {
-  rails_inner(false);
-}
-
-// safety rails
-module safety_rails() {
-  safety_distance = post_height - bed_height;
-
-  // for each safety rail
-  for (safety_index = [1 : safety_count]) {
-    space = (safety_index / safety_count) * (safety_distance - b45x90[1]);
-
-    translate([
-      0,
-      0,
-      space,
-    ])
-    safety_rail();
-  }
-}
-
-module steps() {
-  // bottom shelf
-  color("orange")
-  beam_yx(b45x290, step_length);
-
-  // for each step
-  for (step_index = [0 : step_count - 1]) {
-    step_height = step_length / step_count;
-    next_length = (1 - step_index / step_count) * step_length;
-    bottom = ((step_index + 1) / (step_count)) * bed_height;
-
-    translate([
-      0,
-      step_length - next_length,
-      bottom,
-    ]) {
-      // step shelf
-      color("orange")
-      beam_yx(b45x290, next_length);
-
-      // step front side
-      color("orange")
-      translate([
-        0,
-        0,
-        -step_height + b45x290[0],
-      ])
-      beam_zx(b45x290, step_height - b45x290[0]);
-    }
-  }
-
-  // back side
-  color("orange")
-  translate([
-    0,
-    step_length,
-    0,
-  ])
-  beam_zx(b45x290, bed_height + b45x290[0]);
+  panel_xz(bed_length + 6 * b45x90[0], support_height);
 }
 
 module loft() {
-  posts();
-
   translate([
-    0,
-    0,
-    bed_height,
-  ]) {
-    bed_frame();
-
-    safety_rails();
-  }
-
-  support_braces();
-
-  translate([
-    bed_length + b45x140[0],
-    bed_width - step_length,
-    0,
+    -3 * b45x90[0],
+    -b45x90[1],
   ])
-  steps();
+  side();
+
+  translate([
+    bed_length,
+    -b45x90[1],
+  ])
+  side();
+
+  translate([
+    -3 * b45x90[0],
+    0,
+    bed_height
+  ])
+  bed_frame();
+
+  support_panel();
 }
 
+echo(version=version());
 loft();
