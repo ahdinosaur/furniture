@@ -11,6 +11,20 @@ TODO:
     - A rainbow?
   - This will double as the bottom side panel for bracing
 
+Guides:
+
+- https://www.productsafety.gov.au/business/search-mandatory-standards/bunk-beds-mandatory-standard
+
+Bill of Materials:
+
+- 8x posts: `post_height` = 2400mm
+- 16x ladder rungs: `bed_width` = 1090mm
+- 3x bed frames: `bed_length` + 6x 90mm = 2590mm
+- 1x bed panel: `bed_width` x `bed_length` = 1090mm x 2050mm
+- 6x safety rails: same as "bed frames" = 2590mm
+- 1x support panel
+
+
 Assembly:
 
 Sides:
@@ -42,6 +56,7 @@ bed_height = 1740;
 post_height = 2400;
 bed_length = 2030 + 20; // 10mm clearance on each side
 bed_width = 1070 + 20; // 10mm clearance on each side
+side_width = bed_width - 2 * b45x90[1];
 panel_thickness = 12;
 slat_count = 6;
 slat_width = 200;
@@ -103,14 +118,14 @@ module post_back() {
 module side_rung(top) {
   color("red")
   translate([0, 0, top - b45x90[1]])
-  beam_yz(b45x90, bed_width + 2 * b45x90[1]);
+  beam_yz(b45x90, bed_width);
 }
 
 module side() {
   post_front();
   post_back();
 
-  translate([0, bed_width + b45x90[1]]) {
+  translate([0, bed_width - b45x90[1]]) {
     post_front();
     post_back();
   }
@@ -129,37 +144,75 @@ module side() {
 
 module bed_frame() {
   color("yellow")
+  translate([0, b45x90[1]])
   beam_xz(b45x90, bed_length + b45x90[0] * 6);
 
   color("yellow")
-  translate([0, (1/2) * (bed_width - b45x90[0])])
+  translate([0, b45x90[1] + (1/2) * (side_width - b45x90[0])])
   beam_xz(b45x90, bed_length + b45x90[0] * 6);
 
   color("yellow")
-  translate([0, bed_width - b45x90[0]])
+  translate([0, side_width + b45x90[0]])
   beam_xz(b45x90, bed_length + b45x90[0] * 6);
+
+  color("orange")
+  translate([3 * b45x90[0], 0, b45x90[1]])
+  panel_xy(bed_length, bed_width);
 }
 
 module support_panel() {
-  color("yellow")
+  color("purple")
   translate([
     -3 * b45x90[0],
-    bed_width + b45x90[1],
+    bed_width,
     support_bottom,
   ])
   panel_xz(bed_length + 6 * b45x90[0], support_height);
 }
 
+module safety_rail() {
+  // front
+  color("pink")
+  translate([
+    -3 * b45x90[0],
+    -1 * b45x90[0],
+    -b45x90[1],
+  ])
+  beam_xz(b45x90, bed_length + 6 * b45x90[0]);
+
+  // back
+  color("pink")
+  translate([
+    -3 * b45x90[0],
+    bed_width,
+    -b45x90[1],
+  ])
+  beam_xz(b45x90, bed_length + 6 * b45x90[0]);
+}
+
+module safety_rails() {
+  gap = (post_height - bed_height - 2 * b45x90[1]) / (safety_rungs - 1);
+  echo(safety_gap = gap);
+
+  for (safety_index = [0: safety_rungs - 1]) {
+    top = post_height - (safety_index * gap);
+    echo(safety_index = safety_index, safety_top = top);
+
+    translate([0, 0, top])
+    safety_rail();
+  }
+}
+
 module loft() {
   translate([
     -3 * b45x90[0],
-    -b45x90[1],
+    0,
   ])
   side();
 
   translate([
     bed_length,
-    -b45x90[1],
+    0,
   ])
   side();
 
@@ -171,6 +224,8 @@ module loft() {
   bed_frame();
 
   support_panel();
+
+  safety_rails();
 }
 
 echo(version=version());
