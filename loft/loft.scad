@@ -11,21 +11,6 @@ TODO:
     - A rainbow?
   - This will double as the bottom side panel for bracing
 
-IDEA:
-
-- Wait, the sides could also be CNC'd.
-  - See https://www.reddit.com/r/woodworking/comments/mhduhm/i_built_a_modern_lofted_bed_for_my_son_out_of/
-
-Plywood designs:
-
-- Side ladder:
-  - Params
-    - Height
-    - Width
-    - Rung count
-    - Rung width
-    - Rung height
-
 Assembly:
 
 Sides:
@@ -53,10 +38,10 @@ b25x100 = [25, 100];
 b25x150 = [25, 150];
 b25x200 = [25, 200];
 b25x300 = [25, 300];
-post_height = 2200;
-bed_height = 1800;
-bed_length = 2030;
-bed_width = 1070;
+bed_height = 1750;
+post_height = 2400;
+bed_length = 2030 + 20; // 10mm clearance on each side
+bed_width = 1070 + 20; // 10mm clearance on each side
 panel_thickness = 12;
 slat_count = 6;
 slat_width = 200;
@@ -120,6 +105,7 @@ module side_rung(beam_size, top) {
   translate([0, 0, top - beam_size[1]])
   beam_yz(beam_size, bed_width + 2 * b45x90[1]);
 }
+
 module side() {
   post_front();
   post_back();
@@ -140,12 +126,20 @@ module side() {
     side_rung(side_rung_beam, top);
   }
 
-  for (ladder_index = [0: ladder_rungs - 1]) {
+  for (ladder_index = [0: safety_rungs - 1]) {
+    top = post_height - (ladder_index / (safety_rungs - 1)) * (post_height - bed_height - 2 * b45x90[1] + b45x90[0]);
+
+    translate([b45x90[0], 0])
+    side_rung(b45x45, top);
   }
 }
 
 module bed_frame() {
   color("yellow")
+  beam_xz(b45x90, bed_length + b45x90[0] * 6);
+
+  color("yellow")
+  translate([0, (1/2) * (bed_width - b45x90[0])])
   beam_xz(b45x90, bed_length + b45x90[0] * 6);
 
   color("yellow")
