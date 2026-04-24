@@ -38,7 +38,7 @@ b25x100 = [25, 100];
 b25x150 = [25, 150];
 b25x200 = [25, 200];
 b25x300 = [25, 300];
-bed_height = 1750;
+bed_height = 1740;
 post_height = 2400;
 bed_length = 2030 + 20; // 10mm clearance on each side
 bed_width = 1070 + 20; // 10mm clearance on each side
@@ -100,10 +100,10 @@ module post_back() {
   beam_zy(b45x90, post_height);
 }
 
-module side_rung(beam_size, top) {
+module side_rung(top) {
   color("red")
-  translate([0, 0, top - beam_size[1]])
-  beam_yz(beam_size, bed_width + 2 * b45x90[1]);
+  translate([0, 0, top - b45x90[1]])
+  beam_yz(b45x90, bed_width + 2 * b45x90[1]);
 }
 
 module side() {
@@ -115,22 +115,15 @@ module side() {
     post_back();
   }
 
-  rung_gap = (bed_height - 2 * b45x90[1] - (ladder_rungs - 2) * b45x45[1]) / (ladder_rungs - 1);
+  gap = (post_height - 2 * b45x90[0]) / (ladder_rungs - 1);
+  echo(ladder_gap = gap);
 
   for (ladder_index = [0: ladder_rungs - 1]) {
-    side_rung_beam = (ladder_index == 0 || ladder_index == ladder_rungs - 1) ? b45x90 : b45x45;
-    height_above = (ladder_index == 0) ? 0 : b45x90[1] + (ladder_index - 1) * b45x45[1];
-    top = bed_height - height_above - ladder_index * rung_gap;
+    top = post_height - (ladder_index * gap);
+    echo(ladder_index = ladder_index, ladder_top = top);
 
     translate([b45x90[0], 0])
-    side_rung(side_rung_beam, top);
-  }
-
-  for (ladder_index = [0: safety_rungs - 1]) {
-    top = post_height - (ladder_index / (safety_rungs - 1)) * (post_height - bed_height - 2 * b45x90[1] + b45x90[0]);
-
-    translate([b45x90[0], 0])
-    side_rung(b45x45, top);
+    side_rung(top);
   }
 }
 
