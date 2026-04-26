@@ -23,6 +23,14 @@ Bill of Materials:
 - 1x bed panel: `bed_width` x `bed_length` = 1090mm x 2050mm
 - 6x safety rails: same as "bed frames" = 2590mm
 - 1x support panel
+- polyeurethane glue:
+  - https://www.placemakers.co.nz/online/adhesives-sealants/adhesives-sealants/adhesives/specialty-adhesives/glue-premium-3-hour-cure-500ml/p/4472404
+- polyeurethane interior varnish:
+  - https://www.placemakers.co.nz/online/paint-decorating/paint/woodcare/woodcare-interior/heavy-duty-varnish-interior-satin/p/5449856
+  - https://www.placemakers.co.nz/online/paint-decorating/paint/woodcare/woodcare-interior/cabothane-clear-oil-based-satin-4l-86482030-4lz/p/4017878
+- screws:
+  - "125mm 14g Type 17 bugle-head batten screw"
+    - https://www.mitre10.co.nz/shop/building-king-bugle-head-batten-screw-125mm-x-14g-class-4-galvanised/p/389338
 
 
 Assembly:
