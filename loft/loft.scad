@@ -1,16 +1,5 @@
 /*
 
-TODO:
-
-- Add middle rail under mattress
-- Add plywood sheet on rails under matress
-  - Design ventilation pattern to cut at CNC shop
-    - Hexagon vents?
-- Add plywood sheet on sides for safety
-  - Design something cool for sides to cut at CNC shop
-    - A rainbow?
-  - This will double as the bottom side panel for bracing
-
 Guides:
 
 - https://www.productsafety.gov.au/business/search-mandatory-standards/bunk-beds-mandatory-standard
@@ -19,9 +8,10 @@ Bill of Materials:
 
 - 8x posts: `post_height` = 2400mm
 - 16x ladder rungs: `bed_width` = 1090mm
-- 3x bed frames: `bed_length` + 6x 90mm = 2590mm
+- 3x bed frames: `bed_length` + 6x 45mm = 2320mm
 - 1x bed panel: `bed_width` x `bed_length` = 1090mm x 2050mm
-- 6x safety rails: same as "bed frames" = 2590mm
+- 2x bed frame safety: `bed_width` - 2x 90mm = ???
+- 6x safety rails: same as "bed frames" = 2320mm
 - 1x support panel
 - polyeurethane glue:
   - https://www.placemakers.co.nz/online/adhesives-sealants/adhesives-sealants/adhesives/specialty-adhesives/glue-premium-3-hour-cure-500ml/p/4472404
@@ -60,18 +50,26 @@ b25x100 = [25, 100];
 b25x150 = [25, 150];
 b25x200 = [25, 200];
 b25x300 = [25, 300];
-bed_height = 1740;
-post_height = 2400;
+
+ladder_rungs = 8;
+ladder_spacing = 230 + b45x90[1];
+ladder_height = b45x90[1] + (ladder_rungs - 1) * ladder_spacing;
+echo(ladder_height = ladder_height);
+
+post_height = 2510;
+bed_height = 1690;
 bed_length = 2030 + 20; // 10mm clearance on each side
 bed_width = 1070 + 20; // 10mm clearance on each side
 side_width = bed_width - 2 * b45x90[1];
 panel_thickness = 12;
 slat_count = 6;
 slat_width = 200;
-ladder_rungs = 8;
 safety_rungs = 3;
 support_bottom = 200;
 support_height = 600;
+
+echo("ladder safety distance", ladder_height - bed_height - 12);
+echo("rail safety distance", post_height - bed_height - 12);
 
 // beams
 
@@ -129,7 +127,7 @@ module side_rung(top) {
   beam_yz(b45x90, bed_width);
 }
 
-module side() {
+module side(side_id) {
   post_front();
   post_back();
 
@@ -138,12 +136,16 @@ module side() {
     post_back();
   }
 
-  gap = (post_height - 2 * b45x90[0]) / (ladder_rungs - 1);
-  echo(ladder_gap = gap);
+  spacing = (ladder_height - 2 * b45x90[0]) / (ladder_rungs - 1);
+  if (side_id == "a") {
+    echo(safety_gap = spacing - b45x90[1]);
+  }
 
   for (ladder_index = [0: ladder_rungs - 1]) {
-    top = post_height - (ladder_index * gap);
-    echo(ladder_index = ladder_index, ladder_top = top);
+    top = ladder_height - (ladder_index * spacing);
+    if (side_id == "a") {
+      echo(ladder_index = ladder_index, ladder_top = top);
+    }
 
     translate([b45x90[0], 0])
     side_rung(top);
@@ -166,6 +168,15 @@ module bed_frame() {
   color("orange")
   translate([3 * b45x90[0], 0, b45x90[1]])
   panel_xy(bed_length, bed_width);
+
+  // safety sides, to reduce the gaps to be within guidelines
+  color("teal")
+  translate([2 * b45x90[0], b45x90[1], b45x90[1]])
+  beam_yz(b45x90, bed_width - 2 * b45x90[1]);
+
+  color("teal")
+  translate([bed_length + 3 * b45x90[0], b45x90[1], b45x90[1]])
+  beam_yz(b45x90, bed_width - 2 * b45x90[1]);
 }
 
 module support_panel() {
@@ -199,12 +210,12 @@ module safety_rail() {
 }
 
 module safety_rails() {
-  gap = (post_height - bed_height - 2 * b45x90[1]) / (safety_rungs - 1);
-  echo(safety_gap = gap);
+  spacing = (post_height - bed_height - 2 * b45x90[1]) / (safety_rungs - 1);
+  echo(safety_gap = spacing - b45x90[1]);
 
   for (safety_index = [0: safety_rungs - 1]) {
-    top = post_height - (safety_index * gap);
-    echo(safety_index = safety_index, safety_top = top);
+    top = post_height - (safety_index * spacing);
+    // echo(safety_index = safety_index, safety_top = top);
 
     translate([0, 0, top])
     safety_rail();
@@ -216,13 +227,13 @@ module loft() {
     -3 * b45x90[0],
     0,
   ])
-  side();
+  side("a");
 
   translate([
     bed_length,
     0,
   ])
-  side();
+  side("b");
 
   translate([
     -3 * b45x90[0],
@@ -236,5 +247,4 @@ module loft() {
   safety_rails();
 }
 
-echo(version=version());
 loft();
