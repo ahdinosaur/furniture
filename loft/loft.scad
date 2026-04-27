@@ -52,24 +52,27 @@ b25x200 = [25, 200];
 b25x300 = [25, 300];
 
 ladder_rungs = 8;
-ladder_spacing = 230 + b45x90[1];
+ladder_gap = 235;
+ladder_spacing = ladder_gap + b45x90[1];
 ladder_height = b45x90[1] + (ladder_rungs - 1) * ladder_spacing;
+// SAFETY: end gap is 235mm
+echo(ladder_gap = ladder_gap);
 echo(ladder_height = ladder_height);
 
-post_height = 2510;
-bed_height = 1690;
+post_height = 2435;
+bed_height = 1715;
 bed_length = 2030 + 20; // 10mm clearance on each side
 bed_width = 1070 + 20; // 10mm clearance on each side
 side_width = bed_width - 2 * b45x90[1];
 panel_thickness = 12;
 slat_count = 6;
 slat_width = 200;
-safety_rungs = 3;
+safety_rungs = 4;
 support_bottom = 200;
 support_height = 600;
 
-echo("ladder safety distance", ladder_height - bed_height - 12);
-echo("rail safety distance", post_height - bed_height - 12);
+// SAFETY: end gap is 55mm
+echo(end_gap = ladder_gap - 2 * b45x90[1]);
 
 // beams
 
@@ -138,7 +141,8 @@ module side(side_id) {
 
   spacing = (ladder_height - 2 * b45x90[0]) / (ladder_rungs - 1);
   if (side_id == "a") {
-    echo(safety_gap = spacing - b45x90[1]);
+    // SAFETY: ladder gap is 235mm
+    echo(ladder_gap = spacing - b45x90[1]);
   }
 
   for (ladder_index = [0: ladder_rungs - 1]) {
@@ -211,6 +215,7 @@ module safety_rail() {
 
 module safety_rails() {
   spacing = (post_height - bed_height - 2 * b45x90[1]) / (safety_rungs - 1);
+  // SAFETY: safety gap is 90mm
   echo(safety_gap = spacing - b45x90[1]);
 
   for (safety_index = [0: safety_rungs - 1]) {
