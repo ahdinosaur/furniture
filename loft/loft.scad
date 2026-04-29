@@ -11,9 +11,10 @@
 45x90 timber:
 - 8x posts: `post_height` = 2435mm
 - 16x ladder rungs: `bed_width` = 1090mm
-- 3x bed frames: `bed_length` + 6x 45mm = 2320mm
-- 2x bed frame safety: `bed_width` - 2x 90mm = 910mm
-- 8x safety rails: same as "bed frames" = 2320mm
+- 3x bed frames: `bed_length` = 2030mm
+- 2x bed frame safety: `bed_width` = 1090mm
+- 2x bed frame support: `bed_width` = 1090mm
+- 8x safety rails: `bed_length` + 6x 45mm  = 2320mm
 - Total 45x90 length: ~64.3m (before cutting waste)
 
 12mm plywood panels:
@@ -124,15 +125,12 @@ module panel_xz(length, width) {
 
 // post
 
-module post_front() {
+module post() {
   color("green")
   beam_zy(b45x90, post_height);
-}
 
-module post_back() {
-  color("blue")
   translate([
-    b45x90[0] * 2,
+    b45x90[0],
     0
   ])
   beam_zy(b45x90, post_height);
@@ -145,12 +143,10 @@ module side_rung(top) {
 }
 
 module side(side_id) {
-  post_front();
-  post_back();
+  post();
 
   translate([0, bed_width - b45x90[1]]) {
-    post_front();
-    post_back();
+    post();
   }
 
   spacing = (ladder_height - 2 * b45x90[0]) / (ladder_rungs - 1);
@@ -159,42 +155,55 @@ module side(side_id) {
     echo(ladder_gap = spacing - b45x90[1]);
   }
 
-  for (ladder_index = [0: ladder_rungs - 1]) {
-    top = ladder_height - (ladder_index * spacing);
-    if (side_id == "a") {
-      echo(ladder_index = ladder_index, ladder_top = top);
-    }
+  if (side_id == "a" || side_id == "b") {
+    for (ladder_index = [0: ladder_rungs - 1]) {
+      top = ladder_height - (ladder_index * spacing);
+      if (side_id == "a") {
+        echo(ladder_index = ladder_index, ladder_top = top);
+      }
 
-    translate([b45x90[0], 0])
-    side_rung(top);
+      side_rung_x_offset = side_id == "a" ? -1 * b45x90[0] : 2 * b45x90[0];
+      translate([side_rung_x_offset, 0])
+      side_rung(top);
+    }
   }
 }
 
 module bed_frame() {
   color("yellow")
   translate([0, b45x90[1]])
-  beam_xz(b45x90, bed_length + b45x90[0] * 6);
+  beam_xz(b45x90, bed_length);
 
   color("yellow")
   translate([0, b45x90[1] + (1/2) * (side_width - b45x90[0])])
-  beam_xz(b45x90, bed_length + b45x90[0] * 6);
+  beam_xz(b45x90, bed_length);
 
   color("yellow")
   translate([0, side_width + b45x90[0]])
-  beam_xz(b45x90, bed_length + b45x90[0] * 6);
+  beam_xz(b45x90, bed_length);
 
   color("orange")
-  translate([3 * b45x90[0], 0, b45x90[1]])
+  translate([0, 0, b45x90[1]])
   panel_xy(bed_length, bed_width);
+
+  // support sides
+  color("cyan")
+  translate([0, 0, -b45x90[1]])
+  beam_yz(b45x90, bed_width);
+
+  color("cyan")
+  translate([bed_length - b45x90[0], 0, -b45x90[1]])
+  beam_yz(b45x90, bed_width);
+
 
   // safety sides, to reduce the gaps to be within guidelines
   color("teal")
-  translate([2 * b45x90[0], b45x90[1], b45x90[1]])
-  beam_yz(b45x90, bed_width - 2 * b45x90[1]);
+  translate([0, 0, b45x90[1] + panel_thickness])
+  beam_yz(b45x90, bed_width);
 
   color("teal")
-  translate([bed_length + 3 * b45x90[0], b45x90[1], b45x90[1]])
-  beam_yz(b45x90, bed_width - 2 * b45x90[1]);
+  translate([bed_length - b45x90[0], 0, b45x90[1] + panel_thickness])
+  beam_yz(b45x90, bed_width);
 }
 
 module support_panel() {
@@ -243,7 +252,7 @@ module safety_rails() {
 
 module loft() {
   translate([
-    -3 * b45x90[0],
+    -2 * b45x90[0],
     0,
   ])
   side("a");
@@ -255,7 +264,7 @@ module loft() {
   side("b");
 
   translate([
-    -3 * b45x90[0],
+    0,
     0,
     bed_height
   ])
