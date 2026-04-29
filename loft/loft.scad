@@ -14,7 +14,7 @@
 - 3x bed frames: `bed_length` = 2030mm
 - 2x bed frame safety: `bed_width` = 1090mm
 - 2x bed frame support: `bed_width` = 1090mm
-- 8x safety rails: `bed_length` + 6x 45mm  = 2320mm
+- 8x safety rails: `bed_length` + 4x 45mm  = 2210mm
 - Total 45x90 length: ~64.3m (before cutting waste)
 
 12mm plywood panels:
