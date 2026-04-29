@@ -21,22 +21,18 @@
 - 1x support panel: (`bed_length` + 6x 45mm) x `support_height` = 2320mm x 600mm
 
 Polyeurethane glue:
-- https://www.placemakers.co.nz/online/adhesives-sealants/adhesives-sealants/adhesives/specialty-adhesi
-ves/glue-premium-3-hour-cure-500ml/p/4472404
+- https://www.placemakers.co.nz/online/adhesives-sealants/adhesives-sealants/adhesives/specialty-adhesives/glue-premium-3-hour-cure-500ml/p/4472404
 
 Polyeurethane interior varnish:
-- https://www.placemakers.co.nz/online/paint-decorating/paint/woodcare/woodcare-interior/heavy-duty-var
-nish-interior-satin/p/5449856
-- https://www.placemakers.co.nz/online/paint-decorating/paint/woodcare/woodcare-interior/cabothane-clea
-r-oil-based-satin-4l-86482030-4lz/p/4017878
+- https://www.placemakers.co.nz/online/paint-decorating/paint/woodcare/woodcare-interior/heavy-duty-varnish-interior-satin/p/5449856
+- https://www.placemakers.co.nz/online/paint-decorating/paint/woodcare/woodcare-interior/cabothane-clear-oil-based-satin-4l-86482030-4lz/p/4017878
 
 Screws:
 - "125mm 14g Type 17 bugle-head batten screw"
-  - https://www.mitre10.co.nz/shop/building-king-bugle-head-batten-screw-125mm-x-14g-class-4-galvanised
-/p/389338
+  - https://www.mitre10.co.nz/shop/building-king-bugle-head-batten-screw-125mm-x-14g-class-4-galvanised/p/389338
 
 Bolts:
-- 8x M10 furniture bolts (4 in a square per side, 2 sides)
+- 16x M10 furniture bolts (4 in a square per side, 4 sides)
 
 ## Cut list
 
