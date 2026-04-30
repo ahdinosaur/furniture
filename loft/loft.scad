@@ -15,14 +15,14 @@
 - 2x bed frame supports: `bed_width` = 1090mm
 - 8x safety rails: `bed_length` + 4x 45mm = 2230mm
 - 4x safety rail sides: `bed_width` = 1090mm
-- Total 45x90 length: ~55.5m (need 10x 6m sticks = 60m of stock)
+- Total 45x90 length: ~56.5m (need 10x 6m sticks = 60m of stock)
 
 12mm plywood panels:
 - 1x bed panel: `bed_width` x `bed_length` = 1090mm x 2050mm
   - Note, this could instead have a length of (2050mm + 4 * 90mm), with notches for the posts cut out.
   - Also Note, this should have holes in it for the bed mattress to breathe.
-- 1x back support panel: (`bed_length` + 6x 45mm) x `support_height` = 2320mm x 600mm
-- 1x side-a support panel: (`bed_width` + 6x 45mm) x `support_height` = 1360mm x 600mm
+- 1x back support panel: (`bed_length` + 4x 45mm) x `support_height` = 2230mm x 600mm
+- 1x side-a support panel: `bed_width` x `support_height` = 1090mm x 600mm
 
 PVA wood glue:
 - https://www.bunnings.co.nz/parfix-pva-wood-glue-250ml-250ml_p0830569
@@ -53,7 +53,7 @@ Allocation of the 30 rough pieces:
 - 1 stick:  2480 -> bed-frame-rough,  2380 -> bed-frame-rough,   ~1134 -> short-rough
 - 1 stick:  2480 -> rung-pair-rough,  2380 -> bed-frame-rough,   ~1134 -> short-rough
 
-Total yield: 8 posts + 8 safety rails + 3 bed frames + 12 shorts (1 spare).
+Total yield: 8 posts + 8 safety rails + 3 bed frames + 12 shorts (0 spare).
 
 At home (accurate cut, square one end of each rough piece, then trim to final length):
 
@@ -63,7 +63,7 @@ At home (accurate cut, square one end of each rough piece, then trim to final le
 - short-rough (~1134mm) -> 1 short (1090mm), ~44mm margin
 - rung-pair-rough (2480mm) -> 2 shorts (1090mm each); cut down the middle, then trim each
 
-Shorts are interchangeable: 6 -> ladder rungs, 2 -> bed frame supports, 3 -> safety rail sides, 1 spare.
+Shorts are interchangeable: 6 -> ladder rungs, 2 -> bed frame supports, 4 -> safety rail sides.
 
 
 ## Assembly
