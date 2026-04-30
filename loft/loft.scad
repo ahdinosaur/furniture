@@ -10,7 +10,7 @@
 
 45x90 timber:
 - 8x posts: `post_height` = 2435mm
-- 16x ladder rungs: `bed_width` = 1090mm
+- 6x ladder rungs: `bed_width` = 1090mm
 - 3x bed frames: `bed_length` = 2030mm
 - 2x bed frame safety: `bed_width` = 1090mm
 - 2x bed frame support: `bed_width` = 1090mm
@@ -21,14 +21,11 @@
 - 1x bed panel: `bed_width` x `bed_length` = 1090mm x 2050mm
 - 1x support panel: (`bed_length` + 6x 45mm) x `support_height` = 2320mm x 600mm
 
-Polyeurethane glue:
-- https://www.placemakers.co.nz/online/adhesives-sealants/adhesives-sealants/adhesives/specialty-adhesives/glue-premium-3-hour-cure-500ml/p/4472404
-
-or, PVA glue
+PVA wood glue:
+- https://www.bunnings.co.nz/parfix-pva-wood-glue-250ml-250ml_p0830569
 
 Polyeurethane interior varnish:
-- https://www.placemakers.co.nz/online/paint-decorating/paint/woodcare/woodcare-interior/heavy-duty-varnish-interior-satin/p/5449856
-- https://www.placemakers.co.nz/online/paint-decorating/paint/woodcare/woodcare-interior/cabothane-clear-oil-based-satin-4l-86482030-4lz/p/4017878
+- https://www.resene.co.nz/homeown/painting-your-home/woodcare7.htm
 
 Screws:
 - "125mm 14g Type 17 bugle-head batten screw"
@@ -90,7 +87,7 @@ b25x150 = [25, 150];
 b25x200 = [25, 200];
 b25x300 = [25, 300];
 
-ladder_rungs = 8;
+ladder_rungs = 6;
 ladder_gap = 235;
 ladder_spacing = ladder_gap + b45x90[1];
 ladder_height = b45x90[1] + (ladder_rungs - 1) * ladder_spacing;
@@ -179,7 +176,7 @@ module side(side_id) {
     echo(ladder_gap = spacing - b45x90[1]);
   }
 
-  if (side_id == "a" || side_id == "b") {
+  if (side_id != "a" || side_id == "b") {
     for (ladder_index = [0: ladder_rungs - 1]) {
       top = ladder_height - (ladder_index * spacing);
       if (side_id == "a") {
@@ -218,16 +215,6 @@ module bed_frame() {
   color("cyan")
   translate([bed_length - b45x90[0], 0, -b45x90[1]])
   beam_yz(b45x90, bed_width);
-
-
-  // safety sides, to reduce the gaps to be within guidelines
-  color("teal")
-  translate([0, 0, b45x90[1] + panel_thickness])
-  beam_yz(b45x90, bed_width);
-
-  color("teal")
-  translate([bed_length - b45x90[0], 0, b45x90[1] + panel_thickness])
-  beam_yz(b45x90, bed_width);
 }
 
 module support_panel() {
@@ -240,24 +227,31 @@ module support_panel() {
   panel_xz(bed_length + 6 * b45x90[0], support_height);
 }
 
-module safety_rail() {
+module safety_rail(is_top) {
   // front
   color("pink")
   translate([
-    -3 * b45x90[0],
+    -2 * b45x90[0],
     -1 * b45x90[0],
     -b45x90[1],
   ])
-  beam_xz(b45x90, bed_length + 6 * b45x90[0]);
+  beam_xz(b45x90, bed_length + 4 * b45x90[0]);
 
   // back
   color("pink")
   translate([
-    -3 * b45x90[0],
+    -2 * b45x90[0],
     bed_width,
     -b45x90[1],
   ])
-  beam_xz(b45x90, bed_length + 6 * b45x90[0]);
+  beam_xz(b45x90, bed_length + 4 * b45x90[0]);
+
+  // side
+  if (!is_top) {
+    color("pink")
+    translate([0, 0, 0])
+    beam_yz(b45x90, bed_width);
+  }
 }
 
 module safety_rails() {
@@ -266,11 +260,12 @@ module safety_rails() {
   echo(safety_gap = spacing - b45x90[1]);
 
   for (safety_index = [0: safety_rungs - 1]) {
+    is_top = safety_index == 0;
     top = post_height - (safety_index * spacing);
     // echo(safety_index = safety_index, safety_top = top);
 
     translate([0, 0, top])
-    safety_rail();
+    safety_rail(is_top);
   }
 }
 
