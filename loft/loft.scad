@@ -11,15 +11,16 @@
 45x90 timber:
 - 8x posts: `post_height` = 2435mm
 - 6x ladder rungs: `bed_width` = 1090mm
-- 3x bed frames: `bed_length` = 2030mm
-- 2x bed frame safety: `bed_width` = 1090mm
-- 2x bed frame support: `bed_width` = 1090mm
-- 8x safety rails: `bed_length` + 4x 45mm  = 2210mm
-- Total 45x90 length: ~65m (need 12x 6m sticks = 72m of stock)
+- 3x bed frame joists: `bed_length` = 2050mm
+- 2x bed frame supports: `bed_width` = 1090mm
+- 8x safety rails: `bed_length` + 4x 45mm = 2230mm
+- 3x safety rail sides: `bed_width` = 1090mm
+- Total 45x90 length: ~55.5m (need 10x 6m sticks = 60m of stock)
 
 12mm plywood panels:
 - 1x bed panel: `bed_width` x `bed_length` = 1090mm x 2050mm
-- 1x support panel: (`bed_length` + 6x 45mm) x `support_height` = 2320mm x 600mm
+- 1x back support panel: (`bed_length` + 6x 45mm) x `support_height` = 2320mm x 600mm
+- 1x side-a support panel: (`bed_width` + 6x 45mm) x `support_height` = 1360mm x 600mm
 
 PVA wood glue:
 - https://www.bunnings.co.nz/parfix-pva-wood-glue-250ml-250ml_p0830569
@@ -36,29 +37,31 @@ Bolts:
 
 ## Cut list
 
-Stock: 12x 6m lengths of 45x90.
+Stock: 10x 6m lengths of 45x90.
 
 PlaceMakers (rough cut, every piece must fit Toyota Hiace at <= 2700mm):
 
 For each stick, 2 cuts:
 "First piece 2480mm, second piece 2380mm, leave the rest."
-The remainder is the third piece (~1134mm after kerf). 24 cuts total.
+The remainder is the third piece (~1134mm after kerf). 20 cuts total.
 
-Allocation of the 36 rough pieces:
+Allocation of the 30 rough pieces:
 
-- 8 sticks: 2480 -> post-rough, 2380 -> safety-rail-rough, ~1134 -> short-rough
-- 3 sticks: 2480 -> rung-pair-rough, 2380 -> bed-frame-rough, ~1134 -> short-rough
-- 1 stick:  2480 -> rung-pair-rough, 2380 -> rung-pair-rough,  ~1134 -> short-rough
+- 8 sticks: 2480 -> post-rough,       2380 -> safety-rail-rough, ~1134 -> short-rough
+- 1 stick:  2480 -> bed-frame-rough,  2380 -> bed-frame-rough,   ~1134 -> short-rough
+- 1 stick:  2480 -> rung-pair-rough,  2380 -> bed-frame-rough,   ~1134 -> short-rough
 
-Total yield: 8 posts + 8 safety rails + 3 bed frames + 22 shorts (2 spare).
+Total yield: 8 posts + 8 safety rails + 3 bed frames + 12 shorts (1 spare).
 
 At home (accurate cut, square one end of each rough piece, then trim to final length):
 
 - post-rough (2480mm) -> 1 post (2435mm), 45mm margin
-- safety-rail-rough (2380mm) -> 1 safety rail (2210mm), 170mm margin
-- bed-frame-rough (2380mm) -> 1 bed frame (2030mm), 350mm margin
+- safety-rail-rough (2380mm) -> 1 safety rail (2230mm), 150mm margin
+- bed-frame-rough (2380 or 2480mm) -> 1 bed frame (2050mm), 330 or 430mm margin
 - short-rough (~1134mm) -> 1 short (1090mm), ~44mm margin
-- rung-pair-rough (2480 or 2380mm) -> 2 shorts (1090mm each); cut down the middle, then trim each
+- rung-pair-rough (2480mm) -> 2 shorts (1090mm each); cut down the middle, then trim each
+
+Shorts are interchangeable: 6 -> ladder rungs, 2 -> bed frame supports, 3 -> safety rail sides, 1 spare.
 
 
 ## Assembly
