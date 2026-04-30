@@ -35,14 +35,24 @@ Screws (post lamination only — ~80 needed for 8 posts):
   - https://www.bunnings.co.nz/titan-14g-x-75mm-zinc-gold-timber-bugle-batten-screw-100-pack_p0579085
 - 8-10 screws per post in a staggered pattern, ~250-300mm apart along the 2435mm post.
 
-Bolts — M10 x 150mm hot-dip galvanised coach (carriage) bolts + M10 flat washer + M10 Nyloc nut:
+Bolts — M10 hot-dip galvanised coach (carriage) bolts + M10 flat washer + M10 Nyloc nut.
+Two lengths, sized to the timber they pass through:
 - Coach bolts are the local NZ equivalent to "furniture bolts": the square neck under
   the dome head locks into the wood so only the nut turns. Hex bolts also work but
   need a spanner on the head and a washer on the head side.
-- Bed frame to posts: 4 joints x 4 bolts = 16
-- Ladder rungs to posts (side "b" only): 12 joints x 2 bolts = 24
-- Total: 40x M10 x 150mm coach bolts, 40 flat washers, 40 Nyloc nuts.
-- (Safety rails attachment is TBD — same fastener applies if you want full disassembly.)
+- 150mm bolts pass through 135mm of timber (3 layers x 45mm) with ~15mm protruding
+  for washer + nut. Used for the standard joints.
+- 200mm bolts pass through 180mm of timber (4 layers x 45mm) with ~20mm protruding,
+  used only at the top rung / bed-frame intersection on side "b" — one bolt through
+  all 4 layers (rung + outer post + inner post + bed-frame support) secures both the
+  rung and the bed frame at once, so the two bolt patterns don't clash.
+
+Bolt count:
+- Side "a" bed frame to posts: 2 joints x 4 = 8x M10 x 150mm (135mm joints)
+- Side "b" bed frame + top rung to posts: 2 joints x 4 = 8x M10 x 200mm (180mm joints, dual-purpose)
+- Lower 5 ladder rungs to posts: 10 joints x 2 = 20x M10 x 150mm (135mm joints)
+- Total: 28x M10 x 150mm + 8x M10 x 200mm coach bolts; 36 flat washers; 36 Nyloc nuts.
+- (Safety rails attachment is TBD — same fastener pattern applies if you want full disassembly.)
 
 ## Cut list
 
@@ -87,30 +97,34 @@ Posts (laminate two 45x90s into one 90x90):
     to avoid splitting end grain.
   - Pre-drill anywhere you hit a knot.
 
-Rungs to posts (side "b" only, 6 rungs):
+All bolted joints — common procedure:
 
-- 2x M10 x 150mm coach bolts per rung-end, in a diagonal pattern.
-- Bolt passes through rung (45mm) + outer post (45mm) + inner post (45mm)
-  = 135mm of timber. 150mm bolt leaves ~15mm protruding for washer + nut.
 - Drill 11mm clearance hole all the way through. Use an 11mm auger bit, or
   drill a 6mm pilot first then open up to 11mm from each side.
-- Coach bolt head sits on the outer face of the rung (square neck bites in);
-  flat washer + Nyloc nut on the inner face of the inner post.
-- Do NOT glue — bolts are what makes the joint disassemblable for transport.
+- Coach bolt head sits on the outer face (square neck bites in); flat
+  washer + Nyloc nut on the inner face.
+- Do NOT glue — bolts are what makes the structure disassemblable for transport.
+
+Lower 5 ladder rungs to posts (side "b" only, 10 joints, 135mm of timber):
+
+- 2x M10 x 150mm coach bolts per rung-end in a diagonal pattern.
+- Bolt traverses rung (45) + outer post (45) + inner post (45) = 135mm.
 - We might want to put wood in the empty slots between rungs.
 
-Bed to posts:
+Side "a" bed frame to posts (2 joints, 135mm of timber):
 
-- 4x M10 x 150mm coach bolts per joint, in a square pattern within the
+- 4x M10 x 150mm coach bolts per joint in a square pattern within the
   90x90 contact area where the bed-frame support meets the post pair.
-- Bolt passes through outer post (45) + inner post (45) + bed-frame
-  support (45) = 135mm. Drilling/orientation: same as the rungs.
+- Bolt traverses outer post (45) + inner post (45) + bed-frame support (45)
+  = 135mm.
 
-NOTE: the top ladder rung (Z=1625-1715) and the bed-frame support
-(Z=1625-1715) share the same Z range. Bolt nuts on the top rung will
-exit into the bed-frame support's footprint inside the post pair.
-Resolve before assembly — easiest fixes: drop the top rung by ~100mm,
-or omit it (the bed-frame edge serves as the top step).
+Side "b" bed frame + top rung to posts (2 joints, 180mm of timber):
+
+- 4x M10 x 200mm coach bolts per joint in a square pattern. These bolts
+  secure rung AND bed frame in one fastener — same bolt does both jobs,
+  so the two attachment patterns don't clash.
+- Bolt traverses rung (45) + outer post (45) + inner post (45) + bed-frame
+  support (45) = 180mm.
 
 */
 
