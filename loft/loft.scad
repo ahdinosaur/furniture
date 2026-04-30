@@ -54,6 +54,56 @@ Bolt count:
 - Total: 28x M10 x 150mm + 8x M10 x 200mm coach bolts; 36 flat washers; 36 Nyloc nuts.
 - (Safety rails attachment is TBD — same fastener pattern applies if you want full disassembly.)
 
+## Tools
+
+Cutting (at home, rough -> final length):
+- Mitre saw, or circular saw + speed square (accurate cross-cuts)
+- Jigsaw or circular saw with a fine plywood blade (for the panels)
+- Tape measure, pencil, combination square
+- Sawhorses or work bench
+
+Drilling — post lamination (75mm batten screws):
+- Cordless drill/driver
+- 5.5mm twist bit (clearance hole through the first 45mm board)
+- 4mm twist bit (pilot at the board ends and through any knots)
+- Driver bit matching the screw head — Titan 14g bugle batten is
+  typically square drive #3, but check the box.
+
+Drilling — bolted joints (M10 coach bolts):
+- 11mm auger bit, ~300mm long. Standard 230mm augers only have
+  ~165mm of flute, which is too short for the 180mm 4-layer joint.
+  - Alternative: drill a 6mm pilot first, then open up to 11mm with
+    a shorter auger from each side — keeps the holes aligned without
+    needing the long bit.
+- 17mm socket + ratchet for the M10 Nyloc nut. The square neck under
+  the coach bolt head locks into the wood, so only the nut turns —
+  no second spanner needed on the head.
+- 4-6 quick clamps to hold the layer stack square while drilling
+  through all 3 or 4 layers in one pass — keeps every bolt hole aligned.
+
+Drilling — plywood breathing holes (bed panel only):
+- 25mm Forstner bit. Forstner bits leave clean, flat-bottomed holes
+  in 12mm plywood. Spade and auger bits tear out the back face of
+  plywood badly, even with a backer.
+  - Alternative: 25mm hole saw + arbor (slower but tidy).
+- Drill from the top face with a sacrificial scrap clamped under the
+  panel to prevent blow-out on the underside.
+- Layout: ~150mm grid. For the 1090 x 2050 panel that is ~6 columns
+  x 13 rows = ~80 holes. Skip the rows that land directly above the
+  bed-frame joists — drilling there gains nothing.
+
+Gluing & finishing:
+- Glue spreader or small roller (PVA on the post mating faces)
+- 4-6 quick clamps or sash clamps (hold the post pair during cure)
+- Damp rag (wipe glue squeeze-out before it sets)
+- Random-orbital sander or sanding block (80 / 120 / 180 grit)
+- Brush or short-nap roller for the polyurethane varnish
+
+PPE & general:
+- Safety glasses (cutting, drilling)
+- Dust mask (plywood dust, sanding fines)
+- Hearing protection (mitre saw, long auger drilling)
+
 ## Cut list
 
 Stock: 10x 6m lengths of 45x90.
