@@ -29,6 +29,10 @@ PVA wood glue (for post lamination only — all other joints are bolted for disa
 
 Polyeurethane interior varnish:
 - https://www.resene.co.nz/homeown/painting-your-home/woodcare7.htm
+  - Resene Aquaclear
+- https://www.resene.co.nz/Colorwood.htm
+  - Resene Colorwood: "Rock Salt"
+    - OR... "Rising Tide"
 
 Screws (post lamination only — ~80 needed for 8 posts):
 - "75mm 14g Type 17 bugle-head batten screw" (Titan 100-pack)
@@ -47,12 +51,15 @@ Two lengths, sized to the timber they pass through:
   all 4 layers (rung + outer post + inner post + bed-frame support) secures both the
   rung and the bed frame at once, so the two bolt patterns don't clash.
 
-Bolt count:
-- Side "a" bed frame to posts: 2 joints x 4 = 8x M10 x 150mm (135mm joints)
-- Side "b" bed frame + top rung to posts: 2 joints x 4 = 8x M10 x 200mm (180mm joints, dual-purpose)
+Bolt count (every bolted joint uses 2 M10 coach bolts on a diagonal across
+the 90x90 contact patch — see the ASCII diagram in the Assembly section):
+- Side "a" bed frame to posts: 2 joints x 2 = 4x M10 x 150mm (135mm joints)
+- Side "b" bed frame + top rung to posts: 2 joints x 2 = 4x M10 x 200mm (180mm joints, dual-purpose)
 - Lower 5 ladder rungs to posts: 10 joints x 2 = 20x M10 x 150mm (135mm joints)
-- Total: 28x M10 x 150mm + 8x M10 x 200mm coach bolts; 36 flat washers; 36 Nyloc nuts.
-- (Safety rails attachment is TBD — same fastener pattern applies if you want full disassembly.)
+- Safety rails to posts: 24 joints x 2 = 48x M10 x 150mm (135mm joints)
+  - 8 horizontal (front/back) rails x 2 ends = 16 joints
+  - 4 side rails x 2 ends = 8 joints
+- Total: 72x M10 x 150mm + 4x M10 x 200mm coach bolts; 76 flat washers; 76 Nyloc nuts.
 
 ## Tools
 
@@ -70,21 +77,31 @@ Drilling — post lamination (75mm batten screws):
   typically square drive #3, but check the box.
 
 Drilling — bolted joints (M10 coach bolts):
-- 11mm auger bit, ~300mm long. Standard 230mm augers only have
-  ~165mm of flute, which is too short for the 180mm 4-layer joint.
-  - Alternative: drill a 6mm pilot first, then open up to 11mm with
-    a shorter auger from each side — keeps the holes aligned without
-    needing the long bit.
-- 17mm socket + ratchet for the M10 Nyloc nut. The square neck under
-  the coach bolt head locks into the wood, so only the nut turns —
-  no second spanner needed on the head.
-- 4-6 quick clamps to hold the layer stack square while drilling
-  through all 3 or 4 layers in one pass — keeps every bolt hole aligned.
+- 11mm auger: Irwin 11 x 200/125mm (200mm overall, 125mm flute).
+  - https://www.bunnings.co.nz/irwin-11-x-200-125mm-auger_p0355156
+  - 11mm is the textbook clearance for the M10 coach-bolt square
+    neck to bite cleanly on its flats — no mallet-and-hope needed.
+  - 125mm flute is well past the deepest single hole on this build
+    (90mm through the laminated post pair). Each part is drilled
+    separately, not through stacked layers, so flute length isn't a
+    constraint.
+  - Auger technique: start at low RPM to let the screw tip engage
+    straight, keep both hands on the drill (augers cut aggressively
+    and can torque the drill out of your hand if they catch), and
+    clamp a sacrificial scrap under the exit face for a clean back.
+- 17mm socket + ratchet for the M10 Nyloc nut. If a bolt ever spins
+  under nut torque, tap it in harder to re-seat the square neck, or
+  grip the dome head with vise grips. (Or use M10 hex bolts with a
+  washer under the head — no neck-bite needed at all.)
+- Marking gauge or combination square + sharp pencil for transferring
+  matching hole positions between parts.
 
 Drilling — plywood breathing holes (bed panel only):
-- 25mm Forstner bit. Forstner bits leave clean, flat-bottomed holes
-  in 12mm plywood. Spade and auger bits tear out the back face of
-  plywood badly, even with a backer.
+- 25mm Forstner bit.
+  - https://www.bunnings.co.nz/irwin-1-25mm-forstner-bit_p0355141
+  - Forstner bits leave clean, flat-bottomed holes
+    in 12mm plywood. Spade and auger bits tear out the back face of
+    plywood badly, even with a backer.
   - Alternative: 25mm hole saw + arbor (slower but tidy).
 - Drill from the top face with a sacrificial scrap clamped under the
   panel to prevent blow-out on the underside.
@@ -97,7 +114,14 @@ Gluing & finishing:
 - 4-6 quick clamps or sash clamps (hold the post pair during cure)
 - Damp rag (wipe glue squeeze-out before it sets)
 - Random-orbital sander or sanding block (80 / 120 / 180 grit)
-- Brush or short-nap roller for the polyurethane varnish
+- Resene No Loss Speed Brush, 125mm, for the Aquaclear varnish.
+  - https://shop.resene.co.nz/key-accessories/speedbrushes
+  - Synthetic bristles (water-based-compatible), flat dense pack
+    holds enough product for long strokes that self-level before
+    skinning over. 125mm matches the 90mm post faces well and is
+    still workable on the larger plywood panels — 175mm would be
+    faster on the panels but awkward on the 45mm edges of the rails
+    and rungs.
 
 PPE & general:
 - Safety glasses (cutting, drilling)
@@ -149,32 +173,75 @@ Posts (laminate two 45x90s into one 90x90):
 
 All bolted joints — common procedure:
 
-- Drill 11mm clearance hole all the way through. Use an 11mm auger bit, or
-  drill a 6mm pilot first then open up to 11mm from each side.
-- Coach bolt head sits on the outer face (square neck bites in); flat
-  washer + Nyloc nut on the inner face.
+Every bolted joint uses 2 M10 coach bolts on a diagonal across the 90x90
+contact patch. Diagonal placement gives a moment arm in both axes
+(resisting rotation in any direction in the joint plane) without needing
+the redundancy of a 4-bolt square.
+
+  Diagonal 2-bolt pattern (90x90 contact face, viewed from the bolt-head side):
+
+       <----- 90mm ----->
+      +------------------+   ^
+      |                  |   |
+      |    O             |   |
+      |                  |  90mm
+      |                  |   |
+      |             O    |   |
+      |                  |   |
+      +------------------+   v
+
+  - Bolt centres ~25mm from each adjacent edge (the square neck under
+    the dome head needs wood on every side to bite into; closer than
+    ~2x the bolt diameter risks splitting the edge).
+  - Diagonal separation between centres ~57mm (sqrt(40^2 + 40^2)).
+  - Either diagonal is fine (\ or /); flip whichever is convenient
+    to mark out per joint — orientation does not change the strength.
+
+- Drill 11mm clearance holes (see Tools section) through each part
+  separately, not through all layers at once with the parts clamped.
+  The laminated post pair counts as one part — drill through both
+  45mm layers in one pass (90mm).
+- For each joint: drill the post first, then use it as a physical
+  template for the matching part(s). Clamp them in assembly position,
+  poke a pencil through the post holes to mark the rung/support/rail
+  behind, lift it off and drill to those marks.
+- Coach bolt head sits on the outer face (square neck bites the wood
+  when tapped firmly home with a mallet); flat washer + Nyloc nut on
+  the inner face.
 - Do NOT glue — bolts are what makes the structure disassemblable for transport.
 
 Lower 5 ladder rungs to posts (side "b" only, 10 joints, 135mm of timber):
 
-- 2x M10 x 150mm coach bolts per rung-end in a diagonal pattern.
+- 2x M10 x 150mm coach bolts per rung-end, diagonal pattern (above).
 - Bolt traverses rung (45) + outer post (45) + inner post (45) = 135mm.
 - We might want to put wood in the empty slots between rungs.
 
 Side "a" bed frame to posts (2 joints, 135mm of timber):
 
-- 4x M10 x 150mm coach bolts per joint in a square pattern within the
-  90x90 contact area where the bed-frame support meets the post pair.
+- 2x M10 x 150mm coach bolts per joint, diagonal pattern (above) across
+  the 90x90 contact area where the bed-frame support meets the post pair.
 - Bolt traverses outer post (45) + inner post (45) + bed-frame support (45)
   = 135mm.
 
 Side "b" bed frame + top rung to posts (2 joints, 180mm of timber):
 
-- 4x M10 x 200mm coach bolts per joint in a square pattern. These bolts
-  secure rung AND bed frame in one fastener — same bolt does both jobs,
-  so the two attachment patterns don't clash.
+- 2x M10 x 200mm coach bolts per joint, diagonal pattern (above). These
+  bolts secure rung AND bed frame in one fastener — same bolt does both
+  jobs, so the two attachment patterns don't clash.
 - Bolt traverses rung (45) + outer post (45) + inner post (45) + bed-frame
   support (45) = 180mm.
+
+Safety rails to posts (24 joints, 135mm of timber):
+
+- 8 horizontal rails (front/back, 4 levels each) attach to 2 posts at their
+  ends — 16 joints, bolts in the y direction (perpendicular to bed length).
+- 4 side rails (3 on side "a" between levels, 1 on side "b" at the bottom
+  level) attach to 2 posts at their ends — 8 joints, bolts in the x
+  direction (along bed length).
+- 2x M10 x 150mm coach bolts per joint, diagonal pattern (above).
+- Bolt traverses rail (45) + outer post (45) + inner post (45) = 135mm.
+- Coach bolt head on the outer face of the rail; nut + washer is accessible
+  from inside the bed enclosure (between the post pair).
 
 */
 
