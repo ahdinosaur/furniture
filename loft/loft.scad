@@ -24,18 +24,25 @@
 - 1x back support panel: (`bed_length` + 4x 45mm) x `support_height` = 2230mm x 600mm
 - 1x side-a support panel: `bed_width` x `support_height` = 1090mm x 600mm
 
-PVA wood glue:
+PVA wood glue (for post lamination only — all other joints are bolted for disassembly):
 - https://www.bunnings.co.nz/parfix-pva-wood-glue-250ml-250ml_p0830569
 
 Polyeurethane interior varnish:
 - https://www.resene.co.nz/homeown/painting-your-home/woodcare7.htm
 
-Screws:
-- "125mm 14g Type 17 bugle-head batten screw"
-  - https://www.mitre10.co.nz/shop/building-king-bugle-head-batten-screw-125mm-x-14g-class-4-galvanised/p/389338
+Screws (post lamination only — ~80 needed for 8 posts):
+- "75mm 14g Type 17 bugle-head batten screw" (Titan 100-pack)
+  - https://www.bunnings.co.nz/titan-14g-x-75mm-zinc-gold-timber-bugle-batten-screw-100-pack_p0579085
+- 8-10 screws per post in a staggered pattern, ~250-300mm apart along the 2435mm post.
 
-Bolts:
-- 16x M10 furniture bolts (4 in a square per side, 4 sides)
+Bolts — M10 x 150mm hot-dip galvanised coach (carriage) bolts + M10 flat washer + M10 Nyloc nut:
+- Coach bolts are the local NZ equivalent to "furniture bolts": the square neck under
+  the dome head locks into the wood so only the nut turns. Hex bolts also work but
+  need a spanner on the head and a washer on the head side.
+- Bed frame to posts: 4 joints x 4 bolts = 16
+- Ladder rungs to posts (side "b" only): 12 joints x 2 bolts = 24
+- Total: 40x M10 x 150mm coach bolts, 40 flat washers, 40 Nyloc nuts.
+- (Safety rails attachment is TBD — same fastener applies if you want full disassembly.)
 
 ## Cut list
 
@@ -68,16 +75,42 @@ Shorts are interchangeable: 6 -> ladder rungs, 2 -> bed frame supports, 4 -> saf
 
 ## Assembly
 
-Sides:
+Posts (laminate two 45x90s into one 90x90):
 
-- The rungs and posts should be screwed _and_ glued with polyeurethane glue.
-- The rungs should attach to the posts with 3x screws in a triangle.
-- The screws must be just less than 3 * 45 = 135mm
-- We might want to put wood in the empty slots between rungs
+- Apply PVA glue across both mating faces — glue is the primary fastener;
+  screws are clamps during cure.
+- Drive 75mm 14g Type 17 bugle-head batten screws in a staggered pattern,
+  ~250-300mm apart along the 2435mm post (~8-10 screws per post).
+  - Drill 5.5mm clearance holes through the first board only — threads
+    bite the second board and pull the joint tight against the glue.
+  - Drill a 4mm pilot for the end screws (within ~75mm of either end)
+    to avoid splitting end grain.
+  - Pre-drill anywhere you hit a knot.
 
-Bed to sides:
+Rungs to posts (side "b" only, 6 rungs):
 
-- Use M10 furniture bolts, 4 in a square.
+- 2x M10 x 150mm coach bolts per rung-end, in a diagonal pattern.
+- Bolt passes through rung (45mm) + outer post (45mm) + inner post (45mm)
+  = 135mm of timber. 150mm bolt leaves ~15mm protruding for washer + nut.
+- Drill 11mm clearance hole all the way through. Use an 11mm auger bit, or
+  drill a 6mm pilot first then open up to 11mm from each side.
+- Coach bolt head sits on the outer face of the rung (square neck bites in);
+  flat washer + Nyloc nut on the inner face of the inner post.
+- Do NOT glue — bolts are what makes the joint disassemblable for transport.
+- We might want to put wood in the empty slots between rungs.
+
+Bed to posts:
+
+- 4x M10 x 150mm coach bolts per joint, in a square pattern within the
+  90x90 contact area where the bed-frame support meets the post pair.
+- Bolt passes through outer post (45) + inner post (45) + bed-frame
+  support (45) = 135mm. Drilling/orientation: same as the rungs.
+
+NOTE: the top ladder rung (Z=1625-1715) and the bed-frame support
+(Z=1625-1715) share the same Z range. Bolt nuts on the top rung will
+exit into the bed-frame support's footprint inside the post pair.
+Resolve before assembly — easiest fixes: drop the top rung by ~100mm,
+or omit it (the bed-frame edge serves as the top step).
 
 */
 
