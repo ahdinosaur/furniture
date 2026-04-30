@@ -147,6 +147,10 @@ module panel_xz(length, width) {
   cube([length, panel_thickness, width]);
 }
 
+module panel_yz(length, width) {
+  cube([panel_thickness, length, width]);
+}
+
 // post
 
 module post() {
@@ -220,14 +224,24 @@ module bed_frame() {
   beam_yz(b45x90, bed_width);
 }
 
-module support_panel() {
+module front_support_panel() {
+  color("teal")
+  translate([
+    -2 * b45x90[0] - panel_thickness,
+    0,
+    support_bottom,
+  ])
+  panel_yz(bed_width, support_height);
+}
+
+module side_support_panel() {
   color("purple")
   translate([
-    -3 * b45x90[0],
+    -2 * b45x90[0],
     bed_width,
     support_bottom,
   ])
-  panel_xz(bed_length + 6 * b45x90[0], support_height);
+  panel_xz(bed_length + 4 * b45x90[0], support_height);
 }
 
 module safety_rail(is_top) {
@@ -292,7 +306,9 @@ module loft() {
   ])
   bed_frame();
 
-  support_panel();
+  side_support_panel();
+
+  front_support_panel();
 
   safety_rails();
 }
