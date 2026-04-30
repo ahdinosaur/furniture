@@ -14,11 +14,13 @@
 - 3x bed frame joists: `bed_length` = 2050mm
 - 2x bed frame supports: `bed_width` = 1090mm
 - 8x safety rails: `bed_length` + 4x 45mm = 2230mm
-- 3x safety rail sides: `bed_width` = 1090mm
+- 4x safety rail sides: `bed_width` = 1090mm
 - Total 45x90 length: ~55.5m (need 10x 6m sticks = 60m of stock)
 
 12mm plywood panels:
 - 1x bed panel: `bed_width` x `bed_length` = 1090mm x 2050mm
+  - Note, this could instead have a length of (2050mm + 4 * 90mm), with notches for the posts cut out.
+  - Also Note, this should have holes in it for the bed mattress to breathe.
 - 1x back support panel: (`bed_length` + 6x 45mm) x `support_height` = 2320mm x 600mm
 - 1x side-a support panel: (`bed_width` + 6x 45mm) x `support_height` = 1360mm x 600mm
 
@@ -244,7 +246,7 @@ module side_support_panel() {
   panel_xz(bed_length + 4 * b45x90[0], support_height);
 }
 
-module safety_rail(is_top) {
+module safety_rail(is_top, is_bottom) {
   // front
   color("pink")
   translate([
@@ -266,7 +268,21 @@ module safety_rail(is_top) {
   // side
   if (!is_top) {
     color("pink")
-    translate([0, 0, 0])
+    translate([
+      -3 * b45x90[0],
+      0,
+      0
+    ])
+    beam_yz(b45x90, bed_width);
+  }
+
+  if (is_bottom) {
+    color("pink")
+    translate([
+      bed_length + 2 * b45x90[0],
+      0,
+      0
+    ])
     beam_yz(b45x90, bed_width);
   }
 }
@@ -278,11 +294,12 @@ module safety_rails() {
 
   for (safety_index = [0: safety_rungs - 1]) {
     is_top = safety_index == 0;
+    is_bottom = safety_index == safety_rungs - 1;
     top = post_height - (safety_index * spacing);
     // echo(safety_index = safety_index, safety_top = top);
 
     translate([0, 0, top])
-    safety_rail(is_top);
+    safety_rail(is_top, is_bottom);
   }
 }
 
