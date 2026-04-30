@@ -135,29 +135,27 @@ Stock: 10x 6m lengths of 45x90.
 PlaceMakers (rough cut, every piece must fit Toyota Hiace at <= 2700mm):
 
 For each stick, 2 cuts:
-"First piece 2515mm, second piece 2310mm, leave the rest."
-The remainder is the third piece (~1169mm after kerf). 20 cuts total.
+"First piece 2.5m, second piece 2.3m, leave the rest."
+The remainder is the third piece (~1194mm after kerf). 20 cuts total.
 
-Rough lengths are sized so each piece carries ~80mm of margin for
-home squaring + final trim, regardless of which finished part it
-becomes. (2435 + 2230 + 1090 = 5755mm of finished timber + 2 kerfs
-leaves 239mm of spare per stick; split evenly that is ~80mm each.)
+Rough lengths give every piece a comfortable home-trim margin:
+post 65mm, safety rail 70mm, short 104mm.
 
 Allocation of the 30 rough pieces:
 
-- 8 sticks: 2515 -> post-rough,       2310 -> safety-rail-rough, ~1169 -> short-rough
-- 1 stick:  2515 -> bed-frame-rough,  2310 -> bed-frame-rough,   ~1169 -> short-rough
-- 1 stick:  2515 -> rung-pair-rough,  2310 -> bed-frame-rough,   ~1169 -> short-rough
+- 8 sticks: 2500 -> post-rough,       2300 -> safety-rail-rough, ~1194 -> short-rough
+- 1 stick:  2500 -> bed-frame-rough,  2300 -> bed-frame-rough,   ~1194 -> short-rough
+- 1 stick:  2500 -> rung-pair-rough,  2300 -> bed-frame-rough,   ~1194 -> short-rough
 
 Total yield: 8 posts + 8 safety rails + 3 bed frames + 12 shorts (0 spare).
 
 At home (accurate cut, square one end of each rough piece, then trim to final length):
 
-- post-rough (2515mm) -> 1 post (2435mm), 80mm margin
-- safety-rail-rough (2310mm) -> 1 safety rail (2230mm), 80mm margin
-- bed-frame-rough (2310 or 2515mm) -> 1 bed frame (2050mm), 260 or 465mm margin
-- short-rough (~1169mm) -> 1 short (1090mm), ~79mm margin
-- rung-pair-rough (2515mm) -> 2 shorts (1090mm each); cut down the middle, then trim each
+- post-rough (2500mm) -> 1 post (2435mm), 65mm margin
+- safety-rail-rough (2300mm) -> 1 safety rail (2230mm), 70mm margin
+- bed-frame-rough (2300 or 2500mm) -> 1 bed frame (2050mm), 250 or 450mm margin
+- short-rough (~1194mm) -> 1 short (1090mm), ~104mm margin
+- rung-pair-rough (2500mm) -> 2 shorts (1090mm each); cut down the middle, then trim each
 
 Shorts are interchangeable: 6 -> ladder rungs, 2 -> bed frame supports, 4 -> safety rail sides.
 
