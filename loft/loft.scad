@@ -10,11 +10,11 @@
 
 45x90 timber:
 - 8x posts: `post_height` = 2435mm
-- 6x ladder rungs: `bed_width` = 1090mm
+- 8x ladder rungs: `bed_width` - 2x (90mm - 20mm `ladder_notch`) = 950mm
 - 3x bed frame joists: `bed_length` = 2050mm
 - 2x bed frame supports: `bed_width` = 1090mm
 - 8x safety rails: `bed_length` + 4x 45mm = 2230mm
-- 4x safety rail sides: `bed_width` = 1090mm
+- 3x safety rail sides: `bed_width` = 1090mm
 - Total 45x90 length: ~56.5m (need 10x 6m sticks = 60m of stock)
 
 12mm plywood panels:
@@ -57,11 +57,11 @@ Bolt count (every bolted joint uses 2 coach bolts on a diagonal across
 the 90x90 contact patch — see the ASCII diagram in the Assembly section):
 - Side "a" bed frame to posts: 2 joints x 2 = 4x M6 x 150mm
 - Side "b" bed frame + top rung to posts: 2 joints x 2 = 4x M10 x 200mm (dual-purpose)
-- Lower 5 ladder rungs to posts: 10 joints x 2 = 20x M6 x 150mm
-- Safety rails to posts: 24 joints x 2 = 48x M6 x 150mm
+- Lower 7 ladder rungs to posts: 14 joints x 2 = 28x M6 x 150mm
+- Safety rails to posts: 22 joints x 2 = 44x M6 x 150mm
   - 8 horizontal (front/back) rails x 2 ends = 16 joints
-  - 4 side rails x 2 ends = 8 joints
-- Total: 72x M6 x 150mm coach bolts + 72x M6 flat washers + 72x M6 Nyloc nuts.
+  - 3 side rails x 2 ends = 6 joints
+- Total: 76x M6 x 150mm coach bolts + 76x M6 flat washers + 76x M6 Nyloc nuts.
          4x M10 x 200mm coach bolts + 4x M10 flat washers + 4x M10 Nyloc nuts.
 
 ## Tools
@@ -80,7 +80,7 @@ Drilling — post lamination (75mm batten screws):
   typically square drive #3, but check the box.
 
 Drilling — bolted joints:
-- 7mm bit for the 72 M6 coach bolt holes. Standard clearance for M6 coach: square
+- 7mm bit for the 76 M6 coach bolt holes. Standard clearance for M6 coach: square
   neck (~7.4mm across flats) bites the wood when the bolt is tapped firmly home with
   a mallet. Deepest single hole is 90mm (through the laminated post pair), past the
   flute of a standard jobber-length 7mm twist bit (~70mm) — use an extra-long twist,
@@ -197,7 +197,7 @@ redundancy of a 4-bolt square.
   the inner face.
 - Do NOT glue — bolts are what makes the structure disassemblable for transport.
 
-Lower 5 ladder rungs to posts (side "b" only, 10 joints, 135mm of timber):
+Lower 7 ladder rungs to posts (side "b" only, 14 joints, 135mm of timber):
 
 - 2x M6 x 150mm coach bolts per rung-end, diagonal pattern (above).
 - Bolt traverses rung (45) + outer post (45) + inner post (45) = 135mm.
@@ -218,12 +218,12 @@ Side "b" bed frame + top rung to posts (2 joints, 180mm of timber):
 - Bolt traverses rung (45) + outer post (45) + inner post (45) + bed-frame
   support (45) = 180mm.
 
-Safety rails to posts (24 joints, 135mm of timber):
+Safety rails to posts (22 joints, 135mm of timber):
 
 - 8 horizontal rails (front/back, 4 levels each) attach to 2 posts at their
   ends — 16 joints, bolts in the y direction (perpendicular to bed length).
-- 4 side rails (3 on side "a" between levels, 1 on side "b" at the bottom
-  level) attach to 2 posts at their ends — 8 joints, bolts in the x
+- 3 side rails (on the 3 non-top levels — the top level skips the side
+  rail) attach to 2 posts at their ends — 6 joints, bolts in the x
   direction (along bed length).
 - 2x M6 x 150mm coach bolts per joint, diagonal pattern (above).
 - Bolt traverses rail (45) + outer post (45) + inner post (45) = 135mm.
@@ -251,7 +251,7 @@ ladder_spacing = ladder_gap + b45x90[0];
 ladder_height = b45x90[1] + (ladder_rungs - 1) * ladder_spacing;
 ladder_start = 90;
 ladder_notch = 20;
-// SAFETY: ladder gap is 235mm
+// SAFETY: ladder gap is 240mm
 echo(ladder_gap = ladder_gap);
 echo(ladder_height = ladder_height);
 
@@ -267,7 +267,7 @@ safety_rungs = 4;
 support_bottom = 200;
 support_height = 600;
 
-// SAFETY: end gap is 55mm
+// SAFETY: end gap is 60mm
 echo(end_gap = ladder_gap - 2 * b45x90[1]);
 
 // beams
@@ -365,7 +365,7 @@ module side(side_id) {
 module ladder_rungs_iter(print = false) {
   spacing = (ladder_height - 2 * b45x90[0]) / (ladder_rungs - 1);
   if (print) {
-    // SAFETY: ladder gap is 235mm
+    // SAFETY: ladder gap is 240mm
     echo(ladder_gap = spacing - b45x90[0]);
   }
 
