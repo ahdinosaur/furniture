@@ -277,12 +277,13 @@ b25x150 = [25, 150];
 b25x200 = [25, 200];
 b25x300 = [25, 300];
 
-ladder_rungs = 6;
-ladder_gap = 235;
-ladder_spacing = ladder_gap + b45x90[1];
+ladder_rungs = 8;
+ladder_gap = 240;
+ladder_spacing = ladder_gap + b45x90[0];
 ladder_height = b45x90[1] + (ladder_rungs - 1) * ladder_spacing;
+ladder_start = 90;
 ladder_notch = 20;
-// SAFETY: end gap is 235mm
+// SAFETY: ladder gap is 235mm
 echo(ladder_gap = ladder_gap);
 echo(ladder_height = ladder_height);
 
@@ -355,35 +356,41 @@ module post_back() {
   beam_zy(b45x90, post_height);
 }
 
-module post() {
+module post(has_ladder) {
   difference() {
     union() {
       post_front();
       post_back();
     }
 
-    translate([
-      - eps,
-      b45x90[1] - ladder_notch + eps,
-      0,
-    ])
-    ladder_rungs_iter() {
-      beam_yx(b45x90 + [2 * eps, 2 * eps], ladder_notch + eps);
+    if (has_ladder) {
+      translate([
+        -eps,
+        b45x90[1] - ladder_notch + eps,
+        0,
+      ])
+      ladder_rungs_iter() {
+        beam_yx(b45x90 + [2 * eps, 2 * eps], ladder_notch + eps);
+      }
     }
   }
 }
 
 module side(side_id) {
-  post();
+  has_ladder = side_id == "b";
+
+  post(has_ladder);
 
   translate([0, bed_width])
   mirror([0, 1, 0])
-  post();
+  post(has_ladder);
 
-  ladder_rungs_iter(print = true) {
-    translate([0, b45x90[1] - ladder_notch, 0])
-    color("red")
-    beam_yx(b45x90, bed_width - 2 * (b45x90[1] - ladder_notch));
+  if (has_ladder) {
+    ladder_rungs_iter(print = true) {
+      translate([0, b45x90[1] - ladder_notch, 0])
+      color("red")
+      beam_yx(b45x90, bed_width - 2 * (b45x90[1] - ladder_notch));
+    }
   }
 }
 
@@ -391,11 +398,11 @@ module ladder_rungs_iter(print = false) {
   spacing = (ladder_height - 2 * b45x90[0]) / (ladder_rungs - 1);
   if (print) {
     // SAFETY: ladder gap is 235mm
-    echo(ladder_gap = spacing - b45x90[1]);
+    echo(ladder_gap = spacing - b45x90[0]);
   }
 
   for (ladder_index = [0: ladder_rungs - 1]) {
-    top = ladder_height - (ladder_index * spacing);
+    top = ladder_start + ladder_height - (ladder_index * spacing);
 
     if (print) {
       echo(ladder_index = ladder_index, ladder_top = top);
@@ -486,16 +493,6 @@ module safety_rail(is_top, is_bottom) {
     ])
     beam_yz(b45x90, bed_width);
   }
-
-  if (is_bottom) {
-    color("pink")
-    translate([
-      bed_length + 2 * b45x90[0],
-      0,
-      0
-    ])
-    beam_yz(b45x90, bed_width);
-  }
 }
 
 module safety_rails() {
@@ -505,12 +502,11 @@ module safety_rails() {
 
   for (safety_index = [0: safety_rungs - 1]) {
     is_top = safety_index == 0;
-    is_bottom = safety_index == safety_rungs - 1;
     top = post_height - (safety_index * spacing);
     // echo(safety_index = safety_index, safety_top = top);
 
     translate([0, 0, top])
-    safety_rail(is_top, is_bottom);
+    safety_rail(is_top);
   }
 }
 
