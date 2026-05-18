@@ -138,12 +138,6 @@ module post_back() {
   beam_zy(b45x90, post_height);
 }
 
-module side_rung(top) {
-  color("red")
-  translate([0, 0, top - b45x90[1]])
-  beam_yz(b45x90, bed_width);
-}
-
 module side(side_id) {
   post_front();
   post_back();
@@ -153,20 +147,32 @@ module side(side_id) {
     post_back();
   }
 
+  ladder_rungs_iter(print = true) {
+    color("red")
+    beam_yz(b45x90, bed_width);
+  }
+}
+
+module ladder_rungs_iter(print = false) {
   spacing = (ladder_height - 2 * b45x90[0]) / (ladder_rungs - 1);
-  if (side_id == "a") {
+  if (print) {
     // SAFETY: ladder gap is 235mm
     echo(ladder_gap = spacing - b45x90[1]);
   }
 
   for (ladder_index = [0: ladder_rungs - 1]) {
     top = ladder_height - (ladder_index * spacing);
-    if (side_id == "a") {
+
+    if (print) {
       echo(ladder_index = ladder_index, ladder_top = top);
     }
 
-    translate([b45x90[0], 0])
-    side_rung(top);
+    translate([
+      b45x90[0],
+      0,
+      top - b45x90[1]
+    ])
+    children();
   }
 }
 
