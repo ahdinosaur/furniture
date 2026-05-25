@@ -3,7 +3,7 @@
 // on the CLI, e.g. `openscad -D 'view="post"' loft.scad`. See the dispatch
 // block at the bottom of this file for the supported view names.
 
-view = "all"; // "all" | "side_a" | "side_b" | "bed_frame" | "safety_rails" | "post"
+view = "all"; // "all" | "side_a" | "side_b" | "bed_frame" | "safety_rails" | "post" | "post_blank"
 
 
 eps = 0.01;
@@ -287,4 +287,5 @@ else if (view == "side_b")       side("b");
 else if (view == "bed_frame")    bed_frame(with_panel = false);
 else if (view == "safety_rails") safety_rails();
 else if (view == "post")         rotate([0, 90, 0]) post(true);
+else if (view == "post_blank")   rotate([0, 90, 0]) post(false);
 else assert(false, str("unknown view: ", view, " (see header for valid names)"));
