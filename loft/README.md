@@ -49,10 +49,11 @@ transport with side "b" + ladder shipping as one tall sub-assembly):
 Polyurethane interior varnish:
 
 - https://www.resene.co.nz/homeown/painting-your-home/woodcare7.htm
-  - Resene Aquaclear
-- https://www.resene.co.nz/Colorwood.htm
-  - Resene Colorwood: "Rock Salt"
-    - OR... "Rising Tide"
+  - Resene Aquaclear (the clear top coat)
+- https://www.resene.co.nz/Colorwood.htm — optional tint, applied under the
+  Aquaclear:
+  - Resene Colorwood "Rock Salt" — OR — "Rising Tide" (pick one before
+    buying; both are stocked at most Resene ColorShops)
 
 Screws — two jobs, two lengths:
 
@@ -129,16 +130,13 @@ Drilling — bolted joints:
 - Marking gauge or combination square + sharp pencil for transferring matching hole
   positions between parts.
 
-Cutting — ladder rung housings (side "b" posts only, after lamination):
+Cutting — ladder rung housings (side "b" posts only):
 
-- Circular saw with the depth-of-cut set to exactly 30mm. Test the depth on a
-  scrap of 45x90 before touching the posts.
-- ~25mm bench chisel + mallet for clearing the waste between saw kerfs.
-- Combination square + sharp pencil for marking the 90mm-wide x 45mm-tall housing
-  outline on the inner face of each post pair. 16 housings total (2 side "b"
-  posts x 8 rungs).
-- Optional: a guide block clamped to the post to register the saw at a consistent
-  depth and angle across all 16 housings.
+- Circular saw with adjustable depth-of-cut (set to 30mm; test on scrap).
+- ~25mm bench chisel + mallet (clears the waste between saw kerfs).
+- Combination square + sharp pencil (marking 16 housings — 2 posts x 8 rungs).
+- Optional: a guide block clamped to the post to register the saw at a
+  consistent depth across all 16 housings.
 
 Drilling — ladder rung screws (after the housings are cut and the rungs are
 dry-fitted):
@@ -191,7 +189,11 @@ PPE & general:
 
 ### Posts (laminate two 45x90s into one 90x90)
 
-![Single laminated post with ladder housings](./images/post.png)
+![Single laminated post, no cuts yet — the lamination output before housings](./images/post-blank.png)
+
+All 4 posts laminate the same way. The 2 side "b" posts get 8 ladder
+housings cut into the inner face in the next step — keep lamination screws
+OUT of those z-ranges so cutting the housing later doesn't expose a screw.
 
 - Apply PVA glue across both mating faces — glue is the primary fastener;
   screws are clamps during cure.
@@ -203,11 +205,88 @@ PPE & general:
     to avoid splitting end grain.
   - Pre-drill anywhere you hit a knot.
 
+**Side "b" posts only — no-screw zones**
+
+These are the 8 ladder housings that will be cut in the next step. Each is
+45mm tall in z (measured from the foot of the post):
+
+| Rung | Housing z (mm) | Rung | Housing z (mm) |
+| ---- | --------------: | ---- | --------------: |
+| 0 (top) | 2085 – 2130 | 4 |  945 –  990 |
+| 1       | 1800 – 1845 | 5 |  660 –  705 |
+| 2       | 1515 – 1560 | 6 |  375 –  420 |
+| 3       | 1230 – 1275 | 7 (bottom) |  90 –  135 |
+
+Add ~25mm buffer either side (saw kerfs can wander). Stagger screws into
+the 9 safe bands between/outside these ranges — each safe band is
+180-285mm tall, comfortable for one or two screws at the ~250-300mm
+spacing above.
+
+(The lower edge of each housing — the "shelf z" — is the same table reused
+in the next step to mark out the cuts. Same numbers, two jobs.)
+
+### Ladder (side "b" only — 8 rungs in 30mm housings, glued + screwed)
+
+![Side "b" with ladder rungs in their housings](./images/side-b.png)
+
+Each rung is 970mm long (= `bed_width` - 2 x (90mm - 30mm `ladder_notch`)). Each
+rung end sits in a 30mm-deep housing in the laminated post pair: 90mm wide (full
+post width in x) x 45mm tall (matches rung z-dimension) x 30mm deep (into y).
+The BOTTOM of the housing acts as a shelf — the rung bears on it in pure
+compression, so the joint carries the climbing load even before glue/screws come
+into the picture.
+
+**Cut the housings (after lamination, before any rungs go in):**
+
+![Single laminated side "b" post with all 8 ladder housings cut into the inner face](./images/post.png)
+
+- Mark all 16 housing outlines on the inner face of the 2 side "b" post pairs
+  (90mm wide x 45mm tall x 30mm deep, each). The lower edge of each housing
+  sits at the z value in the "no-screw zones" table above (use the lower number
+  of each range — that's the bearing-shelf z). The upper edge is +45mm above.
+- Set the circular saw to a 30mm depth-of-cut; confirm on scrap.
+- Plunge a series of parallel kerfs across the 90mm width of each housing,
+  within the 45mm tall window, spaced ~3-5mm apart. The kerfs leave a row of
+  thin wood fingers.
+- Knock the fingers out with a 25mm bench chisel + mallet, then pare the bottom
+  of the housing flat. The bottom (lower z-face) is the bearing shelf — flat
+  matters; the back wall (y-face) just needs to be reasonably close.
+- Test-fit each rung end. It should slide in snug with no glue, with the rung's
+  top face flush with the top of the housing.
+
+If you change `ladder_*` in the code, re-run the file and read the
+`echo ladder_top=` output, then update the table above — the README is a
+sibling source of truth, not a derived artifact. (Note: the OpenSCAD
+variable `top` inside `ladder_rungs_iter` is the shelf z + 90mm; the cube
+is then translated down by `b45x90[1]`=90, so shelf = top - 90. The `top`
+name predates the housing rewrite; it's not the geometric top of the rung,
+which sits at shelf + 45.)
+
+**Glue + screw the rungs:**
+
+- Apply PVA glue to the housing's back wall and both z-face shelves, and to the
+  matching faces of the rung end. Squeeze-out is easy to wipe before it sets;
+  hardened squeeze-out is a sander's chore.
+- Slide each rung into its two housings (one in each post of side "b").
+- Drive 2x 100mm 14g batten screws per rung end on a small diagonal across the
+  90 x 45 rung-end face, from the outer face of the post pair. The screw
+  travels 60mm through the post and 40mm into the rung end. Pre-drill 5.5mm
+  clearance in the post and 4mm pilot in the rung end (~30mm deep).
+- Screws are tightened in opposing diagonals to pull the rung evenly against
+  the housing while the glue cures.
+- Wipe squeeze-out, leave the assembly clamped/horizontal for 24 hours, and do
+  not climb on the ladder until the PVA has fully cured.
+
+Note: once glued, side "b" + ladder is one permanent sub-assembly. The rest of
+the loft (side "a", bed frame, safety rails) still disassembles via the bolted
+joints; side "b" ships as a single tall ladder-frame piece.
+
 ### All bolted joints — common procedure
 
-Every bolted joint uses 2 M6 x 150mm coach bolts on a diagonal across
-the 90x90 contact patch. Diagonal placement gives a moment arm in both
-axes (resisting rotation in any direction in the joint plane) without
+The Bed frame and Safety rail sections below both use this pattern; do not
+re-read it per section. Every bolted joint uses 2 M6 x 150mm coach bolts on a
+diagonal across the 90x90 contact patch. Diagonal placement gives a moment arm
+in both axes (resisting rotation in any direction in the joint plane) without
 needing the redundancy of a 4-bolt square.
 
 Diagonal 2-bolt pattern (90x90 contact face, viewed from the bolt-head side):
@@ -248,91 +327,25 @@ Diagonal 2-bolt pattern (90x90 contact face, viewed from the bolt-head side):
   disassemblable for transport. The only glued joints are the post
   laminations and the ladder rung housings.
 
-### Ladder (side "b" only — 8 rungs in 30mm housings, glued + screwed)
+### Bed frame to posts (4 joints, 135mm of timber each)
 
-![Side "b" with ladder rungs](./images/side-b.png)
+![Bed frame sub-assembly (joists in yellow, support sides in cyan)](./images/bed-frame.png)
 
-Each rung is 970mm long (= `bed_width` - 2 x (90mm - 30mm `ladder_notch`)). Each
-rung end sits in a 30mm-deep housing in the laminated post pair: 90mm wide (full
-post width in x) x 45mm tall (matches rung z-dimension) x 30mm deep (into y).
-The BOTTOM of the housing acts as a shelf — the rung bears on it in pure
-compression, so the joint carries the climbing load even before glue/screws come
-into the picture.
+The bed frame attaches to all 4 posts at z = 1625-1715 (a 90mm-tall
+contact patch on the inner face of each post). Same joint on both sides.
 
-**Cut the housings (after lamination, before any rungs go in):**
-
-- Mark all 16 housing outlines on the inner face of the 2 side "b" post pairs.
-  Each housing is 90mm wide x 45mm tall x 30mm deep. With the current values
-  (`ladder_start=90`, `ladder_height=2085`, `ladder_rungs=8`, spacing=285mm),
-  the bottom of each housing (the bearing-shelf z) measured from the foot of
-  the post is:
-
-  | Rung | Shelf z (mm) | Rung | Shelf z (mm) |
-  | ---- | -----------: | ---- | -----------: |
-  | 0 (top) | 2085 | 4 |  945 |
-  | 1       | 1800 | 5 |  660 |
-  | 2       | 1515 | 6 |  375 |
-  | 3       | 1230 | 7 (bottom) |  90 |
-
-  The top of each housing is the shelf z + 45mm. If you change `ladder_*` in
-  the code, re-run the file and read the `echo ladder_top=` output — note the
-  OpenSCAD variable `top` inside `ladder_rungs_iter` is the shelf z + 90mm
-  (the cube is then translated down by `b45x90[1]`=90, so shelf = top - 90).
-  The `top` name predates the housing rewrite; it's not the geometric top of
-  the rung (which sits at shelf + 45).
-- Set the circular saw to a 30mm depth-of-cut; confirm on scrap.
-- Plunge a series of parallel kerfs across the 90mm width of each housing,
-  within the 45mm tall window, spaced ~3-5mm apart. The kerfs leave a row of
-  thin wood fingers.
-- Knock the fingers out with a 25mm bench chisel + mallet, then pare the bottom
-  of the housing flat. The bottom (lower z-face) is the bearing shelf — flat
-  matters; the back wall (y-face) just needs to be reasonably close.
-- Test-fit each rung end. It should slide in snug with no glue, with the rung's
-  top face flush with the top of the housing.
-
-**Glue + screw the rungs:**
-
-- Apply PVA glue to the housing's back wall and both z-face shelves, and to the
-  matching faces of the rung end. Squeeze-out is easy to wipe before it sets;
-  hardened squeeze-out is a sander's chore.
-- Slide each rung into its two housings (one in each post of side "b").
-- Drive 2x 100mm 14g batten screws per rung end on a small diagonal across the
-  90 x 45 rung-end face, from the outer face of the post pair. The screw
-  travels 60mm through the post and 40mm into the rung end. Pre-drill 5.5mm
-  clearance in the post and 4mm pilot in the rung end (~30mm deep).
-- Screws are tightened in opposing diagonals to pull the rung evenly against
-  the housing while the glue cures.
-- Wipe squeeze-out, leave the assembly clamped/horizontal for 24 hours, and do
-  not climb on the ladder until the PVA has fully cured.
-
-Note: once glued, side "b" + ladder is one permanent sub-assembly. The rest of
-the loft (side "a", bed frame, safety rails) still disassembles via the bolted
-joints; side "b" ships as a single tall ladder-frame piece.
-
-### Side "a" bed frame to posts (2 joints, 135mm of timber)
-
-![Side "a", no ladder](./images/side-a.png)
-
-- 2x M6 x 150mm coach bolts per joint, diagonal pattern (above) across
-  the 90x90 contact area where the bed-frame support meets the post pair.
+- 2x M6 x 150mm coach bolts per joint, diagonal pattern (see above),
+  across the 90x90 contact area where the bed-frame support meets the
+  post pair.
 - Bolt traverses outer post (45) + inner post (45) + bed-frame support (45)
   = 135mm.
 
-### Side "b" bed frame to posts (2 joints, 135mm of timber)
-
-![Bed frame sub-assembly](./images/bed-frame.png)
-
-- Identical to the side "a" joint above — 2x M6 x 150mm coach bolts per joint
-  in the diagonal pattern, across the 90x90 contact area where the bed-frame
-  support meets the post pair.
-- Bolt traverses outer post (45) + inner post (45) + bed-frame support (45)
-  = 135mm.
-- The ladder rungs are at independent z-heights from the bed support (z=1625-1715).
-  Rung 1 housing sits at z=1800-1845 (85mm above the support top) and rung 2
-  housing at z=1515-1560 (65mm below the support bottom), so the bed-frame bolt
-  holes and the rung housings don't interfere — but the clearance is closer than
-  it looks, so place the bolts in the middle of the 90x90 contact patch rather
-  than chasing the corners toward the rung 2 housing below.
+**Side "b" — rung-housing clearance**: rung 1 housing sits at z=1800-1845
+(85mm above the support top) and rung 2 housing at z=1515-1560 (65mm
+below the support bottom), so the bed-frame bolt holes and the rung
+housings don't interfere — but the clearance is closer than it looks, so
+place the bolts in the middle of the 90x90 contact patch rather than
+chasing the corners toward the rung 2 housing below.
 
 ### Safety rails to posts (22 joints, 135mm of timber)
 
@@ -349,6 +362,52 @@ joints; side "b" ships as a single tall ladder-frame piece.
 - Coach bolt head on the outer face of the rail; nut + washer is accessible
   from inside the bed enclosure (between the post pair).
 
+**Side "b" bottom-rail caveat — affects 2 joints**
+
+The bottom safety rail (level 3, the one closest to the bed) sits on the
+posts at z = 1805-1895, which overlaps ladder housing 1 (z = 1800-1845) on
+side "b" posts. With the standard diagonal, the LOWER bolt would land at
+z = 1830 and punch straight through the end of rung 1 inside its housing.
+
+On the 2 affected joints (level 3 front rail x side "b" front post; level 3
+back rail x side "b" back post), shift BOTH bolts above z = 1850. A
+workable diagonal in the upper portion of the contact patch:
+
+- Lower bolt: x_offset = 25mm from one side, z = 1855
+- Upper bolt: x_offset = 65mm from the same side, z = 1885
+
+Diagonal separation drops from ~57mm to ~45mm — still a real moment arm.
+The other 20 safety-rail joints (all 3 upper levels, plus level 3 on
+side "a") use the standard diagonal.
+
+### Bed panel (drop-in, no fasteners)
+
+- 12mm plywood, 1090 x 2050mm. Sits on the 3 bed-frame joists; gravity and
+  the surrounding support sides hold it in place — no screws or glue.
+- Drill ~65 breathing holes before installing (see Tools > "Drilling —
+  plywood breathing holes" for layout and method). Drilling on the loft
+  is awkward; do it on a bench.
+
+### Support panels (back + side-"a", drop-in)
+
+- Back support panel (2230 x 600mm): mounts to the back face of the
+  back-row posts, top edge at z = 800mm (`support_bottom + support_height`).
+- Side-"a" support panel (1090 x 600mm): mounts to the outer face of the
+  two side-"a" posts at the same z-range.
+- Both panels are 12mm ply, screwed to the post outer faces with a few
+  short countersunk screws. They are visual/dust panels, not structural —
+  do not load them.
+
+### Finish
+
+- Sand exposed surfaces 80 → 120 → 180 grit. Easier to do before the
+  bolted skeleton goes together (reaching into the assembled bed enclosure
+  with a random-orbital is awkward).
+- Optional tint: brush on Resene Colorwood ("Rock Salt" or "Rising Tide");
+  let it dry per the product instructions.
+- Top coat: 2-3 coats of Resene Aquaclear with the 125mm Speed Brush,
+  sanding lightly between coats with 320 grit.
+
 ## Reference views
 
 Orthographic projections of the full assembly, for dimensional reference:
@@ -363,10 +422,11 @@ The `Justfile` at the repo root has recipes for re-rendering every image in
 this README. From the repo root:
 
 ```sh
-just loft-render-all        # re-render every PNG into loft/images/
-just loft-render-iso        # re-render just the hero
-just loft-render-post       # re-render the post sub-assembly
-just --list                 # show all recipes
+just loft-render-all         # re-render every PNG into loft/images/
+just loft-render-iso         # re-render just the hero
+just loft-render-post-blank  # re-render the bare laminated post (no housings)
+just loft-render-post        # re-render the post sub-assembly (with housings)
+just --list                  # show all recipes
 ```
 
 PNG outputs land in `loft/images/` and are committed via Git LFS (see

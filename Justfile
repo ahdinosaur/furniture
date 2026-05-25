@@ -22,6 +22,7 @@ loft-render-all: loft-render-iso \
                  loft-render-side-b \
                  loft-render-bed-frame \
                  loft-render-safety-rails \
+                 loft-render-post-blank \
                  loft-render-post
 
 # --- full assembly ---
@@ -91,6 +92,14 @@ loft-render-safety-rails:
         --imgsize={{size}} --colorscheme={{scheme}} \
         --projection=p --viewall --autocenter \
         -D 'view="safety_rails"' {{scad}}
+
+# Single laminated post, no housings (the lamination output before any cuts)
+loft-render-post-blank:
+    @mkdir -p {{loft_images}}
+    openscad -o {{loft_images}}/post-blank.png \
+        --imgsize={{size}} --colorscheme={{scheme}} \
+        --projection=p --viewall --autocenter \
+        -D 'view="post_blank"' {{scad}}
 
 # Single laminated post (rotated horizontal so 8 ladder housings read clearly)
 loft-render-post:
