@@ -1,425 +1,445 @@
 # Loft
 
-A bunk-bed-style loft frame in 90 x 90 laminated pine posts, sized for a
-~2030 x 1070 mattress on the upper deck, with an integrated 8-rung ladder on
-side "b" and a 4-tier safety rail around the upper bed.
+A loft bed in laminated pine. Four 90 x 90 posts, a bed deck about 1.7 m up
+sized for a 2030 x 1070 mattress, an 8-rung ladder built into one end, and a
+4-tier safety rail around the top. Everything except the posts and the ladder
+is bolted, so it comes apart for moving.
 
 ![Loft, isometric](./images/iso.png)
 
-The design is modelled in OpenSCAD in [`loft.scad`](./loft.scad). The render
-above and the per-sub-assembly renders below are produced by the `Justfile` at
-the repo root — see [Rendering](#rendering) below. Rendered with **OpenSCAD
-2021.01**.
+## At a glance
 
-Dimensions cited in the BOM and Assembly sections below mirror the constants
-at the top of `loft.scad` (e.g. `post_height = 2435`, `ladder_rungs = 8`,
-`bed_length = 2050`, `bed_width = 1090`). If you change one of these, update
-both — the README is a sibling source of truth, not a derived artifact.
+| | |
+| --- | --- |
+| Timber | 90 x 45 pine, laminated in pairs for the posts |
+| Footprint | 2230 x 1090 mm over the posts, 2275 x 1180 mm with the rails |
+| Post height | 2435 mm |
+| Bed deck top | 1805 mm (joist tops), mattress sits on 12 mm ply above |
+| Mattress | 2030 x 1070 mm, 10 mm clearance each side |
+| Ladder | 8 rungs on side "b", 240 mm gap between rungs |
+| Safety rail | 4 tiers, 90 mm gap between tiers |
+| Bolts | 52x M6 x 150 cup head, 2 per joint, 26 joints |
 
-## Guides
+**Build order**
+
+1. [Laminate the posts](#1-laminate-the-posts)
+2. [Cut the ladder housings](#2-cut-the-ladder-housings-side-b-posts-only) into the two side "b" posts
+3. [Glue and screw the rungs](#3-glue-and-screw-the-rungs) to make the ladder
+4. [Drill every bolt hole in the posts](#4-drill-the-posts) from one table
+5. [Bolt each side together flat](#5-bolt-the-two-sides-together-flat) on the floor
+6. [Stand it up and fit the bed frame](#6-stand-it-up-and-fit-the-bed-frame)
+7. [Fit the safety rails](#7-fit-the-safety-rails), bottom tier first
+8. [Drop in the panels](#8-panels), then [finish](#9-finish)
+
+**Words used in this guide**
+
+- **Side "a"** is the end without the ladder. **Side "b"** is the ladder end.
+- **Front** and **back** are the two long sides.
+- Every height is measured **up from the foot of the post**. The foot is the
+  datum for everything, so posts of slightly different lengths don't matter.
+- Each post has four faces, named by where they point:
+  - **outer end face**: points away from the bed along its length
+  - **inner end face**: points at the bed along its length
+  - **outer long face**: the front or back of the loft
+  - **inner long face**: points at the other post of its pair, across the bed
+    width. On side "b" this is where the ladder housings are cut.
+
+## Standard
 
 - https://www.productsafety.gov.au/business/search-mandatory-standards/bunk-beds-mandatory-standard
 
-## Bill of Materials
+## Materials
 
-45x90 timber:
+### Timber, 90 x 45 pine
 
-- 8x post boards (laminated in pairs into 4 finished 90x90 posts): `post_height` = 2435mm
-- 8x ladder rungs: `bed_width` - 2x (90mm - 30mm `ladder_notch`) = 970mm
-- 3x bed frame joists: `bed_length` = 2050mm
-- 2x bed frame supports: `bed_width` = 1090mm
-- 8x safety rails: `bed_length` + 4x 45mm = 2230mm
-- 3x safety rail sides: `bed_width` = 1090mm
-- Total 45x90 length: ~56.7m (need 10x 6m sticks = 60m of stock)
+| Part | Qty | Length | Notes |
+| --- | ---: | ---: | --- |
+| Post boards | 8 | 2435 | glue up in pairs into 4 posts |
+| Ladder rungs | 8 | 970 | 1090 minus 2 x 60 (post depth behind the housing) |
+| Bed frame joists | 3 | 2050 | run the length of the bed, rest on the supports |
+| Bed frame supports | 2 | 1090 | run across the bed, bolted to the posts |
+| Safety rails, front and back | 8 | 2230 | 2050 plus the 4 post boards |
+| Safety rails, side "a" | 3 | 1090 | no side rail on the top tier |
+| **Total** | | **~56.7 m** | 10 x 6 m sticks |
 
-12mm plywood panels:
+### Plywood, 12 mm
 
-- 1x bed panel: `bed_width` x `bed_length` = 1090mm x 2050mm
-  - Note, this could instead have a length of (2050mm + 4 * 90mm), with notches for the posts cut out.
-  - Also Note, this should have holes in it for the bed mattress to breathe.
-- 1x back support panel: (`bed_length` + 4x 45mm) x `support_height` = 2230mm x 600mm
-- 1x side-a support panel: `bed_width` x `support_height` = 1090mm x 600mm
+| Panel | Size | Notes |
+| --- | --- | --- |
+| Bed panel | 1090 x 2050 | cut it **last**, to the real joist length. Needs breathing holes. |
+| Back support panel | 2230 x 600 | cosmetic |
+| Side "a" support panel | 1090 x 600 | cosmetic |
 
-PVA wood glue (~500ml total — for the 4 post laminations and the 16 ladder rung
-housings; the bolted joints below are NOT glued, so the loft disassembles for
-transport with side "b" + ladder shipping as one tall sub-assembly):
+### Glue and finish
 
-- https://www.bunnings.co.nz/parfix-pva-wood-glue-250ml-250ml_p0830569 (need 2x)
+- **PVA wood glue, ~500 ml.** Only the post laminations and the rung housings
+  are glued. No bolted joint is glued.
+  - https://www.bunnings.co.nz/parfix-pva-wood-glue-250ml-250ml_p0830569 (2x)
+- **Resene Aquaclear** clear top coat:
+  https://www.resene.co.nz/homeown/painting-your-home/woodcare7.htm
+- **Optional tint** under the Aquaclear, Resene Colorwood "Rock Salt" or
+  "Rising Tide": https://www.resene.co.nz/Colorwood.htm
 
-Polyurethane interior varnish:
+### Screws
 
-- https://www.resene.co.nz/homeown/painting-your-home/woodcare7.htm
-  - Resene Aquaclear (the clear top coat)
-- https://www.resene.co.nz/Colorwood.htm — optional tint, applied under the
-  Aquaclear:
-  - Resene Colorwood "Rock Salt" — OR — "Rising Tide" (pick one before
-    buying; both are stocked at most Resene ColorShops)
+| Job | Screw | Qty | Why this size |
+| --- | --- | ---: | --- |
+| Post lamination | 75 mm 14g Type 17 bugle batten screw | 32 to 40 | clamps the glue joint. 8 to 10 per post. |
+| Rung clamping | 100 mm 14g Type 17 bugle batten screw | 32 | 60 mm through the post, 40 mm into the rung end. 2 per rung end. |
 
-Screws — two jobs, two lengths:
+- Titan 75 mm: https://www.bunnings.co.nz/titan-14g-x-75mm-zinc-gold-timber-bugle-batten-screw-100-pack_p0579085
+- Both are clamps while the glue cures. The glue and the housing shelves carry
+  the load, not the screws.
 
-Post lamination (~32-40 needed for the 4 finished posts):
+### Bolts
 
-- "75mm 14g Type 17 bugle-head batten screw" (Titan 100-pack)
-  - https://www.bunnings.co.nz/titan-14g-x-75mm-zinc-gold-timber-bugle-batten-screw-100-pack_p0579085
-- 8-10 screws per laminated post in a staggered pattern, ~250-300mm apart along
-  the 2435mm post. (The BOM "8x post boards" is raw stock — those 8 boards
-  glue up in pairs into 4 finished 90x90 posts.)
+**Shopping list**
 
-Ladder rung clamping (~32 needed for 8 rungs, 2 per end):
+| Item | Qty | Notes |
+| --- | ---: | --- |
+| M6 x 150 mm cup head bolt, zinc | 52 (buy ~60) | "cup head" is the NZ term, also "coach bolt". Square neck under the dome head bites the wood so only the nut turns. |
+| M6 Nyloc nut | 52 | or the plain nut that comes with the bolt. Either way re-tighten after 2 to 4 weeks. |
+| M6 flat washer, nut side only | 52 | biggest diameter you can get, 18 mm or more. Pine is soft. |
+| 7 mm drill bit, 200 mm long | 1 | long-series twist or auger. Must reach through post plus rail in one pass. |
+| 10 mm socket | 1 | |
 
-- "100mm 14g Type 17 bugle-head batten screw" (Titan, or equivalent in the same
-  bugle-head Type 17 family — same driver bit as the 75mm).
-- 2 screws per rung end on a small diagonal across the 90 x 45 rung-end face,
-  driven from the OUTER face of the laminated post pair through 60mm of post
-  material (the post depth behind the 30mm housing) and 40mm into the rung end.
-- The screws are CLAMPS during PVA cure, not the primary fastener. The structural
-  load is carried by the housing shelf + glue. So the screws don't need to be
-  monstrous — they just need to pull the rung tight against the housing.
+- Bunnings: https://www.bunnings.co.nz/zenith-m6-x-150mm-zinc-plated-coach-head-bolt-and-nut_p0230936
 
-Bolts — coach (carriage) bolts + flat washer + Nyloc nut, single size:
+**Measure before you buy.** Stack a real post pair on a real rail and measure.
+The design assumes 135 mm. A 150 bolt leaves room for washer, nut and about
+6 mm of spare thread. If your stack is over 138 mm, buy 160 or 180 instead.
 
-- Coach bolts are the local NZ equivalent to "furniture bolts": the square neck under
-  the dome head locks into the wood so only the nut turns. Hex bolts also work but
-  need a spanner on the head and a washer on the head side.
-- M6 x 150mm zinc-plated for all bolted joints. Every joint is 135mm of timber
-  (3 layers x 45mm: rail or bed-frame support + post pair) with ~15mm of bolt
-  protruding for washer + nut. Pine SG8 bearing capacity gives ~4x safety factor
-  on the worst-loaded joint (bed frame), and 25mm edge distance in the diagonal
-  pattern works out to ~4x the bolt diameter — very generous.
-- (Ladder rungs are NOT bolted — they sit in 30mm glued + screwed housings in
-  the posts. See the Ladder section under Assembly.)
+**Why M6.** Rough Eurocode 5 numbers for the bed frame joints, which are the
+only joints holding people up:
 
-Bolt count (every bolted joint uses 2 coach bolts on a diagonal across
-the 90x90 contact patch — see the ASCII diagram in the Assembly section):
+| | M6 | M8 |
+| --- | --- | --- |
+| Worst-case load per bolt (two adults bouncing, weight at one end) | ~0.9 kN | ~0.9 kN |
+| Design capacity per bolt in pine, single shear, support loaded across the grain | ~1.9 kN | ~3.1 kN |
+| Margin on design values | ~2x | ~3.4x |
+| Edge distance needed on the loaded edge (4 x diameter) | 24 mm, pattern has 25 | 32 mm, pattern has 25 |
 
-- Side "a" bed frame to posts: 2 joints x 2 = 4x M6 x 150mm
-- Side "b" bed frame to posts: 2 joints x 2 = 4x M6 x 150mm
-- Safety rails to posts: 22 joints x 2 = 44x M6 x 150mm
-  - 8 horizontal (front/back) rails x 2 ends = 16 joints
-  - 3 side rails (all on side "a") x 2 ends = 6 joints
-- Total: 52x M6 x 150mm coach bolts + 52x M6 flat washers + 52x M6 Nyloc nuts.
+M6 has a sensible 2x margin on code design values and roughly 4x on real
+failure load. The rails see a small fraction of this. Going to M8 without
+moving the holes makes the bed frame joint worse, not better, because the
+lower bolt ends up too close to the bottom edge of the support.
+
+**Options if you want bigger**
+
+| Option | What changes |
+| --- | --- |
+| All M6 x 150 (recommended) | nothing. One bit, one socket. |
+| M8 for the 8 bed frame bolts, M6 for the 44 rail bolts | bed frame bolts move up to 35 and 65 mm from the bottom of the support. Add a 9 mm bit and 13 mm socket. Buy 160 mm if your stack is over 135. |
+| All M8 | same bed frame change. No real benefit on the rails. |
+
+**Optional upgrade that beats any bolt size.** Screw a 90 mm offcut of 90 x 45
+to each post directly under the bed frame support, so the support sits on it
+in compression like a rung on its shelf. The bolts then only hold it in place.
+
+**Bolt count**
+
+| Joint | Joints | Bolts |
+| --- | ---: | ---: |
+| Bed frame supports to posts | 4 | 8 |
+| Front and back rails to posts (8 rails x 2 ends) | 16 | 32 |
+| Side "a" rails to posts (3 rails x 2 ends) | 6 | 12 |
+| **Total** | **26** | **52** |
+
+Ladder rungs are not bolted. They sit in glued and screwed housings.
 
 ## Tools
 
-Cutting (at home, rough -> final length):
+**Cutting**
 
-- Mitre saw, or circular saw + speed square (accurate cross-cuts)
-- Jigsaw or circular saw with a fine plywood blade (for the panels)
-- Tape measure, pencil, combination square
-- Sawhorses or work bench
+- Mitre saw, or circular saw with a speed square
+- Jigsaw or circular saw with a fine blade, for the plywood
+- Tape, pencil, combination square, sawhorses
 
-Drilling — post lamination (75mm batten screws):
+**Drilling**
 
-- Cordless drill/driver
-- 5.5mm twist bit (clearance hole through the first 45mm board)
-- 4mm twist bit (pilot at the board ends and through any knots)
-- Driver bit matching the screw head — Titan 14g bugle batten is
-  typically square drive #3, but check the box.
+- Cordless drill
+- 5.5 mm twist bit (screw clearance holes) and 4 mm twist bit (pilots)
+- 7 mm bit, at least 200 mm long (bolt holes through post plus rail)
+- Driver bit for the batten screws, usually square drive #3, check the box
+- 10 mm socket and ratchet for the nuts
+- 25 mm Forstner bit for the bed panel breathing holes:
+  https://www.bunnings.co.nz/irwin-1-25mm-forstner-bit_p0355141
+  (spade and auger bits tear out plywood, a 25 mm hole saw also works)
 
-Drilling — bolted joints:
+**Ladder housings**
 
-- 7mm bit for the 52 M6 coach bolt holes. Standard clearance for M6 coach: square
-  neck (~7.4mm across flats) bites the wood when the bolt is tapped firmly home with
-  a mallet. Deepest single hole is 90mm (through the laminated post pair), past the
-  flute of a standard jobber-length 7mm twist bit (~70mm) — use an extra-long twist,
-  a 7mm brad-point, or a 7mm auger for those holes.
-- 10mm socket + ratchet for the M6 Nyloc nuts.
-- If a bolt spins under nut torque, tap it in harder to re-seat the square neck, or
-  grip the dome head with vise grips. (Or use hex bolts with a washer under the head
-  — no neck-bite needed at all.)
-- Marking gauge or combination square + sharp pencil for transferring matching hole
-  positions between parts.
+- Circular saw with depth stop, set to 30 mm
+- 25 mm bench chisel and mallet
+- Optional guide block clamped to the post for a consistent saw depth
 
-Cutting — ladder rung housings (side "b" posts only):
+**Assembly**
 
-- Circular saw with adjustable depth-of-cut (set to 30mm; test on scrap).
-- ~25mm bench chisel + mallet (clears the waste between saw kerfs).
-- Combination square + sharp pencil (marking 16 housings — 2 posts x 8 rungs).
-- Optional: a guide block clamped to the post to register the saw at a
-  consistent depth across all 16 housings.
+- 4 to 6 quick clamps or sash clamps
+- A straight board to screw to the floor as a stop for the post feet
+- Spirit level
+- Glue spreader, damp rag
 
-Drilling — ladder rung screws (after the housings are cut and the rungs are
-dry-fitted):
+**Finishing**
 
-- 5.5mm twist bit for the screw clearance hole through the post pair (60mm from
-  the outer post face to the back of the housing).
-- 4mm twist bit for the pilot hole into the rung end grain (~30mm deep). End
-  grain splits easily — pilots are NOT optional here.
-- Same driver bit as the 75mm batten screws (typically square drive #3).
+- Random orbital sander, 80 / 120 / 180 / 320 grit
+- Resene No Loss Speed Brush, 125 mm:
+  https://shop.resene.co.nz/key-accessories/speedbrushes
 
-Drilling — plywood breathing holes (bed panel only):
+**Safety**: glasses, dust mask, hearing protection.
 
-- 25mm Forstner bit.
-  - https://www.bunnings.co.nz/irwin-1-25mm-forstner-bit_p0355141
-  - Forstner bits leave clean, flat-bottomed holes
-    in 12mm plywood. Spade and auger bits tear out the back face of
-    plywood badly, even with a backer.
-  - Alternative: 25mm hole saw + arbor (slower but tidy).
-- Drill from the top face with a sacrificial scrap clamped under the
-  panel to prevent blow-out on the underside.
-- Layout: ~150mm grid. For the 1090 x 2050 panel that is ~7 columns (across
-  the 1090mm width) x ~13 rows (along the 2050mm length) = ~90 holes. Joists
-  run lengthwise, so each joist is a candidate to align with one full COLUMN
-  of holes (not a row). At the suggested grid origin (~75mm from each edge),
-  joists 2 and 3 align with 2 of the 7 columns; joist 1 falls between columns.
-  Skipping those 2 columns drops you to ~65 useful holes.
+## Build
 
-Gluing & finishing:
+### 1. Laminate the posts
 
-- Glue spreader or small roller (PVA on the post mating faces)
-- 4-6 quick clamps or sash clamps (hold the post pair during cure)
-- Damp rag (wipe glue squeeze-out before it sets)
-- Random-orbital sander or sanding block (80 / 120 / 180 grit)
-- Resene No Loss Speed Brush, 125mm, for the Aquaclear varnish.
-  - https://shop.resene.co.nz/key-accessories/speedbrushes
-  - Synthetic bristles (water-based-compatible), flat dense pack
-    holds enough product for long strokes that self-level before
-    skinning over. 125mm matches the 90mm post faces well and is
-    still workable on the larger plywood panels — 175mm would be
-    faster on the panels but awkward on the 45mm edges of the rails
-    and rungs.
+![Single laminated post, no cuts yet](./images/post-blank.png)
 
-PPE & general:
+Glue two 90 x 45 boards face to face to make each 90 x 90 post. All four posts
+are the same at this stage.
 
-- Safety glasses (cutting, drilling)
-- Dust mask (plywood dust, sanding fines)
-- Hearing protection (mitre saw, long auger drilling)
+- Spread PVA on both mating faces. Glue is the fastener, screws are clamps.
+- Drive 75 mm batten screws in a staggered line, 250 to 300 mm apart, 8 to 10
+  per post.
+  - Drill 5.5 mm clearance holes through the first board only.
+  - Drill 4 mm pilots within 75 mm of either end and through knots.
+- Clamp, wipe squeeze-out, leave 24 hours.
 
-## Assembly
+**Side "b" posts: keep screws out of these bands.** The ladder housings get
+cut here next. Heights from the foot of the post. Add 25 mm buffer either side.
 
-### Posts (laminate two 45x90s into one 90x90)
+| Rung | Housing band | Rung | Housing band |
+| --- | ---: | --- | ---: |
+| 0 (top) | 2085 to 2130 | 4 | 945 to 990 |
+| 1 | 1800 to 1845 | 5 | 660 to 705 |
+| 2 | 1515 to 1560 | 6 | 375 to 420 |
+| 3 | 1230 to 1275 | 7 (bottom) | 90 to 135 |
 
-![Single laminated post, no cuts yet — the lamination output before housings](./images/post-blank.png)
+The lower number in each band is the shelf the rung sits on. The same table is
+used to mark the housings in the next step.
 
-All 4 posts laminate the same way. The 2 side "b" posts get 8 ladder
-housings cut into the inner face in the next step — keep lamination screws
-OUT of those z-ranges so cutting the housing later doesn't expose a screw.
+### 2. Cut the ladder housings (side "b" posts only)
 
-- Apply PVA glue across both mating faces — glue is the primary fastener;
-  screws are clamps during cure.
-- Drive 75mm 14g Type 17 bugle-head batten screws in a staggered pattern,
-  ~250-300mm apart along the 2435mm post (~8-10 screws per post).
-  - Drill 5.5mm clearance holes through the first board only — threads
-    bite the second board and pull the joint tight against the glue.
-  - Drill a 4mm pilot for the end screws (within ~75mm of either end)
-    to avoid splitting end grain.
-  - Pre-drill anywhere you hit a knot.
+![Side "b" post with all 8 ladder housings](./images/post.png)
 
-**Side "b" posts only — no-screw zones**
+Each rung end sits in a housing 90 mm wide (the full post), 45 mm tall and
+30 mm deep, cut into the **inner long face**. The bottom of the housing is a
+shelf. The rung rests on it in compression, so the ladder carries climbing load
+before glue or screws come into it.
 
-These are the 8 ladder housings that will be cut in the next step. Each is
-45mm tall in z (measured from the foot of the post):
+- Mark all 16 housings (2 posts x 8 rungs) using the table above. Lower number
+  is the shelf, upper edge is 45 mm above it.
+- Set the saw to 30 mm depth. Test on scrap.
+- Cut a row of kerfs 3 to 5 mm apart across each housing, chisel out the
+  fingers, pare the shelf flat. The shelf matters, the back wall just needs to
+  be close.
+- Dry fit each rung. Snug, with the rung top flush with the housing top.
 
-| Rung | Housing z (mm) | Rung | Housing z (mm) |
-| ---- | --------------: | ---- | --------------: |
-| 0 (top) | 2085 – 2130 | 4 |  945 –  990 |
-| 1       | 1800 – 1845 | 5 |  660 –  705 |
-| 2       | 1515 – 1560 | 6 |  375 –  420 |
-| 3       | 1230 – 1275 | 7 (bottom) |  90 –  135 |
-
-Add ~25mm buffer either side (saw kerfs can wander). Stagger screws into
-the 9 safe bands between/outside these ranges — each safe band is
-180-285mm tall, comfortable for one or two screws at the ~250-300mm
-spacing above.
-
-(The lower edge of each housing — the "shelf z" — is the same table reused
-in the next step to mark out the cuts. Same numbers, two jobs.)
-
-### Ladder (side "b" only — 8 rungs in 30mm housings, glued + screwed)
+### 3. Glue and screw the rungs
 
 ![Side "b" with ladder rungs in their housings](./images/side-b.png)
 
-Each rung is 970mm long (= `bed_width` - 2 x (90mm - 30mm `ladder_notch`)). Each
-rung end sits in a 30mm-deep housing in the laminated post pair: 90mm wide (full
-post width in x) x 45mm tall (matches rung z-dimension) x 30mm deep (into y).
-The BOTTOM of the housing acts as a shelf — the rung bears on it in pure
-compression, so the joint carries the climbing load even before glue/screws come
-into the picture.
+- Glue the back wall and both shelves of each housing and the matching faces
+  of the rung end.
+- Slide each rung into its two housings.
+- Drive 2x 100 mm batten screws per rung end, on a small diagonal across the
+  90 x 45 rung end, from the **outer long face** of the post. Pre-drill 5.5 mm
+  through the post and 4 mm about 30 mm into the rung end. End grain splits
+  without a pilot.
+- Tighten opposing diagonals so the rung pulls evenly into the housing.
+- **Drive the rung 1 screws flush or slightly below the surface.** The lowest
+  safety rail sits over those heads later and must lie flat on the post.
+- Wipe squeeze-out, leave flat for 24 hours. No climbing until fully cured.
 
-**Cut the housings (after lamination, before any rungs go in):**
+Side "b" plus the ladder is now one permanent piece. Everything else bolts on
+and comes off again.
 
-![Single laminated side "b" post with all 8 ladder housings cut into the inner face](./images/post.png)
+### 4. Drill the posts
 
-- Mark all 16 housing outlines on the inner face of the 2 side "b" post pairs
-  (90mm wide x 45mm tall x 30mm deep, each). The lower edge of each housing
-  sits at the z value in the "no-screw zones" table above (use the lower number
-  of each range — that's the bearing-shelf z). The upper edge is +45mm above.
-- Set the circular saw to a 30mm depth-of-cut; confirm on scrap.
-- Plunge a series of parallel kerfs across the 90mm width of each housing,
-  within the 45mm tall window, spaced ~3-5mm apart. The kerfs leave a row of
-  thin wood fingers.
-- Knock the fingers out with a 25mm bench chisel + mallet, then pare the bottom
-  of the housing flat. The bottom (lower z-face) is the bearing shelf — flat
-  matters; the back wall (y-face) just needs to be reasonably close.
-- Test-fit each rung end. It should slide in snug with no glue, with the rung's
-  top face flush with the top of the housing.
+**The rule for every bolted joint: only the posts get measured holes. Every
+rail and support is drilled in place, through the post hole, using the post as
+the drill jig.** The holes then line up by construction. A rail that came out
+a few millimetres long or short just lands a few millimetres off flush at one
+end, which nobody will see.
 
-If you change `ladder_*` in the code, re-run the file and read the
-`echo ladder_top=` output, then update the table above — the README is a
-sibling source of truth, not a derived artifact. (Note: the OpenSCAD
-variable `top` inside `ladder_rungs_iter` is the shelf z + 90mm; the cube
-is then translated down by `b45x90[1]`=90, so shelf = top - 90. The `top`
-name predates the housing rewrite; it's not the geometric top of the rung,
-which sits at shelf + 45.)
+**Every hole, measured up from the foot**
 
-**Glue + screw the rungs:**
+| What bolts here | Post face the head is on | Band on post | Bolt heights | Side "b" exceptions |
+| --- | --- | ---: | ---: | --- |
+| Bed frame support | outer end face | 1625 to 1715 | 1650, 1690 | |
+| Rail tier 3 (lowest), front and back | outer long face | 1805 to 1895 | 1830, 1870 | **1855, 1885** (clears rung 1) |
+| Rail tier 3, side "a" | outer end face | 1805 to 1895 | **both at 1850** | side "a" only |
+| Rail tier 2, front and back | outer long face | 1985 to 2075 | 2010, 2050 | |
+| Rail tier 2, side "a" | outer end face | 1985 to 2075 | **both at 2030** | side "a" only |
+| Rail tier 1, front and back | outer long face | 2165 to 2255 | 2190, 2230 | |
+| Rail tier 1, side "a" | outer end face | 2165 to 2255 | **both at 2210** | side "a" only |
+| Rail tier 0 (top), front and back | outer long face | 2345 to 2435 | 2370, 2410 | no side rail on top |
 
-- Apply PVA glue to the housing's back wall and both z-face shelves, and to the
-  matching faces of the rung end. Squeeze-out is easy to wipe before it sets;
-  hardened squeeze-out is a sander's chore.
-- Slide each rung into its two housings (one in each post of side "b").
-- Drive 2x 100mm 14g batten screws per rung end on a small diagonal across the
-  90 x 45 rung-end face, from the outer face of the post pair. The screw
-  travels 60mm through the post and 40mm into the rung end. Pre-drill 5.5mm
-  clearance in the post and 4mm pilot in the rung end (~30mm deep).
-- Screws are tightened in opposing diagonals to pull the rung evenly against
-  the housing while the glue cures.
-- Wipe squeeze-out, leave the assembly clamped/horizontal for 24 hours, and do
-  not climb on the ladder until the PVA has fully cured.
+Holes per post: side "a" posts 16 each, side "b" posts 10 each. 52 total.
 
-Note: once glued, side "b" + ladder is one permanent sub-assembly. The rest of
-the loft (side "a", bed frame, safety rails) still disassembles via the bolted
-joints; side "b" ships as a single tall ladder-frame piece.
-
-### All bolted joints — common procedure
-
-The Bed frame and Safety rail sections below both use this pattern; do not
-re-read it per section. Every bolted joint uses 2 M6 x 150mm coach bolts on a
-diagonal across the 90x90 contact patch. Diagonal placement gives a moment arm
-in both axes (resisting rotation in any direction in the joint plane) without
-needing the redundancy of a 4-bolt square.
-
-Diagonal 2-bolt pattern (90x90 contact face, viewed from the bolt-head side):
+**Across the face**
 
 ```
-     <----- 90mm ----->
-    +------------------+   ^
-    |                  |   |
-    |    O             |   |
-    |                  |  90mm
-    |                  |   |
-    |             O    |   |
-    |                  |   |
-    +------------------+   v
+  standard diagonal              side "a" side-rail pair
+  (two heights)                  (one height, mid band)
+
+  <----- 90 ----->               <----- 90 ----->
+  +--------------+  ^            +--------------+  ^
+  |              |  |            |              |  |
+  |   O          |  |  upper     |              |  |
+  |              |  90           |   O      O   |  90  mid
+  |          O   |  |  lower     |              |  |
+  |              |  |            |              |  |
+  +--------------+  v            +--------------+  v
+     25      65                     25      65
 ```
 
-- Bolt centres ~25mm from each adjacent edge (the square neck under
-  the dome head needs wood on every side to bite into; closer than
-  ~2x the bolt diameter risks splitting the edge — 25mm is ~4x the
-  M6 bolt diameter, plenty).
-- Diagonal separation between centres ~57mm (sqrt(40^2 + 40^2),
-  where 40 = 90 - 2 x 25mm edge distance).
-- Either diagonal is fine (\ or /); flip whichever is convenient
-  to mark out per joint — orientation does not change the strength.
+- Standard diagonal: lower bolt 25 mm from one edge, upper bolt 65 mm from the
+  same edge. Either edge, either slope. 25 mm is about 4 bolt diameters from
+  every edge, enough for the square neck to bite and not split the wood.
+- Side "a" side rails use a level pair at mid band instead. Reason: on a side
+  "a" post, the side rail bolts and the front or back rail bolts pass through
+  the same 90 x 90 x 90 block of post at right angles. Any two at the same
+  height would hit each other. The level pair at 45 keeps 20 mm clear of both
+  standard heights.
+- Side "b" tier 3: the standard lower bolt at 1830 would go through the end of
+  rung 1 in its housing. Both bolts move up to 1855 and 1885, still 25 and 65
+  across. Diagonal shrinks from 57 to 45 mm, still fine.
 
-- Drill 7mm clearance holes for the M6 coach bolts (see Tools section).
-  Drill each part separately, not through all layers at once with the
-  parts clamped. The laminated post pair counts as one part — drill
-  through both 45mm layers in one pass (90mm).
-- For each joint: drill the post first, then use it as a physical
-  template for the matching part(s). Clamp them in assembly position,
-  poke a pencil through the post holes to mark the support/rail
-  behind, lift it off and drill to those marks.
-- Coach bolt head sits on the outer face (square neck bites the wood
-  when tapped firmly home with a mallet); flat washer + Nyloc nut on
-  the inner face.
-- Do NOT glue these bolted joints — bolts (not glue) keep the structure
-  disassemblable for transport. The only glued joints are the post
-  laminations and the ladder rung housings.
+**Drilling**
 
-### Bed frame to posts (4 joints, 135mm of timber each)
+- Mark heights from the foot with one story stick for all four posts. If the
+  posts differ by more than 3 mm in length, trim the tops to the shortest so
+  the top rail finishes flush.
+- Mark across the face with a combination square set to 25 and 65. A scrap
+  block with two 7 mm holes and a fence makes a repeatable jig.
+- Drill all 52 holes 7 mm, posts flat on sawhorses, as square to the face as
+  you can. A small angle error doesn't matter, the mating part inherits it.
+- Drill the full 90 mm through the post pair in one pass.
 
-![Bed frame sub-assembly (joists in yellow, support sides in cyan)](./images/bed-frame.png)
+### 5. Bolt the two sides together flat
 
-The bed frame attaches to all 4 posts at z = 1625-1715 (a 90mm-tall
-contact patch on the inner face of each post). Same joint on both sides.
+Assemble each end of the loft lying on the floor. Lay the part being attached
+on the floor, lay the posts on top of it, drill down through the post holes
+into the part, then bolt. Put scrap under the part so you don't drill the
+floor.
 
-- 2x M6 x 150mm coach bolts per joint, diagonal pattern (see above),
-  across the 90x90 contact area where the bed-frame support meets the
-  post pair.
-- Bolt traverses outer post (45) + inner post (45) + bed-frame support (45)
-  = 135mm.
+**Set the spacing first.** Measure your real ladder from outer long face to
+outer long face at two heights. Use that number for side "a", not 1090.
 
-**Side "b" — rung-housing clearance**: rung 1 housing sits at z=1800-1845
-(85mm above the support top) and rung 2 housing at z=1515-1560 (65mm
-below the support bottom), so the bed-frame bolt holes and the rung
-housings don't interfere — but the clearance is closer than it looks, so
-place the bolts in the middle of the 90x90 contact patch rather than
-chasing the corners toward the rung 2 housing below.
+**Side "a"**
 
-### Safety rails to posts (22 joints, 135mm of timber)
+1. Screw a straight board to the floor as a stop. Both post feet press against
+   it, so both posts share the same datum.
+2. Lay the 3 side rails on the floor at tiers 1, 2 and 3. Lay the two posts on
+   top, **outer end face down**, feet on the stop, spaced to the ladder width.
+   Check the diagonals of the rectangle are equal.
+3. Clamp. Drill down through each post hole into the rail. Lift an edge and
+   push the bolts through from the rail side. Head on the rail, washer and nut
+   on the post.
+4. Flip the frame. Lay the bed frame support under the posts at 1625 to 1715,
+   flush with the outer long faces. Drill down through the post holes, drop
+   the bolts in from the top. Head on the post, washer and nut on the support.
 
-![Safety rails — 4 tiers, with the top level skipping the side-"a" rail](./images/safety-rails.png)
+**Side "b"**
 
-- 8 horizontal rails (front/back, 4 levels each) attach to 2 posts at their
-  ends — 16 joints, bolts in the y direction (perpendicular to bed length).
-- 3 side rails (all on side "a", filling the vertical gaps between the
-  front/back rail levels; the top level skips its side rail — see
-  `if (!is_top)` in the `safety_rail` module) attach to 2 posts at their
-  ends — 6 joints, bolts in the x direction (along bed length).
-- 2x M6 x 150mm coach bolts per joint, diagonal pattern (above).
-- Bolt traverses rail (45) + outer post (45) + inner post (45) = 135mm.
-- Coach bolt head on the outer face of the rail; nut + washer is accessible
-  from inside the bed enclosure (between the post pair).
+1. Lay the ladder flat, **inner end faces down**, on the bed frame support
+   placed at 1625 to 1715.
+2. Drill down through the post holes, drop the bolts in. Head on the post,
+   nut on the support.
 
-**Side "b" bottom-rail caveat — affects 2 joints**
+**Label every joint** on a hidden face: which rail, which end, which post.
+Parts drilled in place are matched pairs and must go back the same way after a
+move.
 
-The bottom safety rail (level 3, the one closest to the bed) sits on the
-posts at z = 1805-1895, which overlaps ladder housing 1 (z = 1800-1845) on
-side "b" posts. With the standard diagonal, the LOWER bolt would land at
-z = 1830 and punch straight through the end of rung 1 inside its housing.
+### 6. Stand it up and fit the bed frame
 
-On the 2 affected joints (level 3 front rail x side "b" front post; level 3
-back rail x side "b" back post), shift BOTH bolts above z = 1850. A
-workable diagonal in the upper portion of the contact patch:
+![Bed frame, joists in yellow, supports in cyan](./images/bed-frame.png)
 
-- Lower bolt: x_offset = 25mm from one side, z = 1855
-- Upper bolt: x_offset = 65mm from the same side, z = 1885
+- Stand both sides up. A helper or a temporary diagonal brace holds them.
+- Drop the 3 joists onto the two supports, between the posts. The joists set
+  the distance between the ends. Joist tops are at 1805.
+- Plumb the posts. Measure the two diagonals of the front face. Equal means
+  square.
 
-Diagonal separation drops from ~57mm to ~45mm — still a real moment arm.
-The other 20 safety-rail joints (all 3 upper levels, plus level 3 on
-side "a") use the standard diagonal.
+Rung clearance on side "b": the support band (1625 to 1715) sits 65 mm above
+rung 2 and 85 mm below rung 1. The standard bolt heights clear both.
 
-### Bed panel (drop-in, no fasteners)
+### 7. Fit the safety rails
 
-- 12mm plywood, 1090 x 2050mm. Sits on the 3 bed-frame joists; gravity and
-  the surrounding support sides hold it in place — no screws or glue.
-- Drill ~65 breathing holes before installing (see Tools > "Drilling —
-  plywood breathing holes" for layout and method). Drilling on the loft
-  is awkward; do it on a bench.
+![Safety rails, 4 tiers, no side rail on top](./images/safety-rails.png)
 
-### Support panels (back + side-"a", drop-in)
+Work from the bottom tier up. Each rail adds rigidity and the low ones are
+easier to reach.
 
-- Back support panel (2230 x 600mm): mounts to the back face of the
-  back-row posts, top edge at z = 800mm (`support_bottom + support_height`).
-- Side-"a" support panel (1090 x 600mm): mounts to the outer face of the
-  two side-"a" posts at the same z-range.
-- Both panels are 12mm ply, screwed to the post outer faces with a few
-  short countersunk screws. They are visual/dust panels, not structural —
-  do not load them.
+For each front or back rail:
 
-### Finish
+1. Hold the rail against the outer long faces of the two posts at its tier,
+   side "a" end flush with the post. Length variance lands at the ladder end.
+2. Re-check the front face diagonals, then clamp.
+3. From inside the bed, drill through the post hole into the rail with the
+   long 7 mm bit.
+4. Bolt. Head on the rail outside, washer and nut inside between the post
+   pair.
 
-- Sand exposed surfaces 80 → 120 → 180 grit. Easier to do before the
-  bolted skeleton goes together (reaching into the assembled bed enclosure
-  with a random-orbital is awkward).
-- Optional tint: brush on Resene Colorwood ("Rock Salt" or "Rising Tide");
-  let it dry per the product instructions.
-- Top coat: 2-3 coats of Resene Aquaclear with the 125mm Speed Brush,
-  sanding lightly between coats with 320 grit.
+If your bit is too short to go through post and rail in one pass: spin the bit
+in the post hole just enough to dimple the rail, take the rail down, drill the
+dimples on the bench.
+
+If a hole fights on reassembly, open the hole in the **nut-side part only** to
+8 mm. The head-side part stays 7 mm so the square neck still bites.
+
+### 8. Panels
+
+**Bed panel.** Cut it now, to the real joist length and real post spacing.
+Drill the breathing holes on a bench before fitting:
+
+- 25 mm Forstner, about a 150 mm grid, 75 mm in from the edges. That is about
+  7 columns across by 13 rows along, around 90 holes.
+- The joists run lengthwise, so two of the columns land on joists. Skip those,
+  leaving about 65 useful holes.
+- Clamp scrap under the panel to stop blow-out.
+- Drops onto the joists. Gravity and the supports hold it. No fasteners.
+
+**Support panels.** Back panel on the back posts, side "a" panel on the side
+"a" posts, top edge at 800 mm. A few short countersunk screws into the posts.
+Cosmetic only, don't load them.
+
+### 9. Finish
+
+Sand and finish before the frame goes together if you can. Reaching into the
+assembled bed with a sander is awkward.
+
+- Sand 80, 120, 180.
+- Optional Colorwood tint, dry per the tin.
+- 2 to 3 coats of Aquaclear with the 125 mm Speed Brush, light 320 sand
+  between coats.
+
+### After it's built
+
+- **Re-tighten all 52 nuts after 2 to 4 weeks**, and again each year. Timber
+  shrinks under the washers.
+- **To move it**: take off the rails, lift out the panel and joists, unbolt
+  the two supports. Side "b" travels as one tall ladder piece. Put every part
+  back on its labelled joint.
 
 ## Reference views
-
-Orthographic projections of the full assembly, for dimensional reference:
 
 | Front | Side | Top |
 | :---: | :---: | :---: |
 | ![Front](./images/front.png) | ![Side](./images/side.png) | ![Top](./images/top.png) |
 
-## Rendering
+## Design source
 
-The `Justfile` at the repo root has recipes for re-rendering every image in
-this README. From the repo root:
+The model is in [`loft.scad`](./loft.scad), rendered with OpenSCAD 2021.01.
+Axes: x runs along the bed length, y across the bed width, z up.
+
+The numbers in this README mirror the constants at the top of the file
+(`post_height = 2435`, `ladder_rungs = 8`, `bed_length = 2050`,
+`bed_width = 1090`, and so on). If you change one, update both. The README is
+a sibling source of truth, not generated. The housing shelf heights come from
+the `echo ladder_top=` output (shelf = `top` minus 90, a leftover name from
+before the housing rewrite).
+
+## Rendering
 
 ```sh
 just loft-render-all         # re-render every PNG into loft/images/
@@ -429,5 +449,5 @@ just loft-render-post        # re-render the post sub-assembly (with housings)
 just --list                  # show all recipes
 ```
 
-PNG outputs land in `loft/images/` and are committed via Git LFS (see
+PNGs land in `loft/images/` and are committed via Git LFS (see
 `.gitattributes`).
