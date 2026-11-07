@@ -6,6 +6,10 @@
 // into the other pocket, drill the other. The plastic only places the bar.
 // The steel guides the bit, so the plastic never wears.
 //
+// The bars taper: wide at the top, narrow at the bottom. The pockets taper
+// to match, loose at the bottom and snug at the top of the wall, so the bar
+// always centres on the top edge of the wall.
+//
 // Bit sizes: snug under the bolt head, loose under the nut. Heads go on the
 // posts for rail bolts (6.5), nuts on the rails (8). Support bolts: nuts on
 // the posts (10), heads on the supports (8.5, drilled through the post hole,
@@ -23,9 +27,10 @@ $fn = 48;
 eps = 0.01;
 
 // ---- MEASURE THESE WITH A RULER BEFORE PRINTING ----------------------------
-// The bars, as [length, width, height]. Width is the widest part, the top.
-bar_small = [140, 22.5, 22.2]; // MDG1000NP, 3 to 9.5 mm
-bar_large = [134, 25.4, 22.2]; // MDG2000NP, 10 to 14 mm
+// The bars, as [length, top width, bottom width, height]. Read the widths
+// across an end face: the top is the widest, the bottom the narrowest.
+bar_small = [140, 22.2, 14.3, 22.2]; // MDG1000NP, 3 to 9.5 mm
+bar_large = [134, 25.4, 17.5, 22.2]; // MDG2000NP, 10 to 14 mm. Bottom width is a guess.
 // From the end of the bar with the SMALLEST hole to the centre of the hole we
 // use. These are guesses from the hole count. Replace them with your readings.
 hole_6_5_from_end = 78;  // MDG1000NP, the 6.5 hole
@@ -41,7 +46,7 @@ hang_rail = 30;    // cheeks hang this far down a rail lying flat (45 thick)
 stop_hang = 50;    // RAIL end stop hangs this far, past the 45 mm rail end
 frame_h = 15;      // frame height. The bar stands 7 mm proud so you can grab it
 wall = 8;          // frame wall around a pocket
-pocket_clear = [2, 0.5]; // pocket is this much longer and wider than the bar
+pocket_clear = [2, 0.5, 1.5]; // longer than the bar, wider at the wall top, wider at the bottom
 engrave = 0.8;     // depth of the labels and arrows
 pair = [25, 65];   // the two holes, across a post or along a rail from its end
 
@@ -55,15 +60,35 @@ master_colour = "palegreen";
 cheek_in = part_clear / 2;             // cheek inner face, past the wood
 cheek_out = cheek_in + cheek;          // cheek outer face
 
+// Bar width at height h above the wood.
+function bar_w(b, h) = b[2] + (b[1] - b[2]) * h / b[3];
+
 // A bar with its one working hole, lying along +x from the origin, small end
-// at x = 0.
+// at x = 0, centred on y = 0.
 module bar(b, offset, bit) {
   color(steel)
   difference() {
-    cube(b);
-    translate([offset, b[1] / 2, -eps]) cylinder(d = bit, h = b[2] + 2 * eps);
+    translate([b[0] / 2, 0, 0])
+    linear_extrude(b[3], scale = [1, b[1] / b[2]])
+    square([b[0], b[2]], center = true);
+    translate([offset, 0, -eps]) cylinder(d = bit, h = b[3] + 2 * eps);
   }
 }
+
+// The pocket a bar drops into: along +x from x = 0 (the push wall), centred on
+// y = 0. Tapered like the bar, cut right through the frame.
+module pocket(b) {
+  len = b[0] + pocket_clear[0];
+  bottom = b[2] + pocket_clear[2];
+  top = bar_w(b, frame_h) + pocket_clear[1];
+  h = frame_h + 2 * eps;
+  translate([len / 2, 0, -eps])
+  linear_extrude(h, scale = [1, top / bottom])
+  square([len, bottom], center = true);
+}
+
+// Width of the pocket at the frame top, for sizing the frame around it.
+function pocket_top_w(b) = bar_w(b, frame_h) + pocket_clear[1];
 
 // Engraved arrow in the frame top, pointing toward -x, tip at x.
 module arrow(x, y) {
@@ -97,7 +122,6 @@ module index_notch(hang) {
 // lands at x = 0, on the index line.
 module post_jig(name, bit, b, offset) {
   len = b[0] + pocket_clear[0];
-  wid = b[1] + pocket_clear[1];
   xa = -offset;              // push wall. Bar end sits here, hole at x = 0.
   x0 = xa - wall;
   x1 = xa + len + wall;
@@ -108,8 +132,7 @@ module post_jig(name, bit, b, offset) {
       for (y = [-cheek_out, part_w + cheek_in])
         translate([x0, y, -hang_post]) cube([x1 - x0, cheek, hang_post]);
     }
-    for (y = pair)
-      translate([xa, y - wid / 2, -eps]) cube([len, wid, frame_h + 2 * eps]);
+    for (y = pair) translate([xa, y, 0]) pocket(b);
     arrow(xa - wall + 1.5, part_w / 2);
     label(str(name, "  ", bit), (x0 + x1) / 2, part_w / 2);
     index_notch(hang_post);
@@ -121,7 +144,7 @@ module post_jig(name, bit, b, offset) {
 // end stop. The hole lands at y = 45, the centre of the rail.
 module rail_jig(b, offset) {
   len = b[0] + pocket_clear[0];
-  wid = b[1] + pocket_clear[1];
+  wid = pocket_top_w(b);
   ya = part_w / 2 - offset;  // push wall. Bar end sits here, hole at y = 45.
   y0 = ya - wall;
   y1 = part_w + cheek_out;
@@ -138,8 +161,7 @@ module rail_jig(b, offset) {
       // floor under the part of the pockets that hangs past the rail
       translate([x0, y0, -3]) cube([x1 - x0, -cheek_out - y0, 3]);
     }
-    for (x = pair)
-      translate([x - wid / 2, ya, -eps]) cube([wid, len, frame_h + 2 * eps]);
+    for (x = pair) translate([x, ya, 0]) rotate(90) pocket(b);
     translate([0, 0, 0]) rotate(90) arrow(ya - wall + 1.5, -part_w / 2);
     label("RAIL  8", part_w / 2, (ya + y1) / 2, 90);
   }
@@ -150,10 +172,10 @@ module post_m8() { post_jig("POST M8", 10, bar_large, hole_10_from_end); }
 module rail_jig_m8() { rail_jig(bar_small, hole_8_from_end); }
 
 // Bars sitting in pocket 1 of each jig, for the pictures.
-module post_m6_bar() { translate([-hole_6_5_from_end, pair[0] - bar_small[1] / 2, 0]) bar(bar_small, hole_6_5_from_end, 6.5); }
-module post_m8_bar() { translate([-hole_10_from_end, pair[0] - bar_large[1] / 2, 0]) bar(bar_large, hole_10_from_end, 10); }
+module post_m6_bar() { translate([-hole_6_5_from_end, pair[0], 0]) bar(bar_small, hole_6_5_from_end, 6.5); }
+module post_m8_bar() { translate([-hole_10_from_end, pair[0], 0]) bar(bar_large, hole_10_from_end, 10); }
 module rail_bar() {
-  translate([pair[0] + bar_small[1] / 2, part_w / 2 - hole_8_from_end, 0]) rotate(90)
+  translate([pair[0], part_w / 2 - hole_8_from_end, 0]) rotate(90)
   bar(bar_small, hole_8_from_end, 8);
 }
 
