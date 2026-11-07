@@ -14,10 +14,10 @@ is bolted, so it comes apart for moving.
 | Timber | 90 x 45 pine, laminated in pairs for the posts |
 | Footprint | 2230 x 1090 mm over the posts, 2275 x 1180 mm with the rails |
 | Post height | 2435 mm |
-| Bed deck top | 1805 mm (joist tops), mattress sits on 12 mm ply above |
+| Bed deck top | 1825 mm (joist tops), mattress sits on 12 mm ply above |
 | Mattress | 2030 x 1070 mm, 10 mm clearance each side |
 | Ladder | 8 rungs on side "b", 240 mm gap between rungs |
-| Safety rail | 4 tiers front and back, 3 side rails in the gaps between tiers on side "a" |
+| Safety rail | 4 tiers front and back, 3 side rails on side "a". Gaps 90 mm (50 above the lowest tier) |
 | Bolts | 8x M8 (bed frame) + 44x M6 (rails), cup head, 2 per joint, nuts recessed |
 | Interchangeable | every long rail fits every long rail slot, any way round. Same for side rails and supports. No labels. |
 
@@ -25,9 +25,9 @@ is bolted, so it comes apart for moving.
 
 1. [Laminate the posts](#1-laminate-the-posts)
 2. [Cut the ladder housings](#2-cut-the-ladder-housings-side-b-posts-only) into the two side "b" posts
-3. [Make the 4 drilling jigs](#3-make-the-jigs)
-4. [Drill the posts](#4-drill-the-posts), all 52 holes and recesses, **before** the ladder is glued
-5. [Glue and screw the rungs](#5-glue-and-screw-the-rungs) to make the ladder
+3. [Glue and screw the rungs](#3-glue-and-screw-the-rungs) to make the ladder
+4. [Make the 4 drilling jigs](#4-make-the-jigs)
+5. [Drill the posts](#5-drill-the-posts), all 52 holes and recesses
 6. [Cut and drill the rails and supports](#6-cut-and-drill-the-rails-and-supports)
 7. [Bolt each side together flat](#7-bolt-the-two-sides-together-flat) on sawhorses
 8. [Stand it up and fit the bed frame](#8-stand-it-up-and-fit-the-bed-frame)
@@ -73,16 +73,18 @@ Links:
 | --- | ---: | ---: | --- |
 | Post boards | 8 | 2435 | glue up in pairs into 4 posts |
 | Ladder rungs | 8 | 970 | 1090 minus 2 x 60 (post depth behind the housing) |
-| Bed frame joists | 3 | 2045 | 5 mm short so they drop in. The rails set the post spacing, not the joists. |
-| Supports | 2 | real ladder width (about 1090) | cut after the ladder is glued |
+| Bed frame joists | 3 | 2045 | 5 mm short so they drop in. The rails set the post spacing, not the joists. If cut at 2050, trim 5 mm. |
+| Supports | 2 | 1090 | the side "b" one must match the real ladder width within 1 mm, see [step 6](#6-cut-and-drill-the-rails-and-supports) |
 | Long rails | 8 | 2230 | cut all 8 against one stop block so they match |
-| Side rails | 3 | real ladder width (about 1090) | cut after the ladder is glued |
+| Side rails | 3 | 1090 | these set the side "a" width |
 | Shelf blocks | 4 | 90 | offcuts. Sit under each support end. |
-| Jig blocks | 4 | 150 | offcuts, see [Make the jigs](#3-make-the-jigs) |
+| Jig blocks | 4 | 150 | offcuts, see [Make the jigs](#4-make-the-jigs) |
 | Height stick | 1 | 2500 | any straight offcut |
 | **Total** | | **~60 m** | 11 x 6 m sticks |
 
-Plus scraps of 12 mm ply for the jig cheeks and end stops.
+Plus scraps of 12 mm ply for the jig cheeks and end stops, and about 2.5 m
+of 8 mm dowel. A 40 mm bit of dowel plugs each bolt hole while its nut recess
+is drilled, and gets used up.
 
 ### Plywood, 12 mm
 
@@ -248,7 +250,7 @@ are the same at this stage.
 - Clamp, wipe squeeze-out, leave 24 hours.
 
 **Keep the screws out of the bolt paths.** Bolt holes and recesses are
-drilled later at the heights in [Drill the posts](#4-drill-the-posts). Hitting
+drilled later at the heights in [Drill the posts](#5-drill-the-posts). Hitting
 a screw with a long bit wrecks both.
 
 - Below 1450 mm: anywhere, 250 to 300 mm apart.
@@ -260,10 +262,10 @@ side.
 
 | Rung | Housing band | Rung | Housing band |
 | --- | ---: | --- | ---: |
-| 0 (top) | 2065 to 2110 | 4 | 925 to 970 |
-| 1 | 1780 to 1825 | 5 | 640 to 685 |
-| 2 | 1495 to 1540 | 6 | 355 to 400 |
-| 3 | 1210 to 1255 | 7 (bottom) | 70 to 115 |
+| 0 (top) | 2085 to 2130 | 4 | 945 to 990 |
+| 1 | 1800 to 1845 | 5 | 660 to 705 |
+| 2 | 1515 to 1560 | 6 | 375 to 420 |
+| 3 | 1230 to 1275 | 7 (bottom) | 90 to 135 |
 
 The lower number in each band is the shelf the rung sits on. The same table is
 used to mark the housings in the next step.
@@ -285,9 +287,32 @@ before glue or screws come into it.
   be close.
 - Dry fit each rung. Snug, with the rung top flush with the housing top.
 
-Don't glue the rungs yet. The posts get drilled first.
+### 3. Glue and screw the rungs
 
-### 3. Make the jigs
+![Side "b" with ladder rungs in their housings](./images/side-b.png)
+
+- Glue the back wall and both shelves of each housing and the matching faces
+  of the rung end.
+- Slide each rung into its two housings.
+- Drive 2x 100 mm batten screws per rung end, on a small diagonal across the
+  90 x 45 rung end, from the **outer long face** of the post. Pre-drill 5.5 mm
+  through the post and 4 mm about 30 mm into the rung end. End grain splits
+  without a pilot.
+- Tighten opposing diagonals so the rung pulls evenly into the housing.
+- **Drive every rung screw flush or slightly below the surface.** They show
+  on the outside of the bed.
+- Scrape squeeze-out off the rung 2 ends where they show on the inner end
+  face. A shelf block sits over them later.
+- Wipe up, leave flat for 24 hours. No climbing until fully cured.
+
+Side "b" plus the ladder is now one permanent piece. Everything else bolts on
+and comes off again.
+
+**Measure the ladder now.** Outer long face to outer long face, at two
+heights. Write it down. That is your real width W, about 1090. Only one part
+has to match it: the side "b" support, see [step 6](#6-cut-and-drill-the-rails-and-supports).
+
+### 4. Make the jigs
 
 **The rule: no part is ever drilled through another part.** Every hole is
 drilled through a jig. Parts made with the same jig fit each other, so any
@@ -337,18 +362,18 @@ If you have a 3D printer, the cheeks, end stops and a depth collar for the
 Forstner bit are good things to print. Keep the drilled hole in wood, a steel
 bit chews plastic over 100 holes.
 
-### 4. Drill the posts
+### 5. Drill the posts
 
-Posts flat on sawhorses. Do this **before** the rungs go in: once the ladder
-is glued the jig can't sit on the inner long faces of the side "b" posts.
+Posts flat on sawhorses. The ladder can already be glued: the jig only ever
+sits on faces with no rungs, and the recesses are drilled freehand on a plug.
 
 **Height stick.** A straight 2.5 m offcut. Mark every height in the table
 below from one end. Use it for all four posts, end against the foot.
 
 | What bolts here | Part sits on this face | Height | Jig | Side "b" |
 | --- | --- | ---: | --- | --- |
-| Support | inner end face | 1670 | POST M8 | yes |
-| Long rail tier 3 (lowest) | outer long face | 1850 | POST M6 | yes |
+| Support | inner end face | 1690 | POST M8 | yes |
+| Long rail tier 3 (lowest) | outer long face | 1890 | POST M6 | yes |
 | Side rail, lowest | outer end face | 1940 | POST M6 | side "a" only |
 | Long rail tier 2 | outer long face | 2030 | POST M6 | yes |
 | Side rail, middle | outer end face | 2120 | POST M6 | side "a" only |
@@ -357,53 +382,48 @@ below from one end. Use it for all four posts, end against the foot.
 | Long rail tier 0 (top) | outer long face | 2390 | POST M6 | yes |
 
 Side "a" posts get 16 holes each, side "b" posts 10 each. 52 total. Each
-height is the middle of its rail. Side rails sit in the 90 mm gaps between
-long rail tiers, so no bolts cross inside a post.
+height is the middle of its rail. Long rail and side rail bolts are at least
+50 mm apart in height, so no bolts cross inside a post.
+
+Why tier 3 is at 1845 to 1935 and the bed frame at 1645 to 1735: the tier 3
+nut recess goes on the ladder's inner face, 45 mm above rung 1. Any closer
+and the drill body hits the rung. The bed frame moves up with it so the rail
+still sits just above the bed panel. The gap above tier 3 is 50 mm, the other
+gaps are 90.
 
 For each height in the table:
 
-1. Carry the height line from the stick around all four faces of the post
-   with a square.
-2. Put the jig on the **face opposite** the one in the table. That is the nut
-   face. Line up the cheek line. Poke a pencil through both holes.
-3. Take the jig off. Forstner a 25 mm recess, **20 mm deep**, on each pencil
-   mark. Tape or a collar on the bit for depth. These recesses hold the nuts.
-4. Flip the post. Put the jig on the face named in the table, on the same
-   line. Drill both holes right through with the long bit. The bit comes out
-   inside the recess.
+1. Carry the height line from the stick around the post with a square.
+2. Put the jig on the face named in the table. Line up the cheek line. Drill
+   both holes right through with the long bit.
+3. Flip the post. Tap a 40 mm bit of 8 mm dowel into each hole, 2 to 3 mm
+   proud. For the 9.5 mm support holes, wrap the dowel in masking tape until
+   it's a snug push fit, about 4 turns.
+4. Forstner a 25 mm recess, **20 mm deep**, centred on the dowel. Tape or a
+   collar on the bit for depth. These recesses hold the nuts.
+5. Put the jig back on and re-drill the hole. The bit clears out the stub of
+   dowel.
 
-Recess first, then through hole. A Forstner needs wood under its centre spur.
+Through hole first, then recess. The recess ends up centred on the real hole,
+and the dowel gives the Forstner's centre spur something to bite.
 
-### 5. Glue and screw the rungs
-
-![Side "b" with ladder rungs in their housings](./images/side-b.png)
-
-- Glue the back wall and both shelves of each housing and the matching faces
-  of the rung end.
-- Slide each rung into its two housings.
-- Drive 2x 100 mm batten screws per rung end, on a small diagonal across the
-  90 x 45 rung end, from the **outer long face** of the post. Pre-drill 5.5 mm
-  through the post and 4 mm about 30 mm into the rung end. End grain splits
-  without a pilot.
-- Tighten opposing diagonals so the rung pulls evenly into the housing.
-- **Drive every rung screw flush or slightly below the surface.** Rails sit
-  over some of them, and the rest are exposed on the outside of the bed.
-- Scrape squeeze-out off the rung 2 ends where they show on the inner end
-  face. A shelf block sits over them later.
-- Wipe up, leave flat for 24 hours. No climbing until fully cured.
-
-Side "b" plus the ladder is now one permanent piece. Everything else bolts on
-and comes off again.
-
-**Measure the ladder now.** Outer long face to outer long face, at two
-heights. Write it down. That is your real width W, about 1090.
+**Side "b" is a ladder, not a loose post.** Lay it flat on the sawhorses.
+Drill the long rail holes sideways into the outer long faces with the jig
+clamped on. Drill their recesses from inside the ladder, between the rungs.
+The support holes go in the inner end faces, which face up.
 
 ### 6. Cut and drill the rails and supports
 
 **Cut.** Set a stop block on the saw and cut all 8 long rails to 2230 without
-moving it. Move the stop to W and cut the 3 side rails and 2 supports. The
+moving it. Move the stop to 1090 and cut the 3 side rails and 2 supports. The
 rails set the post spacing, so parts cut against the same stop fit the same
 posts.
+
+**The side "b" support must match W within 1 mm.** Its holes are 1040 apart
+and the post holes are W minus 50 apart, and the ladder is already fixed at
+W. W from 1089 to 1091: use a 1090 support, centred. Under 1089: trim one
+support to W. Over 1091: cut a new support to W from spare. Nothing else
+depends on W. The side rails set side "a" to 1090 on their own.
 
 **Drill.** Push the jig onto one end of the part, end stop tight against the
 end, and drill both holes. Turn the jig around, do the other end. RAIL jig for
@@ -431,13 +451,13 @@ washer and Nyloc in the recess.
 1. Clamp a straight board across the sawhorses as a stop. Both post feet
    press against it, so both posts share the same datum.
 2. Lay the two posts on the sawhorses, **outer end face up**, feet on the
-   stop, W apart.
+   stop, 1090 apart.
 3. Lay the 3 side rails on top at 1895, 2075 and 2255, holes over the post
    holes. Fit the 12 bolts.
 4. Check the diagonals of the rectangle are equal, then tighten.
-5. Flip the frame, **inner end face up**. Lay the support across at 1625 to
-   1715, ends flush with the outer long faces. Fit the 4 M8 bolts. The nuts
-   go in the recesses on the outer end face, underneath.
+5. Flip the frame, **inner end face up**. Lay the support across at 1645 to
+   1735, centred, ends flush with the outer long faces. Fit the 4 M8 bolts.
+   The nuts go in the recesses on the outer end face, underneath.
 6. Lay a shelf block on each post on the foot side of the support, butted
    tight against it. Drill 5.5 mm through the block, then screw it to the
    post with 3x 100 mm batten screws **in the 40 mm nearest the support**.
@@ -457,7 +477,8 @@ washer and Nyloc in the recess.
 - Fit the two tier 3 long rails, front and back, as in the next step. They set
   the distance between the ends. Take the temporary rail off.
 - Drop the 3 joists onto the two supports, between the posts: one against
-  each side touching the posts, one in the middle. Joist tops are at 1805.
+  each side touching the posts, one in the middle. Joist tops are at 1825,
+  20 mm under the tier 3 rails.
 - Plumb the posts. Measure the two diagonals of the front face. Equal means
   square.
 
@@ -524,7 +545,8 @@ The model is in [`loft.scad`](./loft.scad), rendered with OpenSCAD 2021.01.
 Axes: x runs along the bed length, y across the bed width, z up.
 
 The numbers in this README mirror the constants at the top of the file
-(`post_height = 2435`, `ladder_rungs = 8`, `ladder_start = 70`,
+(`post_height = 2435`, `ladder_rungs = 8`, `ladder_start = 90`,
+`bed_height = 1735`, `rail_tier3_lift = 40`,
 `bed_length = 2050`, `bed_width = 1090`, and so on). If you change one, update
 both. The README is a sibling source of truth, not generated. The housing
 shelf heights come from the `echo ladder_top=` output (shelf = `top` minus 90,

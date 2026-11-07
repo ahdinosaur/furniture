@@ -23,14 +23,14 @@ ladder_rungs = 8;
 ladder_gap = 240;
 ladder_spacing = ladder_gap + b45x90[0];
 ladder_height = b45x90[1] + (ladder_rungs - 1) * ladder_spacing;
-ladder_start = 70; // bottom rung shelf. 70 keeps the tier 3 bolt recess 12 mm clear of rung 1.
+ladder_start = 90; // bottom rung shelf, as built. Rung 1 top is 1845.
 ladder_notch = 30;
 // SAFETY: ladder gap is 240mm
 echo(ladder_gap = ladder_gap);
 echo(ladder_height = ladder_height);
 
 post_height = 2435;
-bed_height = 1715;
+bed_height = 1735; // joist bottom. Raised 20 from the original design, see README step 5.
 bed_length = 2030 + 20; // 10mm clearance on each side
 bed_width = 1070 + 20; // 10mm clearance on each side
 side_width = bed_width - 2 * b45x90[1];
@@ -39,6 +39,11 @@ slat_count = 6;
 slat_width = 200;
 safety_rungs = 4;
 support_bottom = 200;
+// The lowest long rail (tier 3) sits 40 mm above the 1805 it would have at even
+// spacing. Its centred bolt lands at 1890, 45 mm above the top of rung 1, so a
+// drill body fits to cut the 25 mm nut recess on the ladder's inner face.
+rail_tier3_lift = 40;
+safety_gap = 90; // between rail tiers, except 50 above tier 3
 support_height = 600;
 
 // SAFETY: end gap is 60mm
@@ -208,13 +213,13 @@ module side_support_panel() {
   panel_xz(bed_length + 4 * b45x90[0], support_height);
 }
 
-module safety_rail(is_top) {
+module safety_rail(is_top, lift = 0) {
   // front
   color("pink")
   translate([
     -2 * b45x90[0],
     -1 * b45x90[0],
-    -b45x90[1],
+    -b45x90[1] + lift,
   ])
   beam_xz(b45x90, bed_length + 4 * b45x90[0]);
 
@@ -223,7 +228,7 @@ module safety_rail(is_top) {
   translate([
     -2 * b45x90[0],
     bed_width,
-    -b45x90[1],
+    -b45x90[1] + lift,
   ])
   beam_xz(b45x90, bed_length + 4 * b45x90[0]);
 
@@ -240,17 +245,19 @@ module safety_rail(is_top) {
 }
 
 module safety_rails() {
-  spacing = (post_height - bed_height - 2 * b45x90[1]) / (safety_rungs - 1);
-  // SAFETY: safety gap is 90mm
-  echo(safety_gap = spacing - b45x90[1]);
+  spacing = b45x90[1] + safety_gap;
+  // SAFETY: safety gap is 90mm, 50mm above tier 3 (rail_tier3_lift)
+  echo(safety_gap = safety_gap, bottom_gap = safety_gap - rail_tier3_lift);
 
   for (safety_index = [0: safety_rungs - 1]) {
     is_top = safety_index == 0;
+    is_bottom = safety_index == safety_rungs - 1;
     top = post_height - (safety_index * spacing);
-    // echo(safety_index = safety_index, safety_top = top);
+    lift = is_bottom ? rail_tier3_lift : 0;
+    echo(safety_index = safety_index, long_rail_bottom = top - b45x90[1] + lift, long_rail_top = top + lift);
 
     translate([0, 0, top])
-    safety_rail(is_top);
+    safety_rail(is_top, lift);
   }
 }
 
