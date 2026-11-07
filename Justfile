@@ -5,6 +5,7 @@
 # Right now only the loft has render recipes.
 
 scad        := "loft/loft.scad"
+jigs_scad   := "loft/jigs.scad"
 loft_images := "loft/images"
 size        := "1600,1200"
 scheme      := "Cornfield"
@@ -23,7 +24,10 @@ loft-render-all: loft-render-iso \
                  loft-render-bed-frame \
                  loft-render-safety-rails \
                  loft-render-post-blank \
-                 loft-render-post
+                 loft-render-post \
+                 loft-render-jigs \
+                 loft-render-jig-on-post \
+                 loft-render-jig-on-rail
 
 # --- full assembly ---
 
@@ -108,6 +112,32 @@ loft-render-post:
         --imgsize={{size}} --colorscheme={{scheme}} \
         --projection=p --viewall --autocenter \
         -D 'view="post"' {{scad}}
+
+# --- drilling jigs (loft/jigs.scad) ---
+
+# All four jigs side by side, labelled
+loft-render-jigs:
+    @mkdir -p {{loft_images}}
+    openscad -o {{loft_images}}/jigs.png \
+        --imgsize={{size}} --colorscheme={{scheme}} \
+        --projection=p --viewall --autocenter \
+        -D 'view="all"' {{jigs_scad}}
+
+# POST M6 jig sitting on a post, cheek line on the pencil line
+loft-render-jig-on-post:
+    @mkdir -p {{loft_images}}
+    openscad -o {{loft_images}}/jig-on-post.png \
+        --imgsize={{size}} --colorscheme={{scheme}} \
+        --projection=p --viewall --autocenter \
+        -D 'view="on_post"' {{jigs_scad}}
+
+# RAIL jig pushed onto the end of a rail, end stop against the end
+loft-render-jig-on-rail:
+    @mkdir -p {{loft_images}}
+    openscad -o {{loft_images}}/jig-on-rail.png \
+        --imgsize={{size}} --colorscheme={{scheme}} \
+        --projection=p --viewall --autocenter \
+        -D 'view="on_rail"' {{jigs_scad}}
 
 # Remove all rendered PNGs. WARNING: these files are committed (via LFS).
 # After running this, `git status` will show them as deleted — restore with

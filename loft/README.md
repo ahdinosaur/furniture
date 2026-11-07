@@ -324,16 +324,7 @@ side, so it drops over a post or a rail like a saddle and centres itself. The
 hole through the 45 mm block guides the drill bit straight. The one precision
 step is drilling the jig holes, and the Big Gator guide does that for you.
 
-```
-   side view               end view
-
-  +------------+           +-+------+-+
-  |   o    o   |  jig      | |      | |   ply cheeks
-  |            |  block    | | 90x45| |
-  +------------+           +-+------+-+
-  |  post or   |           | |      | |
-  |  rail      |           | |  90  | |
-```
+![The four jigs. POST jigs have a line across the cheeks, RAIL and SUPPORT jigs have an end stop](./images/jigs.png)
 
 Four jigs. Two holes each, 40 mm apart.
 
@@ -345,6 +336,13 @@ Four jigs. Two holes each, 40 mm apart.
 | **SUPPORT** | 8.5 mm | 25 and 65 from the end stop, both dead centre (45 up) | the end of the support | both ends of both supports |
 
 Every pattern is symmetric, so no jig and no part has a right way round.
+
+| POST jig on a post | RAIL jig on a rail end |
+| :---: | :---: |
+| ![POST M6 jig sitting on a post, cheek line on the pencil line](./images/jig-on-post.png) | ![RAIL jig pushed onto a rail end, end stop against the end](./images/jig-on-rail.png) |
+
+Left: the line on the cheeks sits on the pencil line around the post. Right:
+the end stop hangs past the rail and butts against its end.
 
 How to make one:
 
@@ -542,7 +540,8 @@ assembled bed with a sander is awkward.
 ## Design source
 
 The model is in [`loft.scad`](./loft.scad), rendered with OpenSCAD 2021.01.
-Axes: x runs along the bed length, y across the bed width, z up.
+Axes: x runs along the bed length, y across the bed width, z up. The jigs
+are in [`jigs.scad`](./jigs.scad).
 
 The numbers in this README mirror the constants at the top of the file
 (`post_height = 2435`, `ladder_rungs = 8`, `ladder_start = 90`,
@@ -560,6 +559,7 @@ just loft-render-all         # re-render every PNG into loft/images/
 just loft-render-iso         # re-render just the hero
 just loft-render-post-blank  # re-render the bare laminated post (no housings)
 just loft-render-post        # re-render the post sub-assembly (with housings)
+just loft-render-jigs        # re-render the four jigs (also jig-on-post, jig-on-rail)
 just --list                  # show all recipes
 ```
 
