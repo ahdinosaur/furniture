@@ -23,7 +23,7 @@ ladder_rungs = 8;
 ladder_gap = 240;
 ladder_spacing = ladder_gap + b45x90[0];
 ladder_height = b45x90[1] + (ladder_rungs - 1) * ladder_spacing;
-ladder_start = 90;
+ladder_start = 70; // bottom rung shelf. 70 keeps the tier 3 bolt recess 12 mm clear of rung 1.
 ladder_notch = 30;
 // SAFETY: ladder gap is 240mm
 echo(ladder_gap = ladder_gap);
