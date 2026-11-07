@@ -30,7 +30,7 @@ echo(ladder_gap = ladder_gap);
 echo(ladder_height = ladder_height);
 
 post_height = 2435;
-bed_height = 1735; // joist bottom. Raised 20 from the original design, see README step 5.
+bed_height = 1715; // joist bottom
 bed_length = 2030 + 20; // 10mm clearance on each side
 bed_width = 1070 + 20; // 10mm clearance on each side
 side_width = bed_width - 2 * b45x90[1];
@@ -39,11 +39,11 @@ slat_count = 6;
 slat_width = 200;
 safety_rungs = 4;
 support_bottom = 200;
-// The lowest long rail (tier 3) sits 40 mm above the 1805 it would have at even
-// spacing. Its centred bolt lands at 1890, 45 mm above the top of rung 1, so a
-// drill body fits to cut the 25 mm nut recess on the ladder's inner face.
-rail_tier3_lift = 40;
-safety_gap = 90; // between rail tiers, except 50 above tier 3
+// The lowest long rail (tier 3) sits 20 mm above the 1805 it would have at even
+// spacing. Its centred bolt lands at 1870, clear of rung 1 (top 1845) and the
+// rung screws in that band. See README step 5.
+rail_tier3_lift = 20;
+safety_gap = 90; // between rail tiers, except 70 above tier 3
 support_height = 600;
 
 // SAFETY: end gap is 60mm
@@ -246,7 +246,7 @@ module safety_rail(is_top, lift = 0) {
 
 module safety_rails() {
   spacing = b45x90[1] + safety_gap;
-  // SAFETY: safety gap is 90mm, 50mm above tier 3 (rail_tier3_lift)
+  // SAFETY: safety gap is 90mm, 70mm above tier 3 (rail_tier3_lift)
   echo(safety_gap = safety_gap, bottom_gap = safety_gap - rail_tier3_lift);
 
   for (safety_index = [0: safety_rungs - 1]) {

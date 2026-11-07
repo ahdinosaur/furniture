@@ -4,9 +4,13 @@
 // side, so it drops over a post or a rail like a saddle. The holes go through
 // the 45 mm thickness and guide the drill bit straight.
 //
+// Bit sizes: snug under the bolt head, loose under the nut. Heads go on the
+// posts for rail bolts (6.5) and on the supports for support bolts (8.5).
+// Nuts go on the rails (8) and on the posts for support bolts (10).
+//
 // Axes: x along the block, y across it, z up. The block sits on top of the part.
 
-view = "all"; // "all" | "post_m6" | "post_m8" | "rail" | "support" | "on_post" | "on_rail"
+view = "all"; // "all" | "post_m6" | "post_m8" | "rail" | "support" | "on_post" | "on_rail" | "rail_end"
 
 $fn = 48;
 eps = 0.01;
@@ -68,9 +72,9 @@ module jig(name, bit, holes, end_stop = false) {
   text(str(bit, " mm"), size = 6, halign = "center", valign = "center");
 }
 
-module post_m6() { jig("POST M6", 8, post_holes); }
-module post_m8() { jig("POST M8", 9.5, post_holes); }
-module rail_jig() { jig("RAIL", 6.5, rail_holes, end_stop = true); }
+module post_m6() { jig("POST M6", 6.5, post_holes); }
+module post_m8() { jig("POST M8", 10, post_holes); }
+module rail_jig() { jig("RAIL", 8, rail_holes, end_stop = true); }
 module support_jig() { jig("SUPPORT", 8.5, rail_holes, end_stop = true); }
 
 // A length of 90 x 90 post lying along x, with a pencil line around it.
@@ -89,6 +93,20 @@ module post_piece(length = 400, line_at = 200) {
 module rail_piece(length = 400) {
   color(rail_colour)
   cube([length, 90, 45]);
+}
+
+// A finished rail end: two 8 mm holes with 25 mm nut recesses, 20 deep, in
+// the face that goes on the outside of the loft.
+module rail_end(length = 300) {
+  color(rail_colour)
+  difference() {
+    cube([length, 90, 45]);
+    for (h = rail_holes) {
+      x = length - (block[0] - h[0]); // 25 and 65 from this end
+      translate([x, h[1], -eps]) cylinder(d = 8, h = 45 + 2 * eps);
+      translate([x, h[1], 45 - 20]) cylinder(d = 25, h = 20 + eps);
+    }
+  }
 }
 
 if (view == "all") {
@@ -112,7 +130,7 @@ if (view == "all") {
   // the drill bit, in the hole
   color("silver")
   translate([200, post_holes[0][1], 0])
-  cylinder(d = 8, h = 90 + block[2] + 60);
+  cylinder(d = 6.5, h = 90 + block[2] + 60);
 } else if (view == "on_rail") {
   // RAIL jig pushed onto the end of a rail, end stop against the end
   translate([block[0] - 400, 0, 0]) rail_piece(400);
@@ -120,5 +138,14 @@ if (view == "all") {
   // the drill bit, in the hole nearest the end
   color("silver")
   translate([rail_holes[0][0], rail_holes[0][1], 0])
-  cylinder(d = 6.5, h = 45 + block[2] + 60);
+  cylinder(d = 8, h = 45 + block[2] + 60);
+} else if (view == "rail_end") {
+  // the end of a finished rail, recess side up
+  rail_end(200);
+  // a bolt in the far hole: dome underneath, washer and nut in the recess
+  x = 200 - (block[0] - rail_holes[1][0]);
+  color("silver") translate([x, rail_holes[1][1], -3]) cylinder(d = 6, h = 3 + 45 - 20 + 15);
+  color("silver") translate([x, rail_holes[1][1], -3]) cylinder(d = 13, h = 3);
+  color("silver") translate([x, rail_holes[1][1], 45 - 20]) cylinder(d = 18, h = 1.6);
+  color("silver") translate([x, rail_holes[1][1], 45 - 20 + 1.6]) cylinder(d = 11, h = 6, $fn = 6);
 }

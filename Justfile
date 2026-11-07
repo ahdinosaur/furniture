@@ -27,7 +27,8 @@ loft-render-all: loft-render-iso \
                  loft-render-post \
                  loft-render-jigs \
                  loft-render-jig-on-post \
-                 loft-render-jig-on-rail
+                 loft-render-jig-on-rail \
+                 loft-render-rail-end
 
 # --- full assembly ---
 
@@ -138,6 +139,14 @@ loft-render-jig-on-rail:
         --imgsize={{size}} --colorscheme={{scheme}} \
         --projection=p --viewall --autocenter \
         -D 'view="on_rail"' {{jigs_scad}}
+
+# A finished rail end: two holes with their nut recesses, bolt in one
+loft-render-rail-end:
+    @mkdir -p {{loft_images}}
+    openscad -o {{loft_images}}/rail-end.png \
+        --imgsize={{size}} --colorscheme={{scheme}} \
+        --projection=p --camera=130,45,22,35,0,20,480 \
+        -D 'view="rail_end"' {{jigs_scad}}
 
 # Remove all rendered PNGs. WARNING: these files are committed (via LFS).
 # After running this, `git status` will show them as deleted — restore with
