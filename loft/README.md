@@ -379,7 +379,9 @@ rails stay level and the posts still match. On the rail it only moves where
 the master's ends sit against the post face.
 
 The MDG1000NP numbers already in the file come from a community CAD model
-of the bar and should be close. The MDG2000NP numbers are guesses.
+of the bar and should be close. The MDG2000NP is a bigger, chunkier block and
+its numbers are guesses. Only POST M8 depends on it, so print POST M6 and
+RAIL now and POST M8 once that bar is in hand and measured.
 
 **Print.** `just loft-stl-all` writes the three STLs to [`stl/`](./stl/),
 already flat side down. PLA or PETG, 4 walls, 30% infill, no supports.
