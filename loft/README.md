@@ -26,9 +26,9 @@ is bolted, so it comes apart for moving.
 1. [Laminate the posts](#1-laminate-the-posts)
 2. [Cut the ladder housings](#2-cut-the-ladder-housings-side-b-posts-only) into the two side "b" posts
 3. [Glue and screw the rungs](#3-glue-and-screw-the-rungs) to make the ladder
-4. [Make the 4 drilling jigs](#4-make-the-jigs)
+4. [Make the 3 drilling jigs](#4-make-the-jigs)
 5. [Drill the posts](#5-drill-the-posts), all 52 holes
-6. [Cut and drill the rails and supports](#6-cut-and-drill-the-rails-and-supports), with the nut recesses
+6. [Drill the rails and supports](#6-drill-the-rails-and-supports): one master each, copy the rest
 7. [Bolt each side together flat](#7-bolt-the-two-sides-together-flat) on sawhorses
 8. [Stand it up and fit the bed frame](#8-stand-it-up-and-fit-the-bed-frame)
 9. [Fit the safety rails](#9-fit-the-safety-rails), bottom tier first
@@ -74,15 +74,15 @@ Links:
 | Post boards | 8 | 2435 | glue up in pairs into 4 posts |
 | Ladder rungs | 8 | 970 | 1090 minus 2 x 60 (post depth behind the housing) |
 | Bed frame joists | 3 | 2045 | 5 mm short so they drop in. The rails set the post spacing, not the joists. If cut at 2050, trim 5 mm. |
-| Supports | 2 | 1090 | the side "b" one must match the real ladder width within 1 mm, see [step 6](#6-cut-and-drill-the-rails-and-supports) |
-| Long rails | 8 | 2230 | cut all 8 against one stop block so they match |
-| Side rails | 3 | 1090 | these set the side "a" width |
+| Supports | 2 | 1090 | a few mm out is fine. The side "b" one is drilled on the ladder, see [step 6](#6-drill-the-rails-and-supports) |
+| Long rails | 8 | 2230 | a few mm out is fine. The longest becomes the master, see [step 6](#6-drill-the-rails-and-supports) |
+| Side rails | 3 | 1090 | a few mm out is fine. Copied from the side "b" support |
 | Shelf blocks | 4 | 90 | offcuts. Sit under each support end. |
-| Jig blocks | 4 | 150 | offcuts, see [Make the jigs](#4-make-the-jigs) |
+| Jig blocks | 3 | 150 | offcuts, see [Make the jigs](#4-make-the-jigs) |
 | Height stick | 1 | 2500 | any straight offcut |
 | **Total** | | **~60 m** | 11 x 6 m sticks |
 
-Plus scraps of 12 mm ply for the jig cheeks and end stops.
+Plus scraps of 12 mm ply for the jig cheeks and end stop.
 
 ### Plywood, 12 mm
 
@@ -207,13 +207,13 @@ Ladder rungs are not bolted. They sit in glued and screwed housings.
 - Cordless drill
 - Big Gator V-DrillGuide, metric. Steel blocks with square guide holes, used
   once, to make the jigs. Two of them, Carbatec NZ, about $59 each:
-  - 3 to 9.5 mm (MDG1000NP) for the 6.5, 8 and 8.5 holes:
+  - 3 to 9.5 mm (MDG1000NP) for the 6.5 and 8 holes:
     https://www.carbatec.co.nz/product/35590-big-gator-v-drill-guides
   - 10 to 14 mm (MDG2000NP) for the 10 hole:
     https://www.carbatec.co.nz/product/17558-big-gator-v-drill-guides-10-14mm
-- Long drill bits. 6.5 and 10 mm, 200 mm long (45 mm jig plus 90 mm post).
-  8 and 8.5 mm, 150 mm long (45 mm jig plus 45 mm rail).
-- 8.5 mm and 11 mm bits, any length, only for opening a tight nut-side hole
+- Long drill bits. 6.5, 8.5 and 10 mm, 200 mm long (through a 90 mm post
+  and into the part behind it). 8 mm, 150 mm long (45 mm jig plus 45 mm rail).
+- 11 mm bit, any length, only for opening a tight nut-side hole
 - 5.5 mm twist bit (screw clearance holes) and 4 mm twist bit (pilots)
 - Driver bit for the batten screws, usually square drive #3, check the box
 - 25 mm Forstner bit, for the nut recesses and the bed panel breathing holes:
@@ -319,32 +319,27 @@ before glue or screws come into it.
 Side "b" plus the ladder is now one permanent piece. Everything else bolts on
 and comes off again.
 
-**Measure the ladder now.** Outer long face to outer long face, at two
-heights. Write it down. That is your real width W, about 1090. Only one part
-has to match it: the side "b" support, see [step 6](#6-cut-and-drill-the-rails-and-supports).
-
 ### 4. Make the jigs
 
-**The rule: no part is ever drilled through another part.** Every hole is
-drilled through a jig. Parts made with the same jig fit each other, so any
-rail fits any rail slot and the loft goes back together after a move without
-labels.
+**The rule: nothing is measured.** Post holes come from a jig that sits on
+the post. Rail holes come from one master rail, copied onto the rest. Parts
+made from the same master fit each other, so any rail fits any rail slot and
+the loft goes back together after a move without labels.
 
 A jig is a 150 mm offcut of 90 x 45 with a 12 mm ply cheek screwed to each
 side, so it drops over a post or a rail like a saddle and centres itself. The
 hole through the 45 mm block guides the drill bit straight. The one precision
 step is drilling the jig holes, and the Big Gator guide does that for you.
 
-![The four jigs. POST jigs have a line across the cheeks, RAIL and SUPPORT jigs have an end stop](./images/jigs.png)
+![The three jigs. POST jigs have a line across the cheeks, the RAIL jig has an end stop](./images/jigs.png)
 
-Four jigs. Two holes each, 40 mm apart.
+Three jigs. Two holes each, 40 mm apart.
 
 | Jig | Bit | Hole position | Registers on | Used on |
 | --- | --- | --- | --- | --- |
 | **POST M6** | 6.5 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | all 44 rail holes in the posts |
 | **POST M8** | 10 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | the 8 support holes in the posts |
-| **RAIL** | 8 mm | 25 and 65 from the end stop, both dead centre (45 up) | the end of the rail | both ends of every rail |
-| **SUPPORT** | 8.5 mm | 25 and 65 from the end stop, both dead centre (45 up) | the end of the support | both ends of both supports |
+| **RAIL** | 8 mm | 25 and 65 from the end stop, both dead centre (45 up) | the end of the rail | both ends of the master long rail only |
 
 Every pattern is symmetric, so no jig has a right way round, and every part
 fits either end first.
@@ -372,11 +367,11 @@ How to make one:
 3. Screw a cheek to each side, flush with the top. Check it slides over a post
    and over a rail.
 4. POST jigs: draw a line across both cheeks through the hole centres.
-   RAIL and SUPPORT jigs: screw a ply end stop across one end of the block,
-   hanging down 90 mm, exactly 25 mm from the nearer hole centre.
+   RAIL jig: screw a ply end stop across one end of the block, hanging down
+   90 mm, exactly 25 mm from the nearer hole centre.
 5. Write the jig name and bit size on it.
 
-If you have a 3D printer, the cheeks, end stops and a depth collar for the
+If you have a 3D printer, the cheeks, end stop and a depth collar for the
 Forstner bit are good things to print. Keep the drilled hole in wood, a steel
 bit chews plastic over 100 holes.
 
@@ -386,7 +381,9 @@ Posts flat on sawhorses. The ladder can already be glued: the jig only ever
 sits on faces with no rungs, and nothing is cut into the rung face.
 
 **Height stick.** A straight 2.5 m offcut. Mark every height in the table
-below from one end. Use it for all four posts, end against the foot.
+below from one end. Use it for all four posts, end against the foot. Also
+mark 1625 on it: the bottom of the support. No hole goes there, but side "b"
+needs that line in step 6.
 
 | What bolts here | Jig on this face | Height | Jig | Side "b" |
 | --- | --- | ---: | --- | --- |
@@ -413,7 +410,8 @@ holes right through. The bolt head goes on this face, the rail covers the
 other side.
 
 **Support holes, 8.** Same, but the jig goes on the outer end face and the
-nut recess goes in first:
+nut recess goes in first. On side "b", also carry the 1625 line right around
+both posts:
 
 1. Jig on. Spin the bit by hand in each hole to dimple the wood. Jig off.
 2. Forstner a 25 mm recess, **20 mm deep**, on each dimple. Tape or a collar
@@ -427,22 +425,41 @@ the inner face, then finish the last bit from the inner face with the same
 bit. That keeps the mouth clean where the bolt head sits. The support holes
 go in the outer end faces as normal.
 
-### 6. Cut and drill the rails and supports
+### 6. Drill the rails and supports
 
-**Cut.** Set a stop block on the saw and cut all 8 long rails to 2230 without
-moving it. Move the stop to 1090 and cut the 3 side rails and 2 supports. The
-rails set the post spacing, so parts cut against the same stop fit the same
-posts.
+Rails cut by hand come out a few mm long or short. That is fine. A post does
+not care where a rail ends, only that the two hole pairs are the right
+distance apart. So each family gets **one master**, and every other part is
+**copied from it**.
 
-**The side "b" support must match W within 1 mm.** Its holes are 1040 apart
-and the post holes are W minus 50 apart, and the ladder is already fixed at
-W. W from 1089 to 1091: use a 1090 support, centred. Under 1089: trim one
-support to W. Over 1091: cut a new support to W from spare. Nothing else
-depends on W. The side rails set side "a" to 1090 on their own.
+| Family | Master | Copies |
+| --- | --- | --- |
+| Supports (2) | side "b" support, drilled on the ladder | side "a" support |
+| Side rails (3) | side "b" support again | all 3 |
+| Long rails (8) | the longest long rail, drilled with the RAIL jig | the other 7 |
 
-**Drill the rails.** The nuts sit in recesses in the rail, so the recesses
-go in first. Lay the rail flat and leave it that way. The face that is up
-becomes the outside.
+Lay every part flat and leave it that way until it is drilled. **The face
+that is up becomes the outside.**
+
+**Side "b" support, drilled on the ladder.** Its holes must match the ladder
+as built, so they are drilled through the post holes.
+
+1. Ladder flat on the sawhorses, **outer end faces up**, sawhorses under the
+   lower half of the posts.
+2. Clamp the support under the posts, against the inner end faces. Bottom
+   edge on the 1625 lines, ends roughly even.
+3. Drill down through each of the 4 post holes with the 8.5 mm bit, right
+   through the support. The post hole guides the bit.
+
+No recesses: the support bolt heads sit on the support, the nuts go in the
+post.
+
+**Side "a" support.** Clamp support "b" on top of it, long edges flush, the
+same overhang at both ends. Drill straight through all 4 holes with the
+8.5 mm bit.
+
+**Master long rail.** Pick the longest. The nuts sit in recesses in the rail,
+so the recesses go in first.
 
 1. Push the RAIL jig onto one end, end stop tight against the end. Spin the
    bit by hand in each hole to dimple the wood. Turn the jig around, dimple
@@ -452,11 +469,23 @@ becomes the outside.
 
 ![A finished rail end: two holes, two recesses, one with its washer and nut](./images/rail-end.png)
 
-**Drill the supports.** SUPPORT jig, both ends, drill straight through. No
-recesses: the support bolt heads sit on the support, the nuts go in the post.
+**Copies: 7 long rails and 3 side rails.** The template is the master long
+rail for long rails, support "b" for side rails.
 
-Every hole is 45 mm up, dead centre, and 25 or 65 mm from the end. Both ends
-of every part are the same. A rail has one rule: recesses face out.
+1. Blank flat, template on top, recesses up. Long edges flush. Same overhang
+   at both ends, by eye. Clamp.
+2. Spin the 8 mm bit by hand in each template hole to dimple the blank.
+   Template off.
+3. Forstner a 25 mm recess, **20 mm deep**, on each dimple.
+4. Drill the 4 holes right through with the 8 mm bit.
+
+![The master long rail clamped on a blank, bit dimpling through one hole](./images/rail-copy.png)
+
+Why the longest long rail is the master: every copy then ends a little inside
+the post face instead of sticking out past it.
+
+Every hole is dead centre, 45 up. Both ends of every part match. A rail has
+one rule: recesses face out.
 
 **Check.** Push a bolt through a rail hole and a post hole. It should slide in
 with a little wiggle, no forcing. If one fights, open the **nut side** hole
@@ -478,14 +507,13 @@ the square neck bites. Then tighten.
 1. Clamp a straight board across the sawhorses as a stop. Both post feet
    press against it, so both posts share the same datum.
 2. Lay the two posts on the sawhorses, **outer end face up**, feet on the
-   stop, 1090 apart.
+   stop, about 1090 apart. The holes set the exact width.
 3. Lay the 3 side rails on top at 1895, 2075 and 2255, recesses up, holes
    over the post holes. Push the 12 bolts up from underneath. Washer and
    Nyloc in the recesses on top, then tap the heads home from below.
 4. Check the diagonals of the rectangle are equal, then tighten.
 5. Flip the frame, **inner end face up**. Lay the support across at 1625 to
-   1715, centred, ends flush with the outer long faces. Fit the 4 M8 bolts
-   from the top. The nuts go in the recesses on the outer end face,
+   1715, holes over the post holes. Fit the 4 M8 bolts from the top. The nuts go in the recesses on the outer end face,
    underneath.
 6. Lay a shelf block on each post on the foot side of the support, butted
    tight against it. Drill 5.5 mm through the block, then screw it to the
@@ -500,7 +528,7 @@ the square neck bites. Then tighten.
 
 ![Bed frame, joists in yellow, supports in cyan](./images/bed-frame.png)
 
-- Stand both sides up, 2230 apart over the posts. Clamp a long offcut across
+- Stand both sides up, about 2230 apart over the posts. Clamp a long offcut across
   the front of both end frames at about 1 m up as a temporary rail, so they
   stand on their own.
 - Fit the two tier 3 long rails, front and back, as in the next step. They set
@@ -594,7 +622,7 @@ just loft-render-all         # re-render every PNG into loft/images/
 just loft-render-iso         # re-render just the hero
 just loft-render-post-blank  # re-render the bare laminated post (no housings)
 just loft-render-post        # re-render the post sub-assembly (with housings)
-just loft-render-jigs        # re-render the four jigs (also jig-on-post, jig-on-rail, rail-end)
+just loft-render-jigs        # re-render the three jigs (also jig-on-post, jig-on-rail, rail-end, rail-copy)
 just --list                  # show all recipes
 ```
 

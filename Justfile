@@ -28,7 +28,8 @@ loft-render-all: loft-render-iso \
                  loft-render-jigs \
                  loft-render-jig-on-post \
                  loft-render-jig-on-rail \
-                 loft-render-rail-end
+                 loft-render-rail-end \
+                 loft-render-rail-copy
 
 # --- full assembly ---
 
@@ -116,7 +117,7 @@ loft-render-post:
 
 # --- drilling jigs (loft/jigs.scad) ---
 
-# All four jigs side by side, labelled
+# All three jigs side by side, labelled
 loft-render-jigs:
     @mkdir -p {{loft_images}}
     openscad -o {{loft_images}}/jigs.png \
@@ -147,6 +148,14 @@ loft-render-rail-end:
         --imgsize={{size}} --colorscheme={{scheme}} \
         --projection=p --camera=130,45,22,35,0,20,480 \
         -D 'view="rail_end"' {{jigs_scad}}
+
+# The master rail clamped on a blank, bit dimpling through one hole
+loft-render-rail-copy:
+    @mkdir -p {{loft_images}}
+    openscad -o {{loft_images}}/rail-copy.png \
+        --imgsize={{size}} --colorscheme={{scheme}} \
+        --projection=p --camera=190,45,45,40,0,25,1150 \
+        -D 'view="copy"' {{jigs_scad}}
 
 # Remove all rendered PNGs. WARNING: these files are committed (via LFS).
 # After running this, `git status` will show them as deleted — restore with

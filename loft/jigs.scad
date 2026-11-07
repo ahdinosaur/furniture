@@ -1,16 +1,18 @@
-// The four drilling jigs from loft/README.md, step 4.
+// The three drilling jigs from loft/README.md, step 4.
 //
 // A jig is a 150 mm offcut of 90 x 45 with a 12 mm ply cheek screwed to each
 // side, so it drops over a post or a rail like a saddle. The holes go through
 // the 45 mm thickness and guide the drill bit straight.
 //
 // Bit sizes: snug under the bolt head, loose under the nut. Heads go on the
-// posts for rail bolts (6.5) and on the supports for support bolts (8.5).
-// Nuts go on the rails (8) and on the posts for support bolts (10).
+// posts for rail bolts (6.5), nuts on the rails (8). Support bolts: nuts on
+// the posts (10), heads on the supports (8.5, drilled through the post hole,
+// no jig). Only the master long rail is jig-drilled; every other rail is
+// copied from a template, see the "copy" view and README step 6.
 //
 // Axes: x along the block, y across it, z up. The block sits on top of the part.
 
-view = "all"; // "all" | "post_m6" | "post_m8" | "rail" | "support" | "on_post" | "on_rail" | "rail_end"
+view = "all"; // "all" | "post_m6" | "post_m8" | "rail" | "on_post" | "on_rail" | "rail_end" | "copy"
 
 $fn = 48;
 eps = 0.01;
@@ -21,7 +23,7 @@ cheek_hang = 50;       // how far the cheeks hang below the block
 stop_hang = 90;        // how far the end stop hangs below the block (full rail depth)
 
 // Hole pairs. POST jigs: across the block at one place along it.
-// RAIL and SUPPORT jigs: along the block from the end stop, on the centre line.
+// RAIL jig: along the block from the end stop, on the centre line.
 post_holes = [[75, 25], [75, 65]];
 rail_holes = [[block[0] - 25, 45], [block[0] - 65, 45]]; // end stop is at x = 150
 label_x = 30; // labels sit at this end, clear of the holes
@@ -31,6 +33,7 @@ ply_colour = "wheat";
 ink = "black";
 post_colour = "steelblue";
 rail_colour = "lightpink";
+master_colour = "palegreen";
 
 module jig(name, bit, holes, end_stop = false) {
   // block with the two holes
@@ -75,7 +78,6 @@ module jig(name, bit, holes, end_stop = false) {
 module post_m6() { jig("POST M6", 6.5, post_holes); }
 module post_m8() { jig("POST M8", 10, post_holes); }
 module rail_jig() { jig("RAIL", 8, rail_holes, end_stop = true); }
-module support_jig() { jig("SUPPORT", 8.5, rail_holes, end_stop = true); }
 
 // A length of 90 x 90 post lying along x, with a pencil line around it.
 module post_piece(length = 400, line_at = 200) {
@@ -96,13 +98,15 @@ module rail_piece(length = 400) {
 }
 
 // A finished rail end: two 8 mm holes with 25 mm nut recesses, 20 deep, in
-// the face that goes on the outside of the loft.
-module rail_end(length = 300) {
-  color(rail_colour)
+// the face that goes on the outside of the loft. both_ends drills the far end
+// too, for the master rail in the "copy" view.
+module rail_end(length = 300, both_ends = false, colour = rail_colour) {
+  color(colour)
   difference() {
     cube([length, 90, 45]);
-    for (h = rail_holes) {
-      x = length - (block[0] - h[0]); // 25 and 65 from this end
+    for (h = rail_holes, end = both_ends ? [0, 1] : [1]) {
+      from_end = block[0] - h[0]; // 25 and 65
+      x = end == 1 ? length - from_end : from_end;
       translate([x, h[1], -eps]) cylinder(d = 8, h = 45 + 2 * eps);
       translate([x, h[1], 45 - 20]) cylinder(d = 25, h = 20 + eps);
     }
@@ -110,19 +114,16 @@ module rail_end(length = 300) {
 }
 
 if (view == "all") {
-  // four jigs in a row, end stops toward the viewer
+  // three jigs in a row, end stop toward the viewer
   translate([0, 0, 0]) post_m6();
   translate([0, 160, 0]) post_m8();
   translate([0, 320, 0]) rail_jig();
-  translate([0, 480, 0]) support_jig();
 } else if (view == "post_m6") {
   post_m6();
 } else if (view == "post_m8") {
   post_m8();
 } else if (view == "rail") {
   rail_jig();
-} else if (view == "support") {
-  support_jig();
 } else if (view == "on_post") {
   // POST M6 jig sitting on a post, cheek line on the pencil line
   post_piece(400, 200);
@@ -148,4 +149,14 @@ if (view == "all") {
   color("silver") translate([x, rail_holes[1][1], -3]) cylinder(d = 13, h = 3);
   color("silver") translate([x, rail_holes[1][1], 45 - 20]) cylinder(d = 18, h = 1.6);
   color("silver") translate([x, rail_holes[1][1], 45 - 20 + 1.6]) cylinder(d = 11, h = 6, $fn = 6);
+} else if (view == "copy") {
+  // the master rail (green, drilled both ends, recesses up) clamped on a
+  // shorter blank. Lengths differ, so the master overhangs a little each end.
+  blank = 380;
+  master = 400;
+  rail_piece(blank);
+  translate([-(master - blank) / 2, 0, 45]) rail_end(master, both_ends = true, colour = master_colour);
+  // the 8 mm bit in the near hole, tip dimpling the blank
+  x = -(master - blank) / 2 + (block[0] - rail_holes[0][0]);
+  color("silver") translate([x, rail_holes[0][1], 45 - 2]) cylinder(d = 8, h = 2 + 45 + 60);
 }
