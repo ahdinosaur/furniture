@@ -32,10 +32,13 @@ eps = 0.01;
 bar_small = [140, 22.2, 14.3, 22.2]; // MDG1000NP, 3 to 9.5 mm
 bar_large = [134, 25.4, 17.5, 22.2]; // MDG2000NP, 10 to 14 mm. Bottom width is a guess.
 // From the end of the bar with the SMALLEST hole to the centre of the hole we
-// use. These are guesses from the hole count. Replace them with your readings.
-hole_6_5_from_end = 78;  // MDG1000NP, the 6.5 hole
-hole_8_from_end = 110;   // MDG1000NP, the 8 hole
-hole_10_from_end = 8;    // MDG2000NP, the 10 hole
+// use. The MDG1000NP numbers come from a community CAD model of the bar
+// (grabcad.com, "Big Gator Tools Drill Guide metric 3-9.5 mm"), which is
+// 137 long against the 139.7 spec, so check them. The MDG2000NP number is a
+// guess. Replace them with your readings.
+hole_6_5_from_end = 61.5; // MDG1000NP, the 6.5 hole
+hole_8_from_end = 97;     // MDG1000NP, the 8 hole
+hole_10_from_end = 8;     // MDG2000NP, the 10 hole
 // ----------------------------------------------------------------------------
 
 part_w = 90;       // posts and rails are 90 wide

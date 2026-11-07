@@ -378,6 +378,9 @@ millimetre out on a hole reading moves every post hole the same way, so the
 rails stay level and the posts still match. On the rail it only moves where
 the master's ends sit against the post face.
 
+The MDG1000NP numbers already in the file come from a community CAD model
+of the bar and should be close. The MDG2000NP numbers are guesses.
+
 **Print.** `just loft-stl-all` writes the three STLs to [`stl/`](./stl/),
 already flat side down. PLA or PETG, 4 walls, 30% infill, no supports.
 
