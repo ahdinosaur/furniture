@@ -26,7 +26,7 @@ is bolted, so it comes apart for moving.
 1. [Laminate the posts](#1-laminate-the-posts)
 2. [Cut the ladder housings](#2-cut-the-ladder-housings-side-b-posts-only) into the two side "b" posts
 3. [Glue and screw the rungs](#3-glue-and-screw-the-rungs) to make the ladder
-4. [Make the 3 drilling jigs](#4-make-the-jigs)
+4. [Print the 3 drilling jigs](#4-print-the-jigs)
 5. [Drill the posts](#5-drill-the-posts), all 52 holes
 6. [Drill the rails and supports](#6-drill-the-rails-and-supports): one master each, copy the rest
 7. [Bolt each side together flat](#7-bolt-the-two-sides-together-flat) on sawhorses
@@ -78,11 +78,8 @@ Links:
 | Long rails | 8 | 2230 | a few mm out is fine. The longest becomes the master, see [step 6](#6-drill-the-rails-and-supports) |
 | Side rails | 3 | 1090 | a few mm out is fine. Copied from the side "b" support |
 | Shelf blocks | 4 | 90 | offcuts. Sit under each support end. |
-| Jig blocks | 3 | 150 | offcuts, see [Make the jigs](#4-make-the-jigs) |
 | Height stick | 1 | 2500 | any straight offcut |
 | **Total** | | **~60 m** | 11 x 6 m sticks |
-
-Plus scraps of 12 mm ply for the jig cheeks and end stop.
 
 ### Plywood, 12 mm
 
@@ -109,7 +106,6 @@ Plus scraps of 12 mm ply for the jig cheeks and end stop.
 | Post lamination | 75 mm 14g Type 17 bugle batten screw | 32 to 40 | clamps the glue joint. 8 to 10 per post. |
 | Rung clamping | 100 mm 14g Type 17 bugle batten screw | 32 | 60 mm through the post, 40 mm into the rung end. 2 per rung end. |
 | Shelf blocks | 100 mm 14g Type 17 bugle batten screw | 12 | 45 mm through the block, 55 mm into the post. 3 per block. |
-| Jig cheeks and stops | 30 mm wood screws | ~20 | |
 
 - Titan 75 mm: https://www.bunnings.co.nz/titan-14g-x-75mm-zinc-gold-timber-bugle-batten-screw-100-pack_p0579085
 - The lamination and rung screws are clamps while the glue cures. The glue and
@@ -205,14 +201,17 @@ Ladder rungs are not bolted. They sit in glued and screwed housings.
 **Drilling**
 
 - Cordless drill
-- Big Gator V-DrillGuide, metric. Steel blocks with square guide holes, used
-  once, to make the jigs. Two of them, Carbatec NZ, about $59 each:
+- Big Gator V-DrillGuide, metric. Hardened steel bars with guide holes. They
+  sit in the printed jigs and guide every hole. Two of them, Carbatec NZ,
+  about $59 each:
   - 3 to 9.5 mm (MDG1000NP) for the 6.5 and 8 holes:
     https://www.carbatec.co.nz/product/35590-big-gator-v-drill-guides
   - 10 to 14 mm (MDG2000NP) for the 10 hole:
     https://www.carbatec.co.nz/product/17558-big-gator-v-drill-guides-10-14mm
+- 3D printer, for the three jigs. The biggest is 170 x 105 mm.
 - Long drill bits. 6.5, 8.5 and 10 mm, 200 mm long (through a 90 mm post
-  and into the part behind it). 8 mm, 150 mm long (45 mm jig plus 45 mm rail).
+  and into the part behind it). 8 mm, 150 mm long (22 mm guide plus 45 mm
+  rail).
 - 11 mm bit, any length, only for opening a tight nut-side hole
 - 5.5 mm twist bit (screw clearance holes) and 4 mm twist bit (pilots)
 - Driver bit for the batten screws, usually square drive #3, check the box
@@ -319,27 +318,28 @@ before glue or screws come into it.
 Side "b" plus the ladder is now one permanent piece. Everything else bolts on
 and comes off again.
 
-### 4. Make the jigs
+### 4. Print the jigs
 
 **The rule: nothing is measured.** Post holes come from a jig that sits on
 the post. Rail holes come from one master rail, copied onto the rest. Parts
 made from the same master fit each other, so any rail fits any rail slot and
 the loft goes back together after a move without labels.
 
-A jig is a 150 mm offcut of 90 x 45 with a 12 mm ply cheek screwed to each
-side, so it drops over a post or a rail like a saddle and centres itself. The
-hole through the 45 mm block guides the drill bit straight. The one precision
-step is drilling the jig holes, and the Big Gator guide does that for you.
+A jig is a 3D printed saddle that drops over a post or a rail and centres
+itself. On top are two pockets, 40 mm apart. A Big Gator steel guide (the
+bar) sits in a pocket, flat on the wood. Drill through it, lift the bar into
+the other pocket, drill again. The plastic places the bar. The steel guides
+the bit, so nothing wears.
 
-![The three jigs. POST jigs have a line across the cheeks, the RAIL jig has an end stop](./images/jigs.png)
+![The three jigs, a bar in one pocket of each. POST jigs have a line down the cheeks, the RAIL jig has an end stop](./images/jigs.png)
 
-Three jigs. Two holes each, 40 mm apart.
+Three jigs. Two pockets each, 40 mm apart. One bar moves between them.
 
-| Jig | Bit | Hole position | Registers on | Used on |
-| --- | --- | --- | --- | --- |
-| **POST M6** | 6.5 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | all 44 rail holes in the posts |
-| **POST M8** | 10 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | the 8 support holes in the posts |
-| **RAIL** | 8 mm | 25 and 65 from the end stop, both dead centre (45 up) | the end of the rail | both ends of the master long rail only |
+| Jig | Bar | Bit | Hole position | Registers on | Used on |
+| --- | --- | --- | --- | --- | --- |
+| **POST M6** | MDG1000NP | 6.5 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | all 44 rail holes in the posts |
+| **POST M8** | MDG2000NP | 10 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | the 8 support holes in the posts |
+| **RAIL** | MDG1000NP | 8 mm | 25 and 65 from the end stop, both dead centre (45 up) | the end of the rail | both ends of the master long rail only |
 
 Every pattern is symmetric, so no jig has a right way round, and every part
 fits either end first.
@@ -353,27 +353,42 @@ stiffen the frame.
 
 | POST jig on a post | RAIL jig on a rail end |
 | :---: | :---: |
-| ![POST M6 jig sitting on a post, cheek line on the pencil line](./images/jig-on-post.png) | ![RAIL jig pushed onto a rail end, end stop against the end](./images/jig-on-rail.png) |
+| ![POST M6 jig sitting on a post, cheek line on the pencil line, bar in one pocket](./images/jig-on-post.png) | ![RAIL jig on a rail end, end stop against the end, bar across the rail](./images/jig-on-rail.png) |
 
-Left: the line on the cheeks sits on the pencil line around the post. Right:
-the end stop hangs past the rail and butts against its end.
+Left: the line on the cheeks sits on the pencil line around the post, the
+bar lies along the post. Right: the end stop butts against the rail end, the
+bar lies across the rail and hangs over one edge. That is fine, the pocket
+holds it flat.
 
-How to make one:
+**Before printing: three ruler readings.** A pocket holds the bar by its
+outside, so the print has to know where the hole is along the bar. Lay each
+bar on a ruler, the end with the smallest hole at zero, and read the centre
+of the hole. Type the numbers into the top of [`jigs.scad`](./jigs.scad).
 
-1. Cut the block. Mark the hole centres with a combination square.
-2. Clamp the Big Gator on the mark, hash marks on your line. Drill the block
-   with the long bit in the matching guide hole (10 mm is on the second
-   guide). Go all the way through.
-3. Screw a cheek to each side, flush with the top. Check it slides over a post
-   and over a rail.
-4. POST jigs: draw a line across both cheeks through the hole centres.
-   RAIL jig: screw a ply end stop across one end of the block, hanging down
-   90 mm, exactly 25 mm from the nearer hole centre.
-5. Write the jig name and bit size on it.
+| Reading | Bar | Set this |
+| --- | --- | --- |
+| End to centre of the 6.5 hole | MDG1000NP | `hole_6_5_from_end` |
+| End to centre of the 8 hole | MDG1000NP | `hole_8_from_end` |
+| End to centre of the 10 hole | MDG2000NP | `hole_10_from_end` |
 
-If you have a 3D printer, the cheeks, end stop and a depth collar for the
-Forstner bit are good things to print. Keep the drilled hole in wood, a steel
-bit chews plastic over 100 holes.
+Check the bar lengths and widths against `bar_small` and `bar_large` while
+the ruler is out. Nearest millimetre is plenty. A millimetre out moves every
+post hole the same way, so the rails stay level and the posts still match. On
+the rail it only moves where the master's ends sit against the post face.
+
+**Print.** `just loft-stl-all` writes the three STLs to [`stl/`](./stl/),
+already flat side down. PLA or PETG, 4 walls, 30% infill, no supports.
+
+**Using a jig.**
+
+1. Drop it over the part. POST: line on the cheeks on the pencil line. RAIL:
+   end stop against the rail end.
+2. Bar in a pocket, small-hole end toward the arrow. Push it to that end.
+3. Drill through the guide hole. Lift the bit out often to clear the chips.
+4. Move the bar to the other pocket. Repeat.
+
+Tight on the wood? Raise `part_clear` in `jigs.scad` and print again. A depth
+collar for the 25 mm Forstner bit is also worth printing.
 
 ### 5. Drill the posts
 
@@ -413,7 +428,8 @@ other side.
 nut recess goes in first. On side "b", also carry the 1625 line right around
 both posts:
 
-1. Jig on. Spin the bit by hand in each hole to dimple the wood. Jig off.
+1. Jig and bar on. Spin the bit by hand in the guide to dimple the wood.
+   Same in the other pocket. Jig off.
 2. Forstner a 25 mm recess, **20 mm deep**, on each dimple. Tape or a collar
    on the bit for depth.
 3. Jig back on. Drill both holes right through.
@@ -462,8 +478,8 @@ same overhang at both ends. Drill straight through all 4 holes with the
 so the recesses go in first.
 
 1. Push the RAIL jig onto one end, end stop tight against the end. Spin the
-   bit by hand in each hole to dimple the wood. Turn the jig around, dimple
-   the other end. Jig off.
+   bit by hand in the guide to dimple the wood, one pocket then the other.
+   Turn the jig around, dimple the other end. Jig off.
 2. Forstner a 25 mm recess, **20 mm deep**, on each of the 4 dimples.
 3. Jig back on, each end in turn. Drill the 4 holes right through.
 
@@ -604,7 +620,7 @@ assembled bed with a sander is awkward.
 
 The model is in [`loft.scad`](./loft.scad), rendered with OpenSCAD 2021.01.
 Axes: x runs along the bed length, y across the bed width, z up. The jigs
-are in [`jigs.scad`](./jigs.scad).
+are in [`jigs.scad`](./jigs.scad), with printable STLs in [`stl/`](./stl/).
 
 The numbers in this README mirror the constants at the top of the file
 (`post_height = 2435`, `ladder_rungs = 8`, `ladder_start = 90`,
@@ -623,8 +639,9 @@ just loft-render-iso         # re-render just the hero
 just loft-render-post-blank  # re-render the bare laminated post (no housings)
 just loft-render-post        # re-render the post sub-assembly (with housings)
 just loft-render-jigs        # re-render the three jigs (also jig-on-post, jig-on-rail, rail-end, rail-copy)
+just loft-stl-all            # export the three printable jigs into loft/stl/
 just --list                  # show all recipes
 ```
 
-PNGs land in `loft/images/` and are committed via Git LFS (see
-`.gitattributes`).
+PNGs land in `loft/images/`, STLs in `loft/stl/`. Both are committed via Git
+LFS (see `.gitattributes`).

@@ -1,8 +1,10 @@
-// The three drilling jigs from loft/README.md, step 4.
+// The three drilling jigs from loft/README.md, step 4. 3D printed.
 //
-// A jig is a 150 mm offcut of 90 x 45 with a 12 mm ply cheek screwed to each
-// side, so it drops over a post or a rail like a saddle. The holes go through
-// the 45 mm thickness and guide the drill bit straight.
+// A jig is a printed saddle that drops over a post or a rail. On top are two
+// pockets, 40 mm apart. A Big Gator steel drill guide (the "bar") sits in a
+// pocket, flat on the wood, and guides the bit. Drill a hole, lift the bar
+// into the other pocket, drill the other. The plastic only places the bar.
+// The steel guides the bit, so the plastic never wears.
 //
 // Bit sizes: snug under the bolt head, loose under the nut. Heads go on the
 // posts for rail bolts (6.5), nuts on the rails (8). Support bolts: nuts on
@@ -10,74 +12,150 @@
 // no jig). Only the master long rail is jig-drilled; every other rail is
 // copied from a template, see the "copy" view and README step 6.
 //
-// Axes: x along the block, y across it, z up. The block sits on top of the part.
+// Axes: x along the part, y across it (0 to 90), z up. z = 0 is the top face
+// of the wood. With print = true a single jig is flipped flat side down,
+// ready to slice.
 
 view = "all"; // "all" | "post_m6" | "post_m8" | "rail" | "on_post" | "on_rail" | "rail_end" | "copy"
+print = false; // true flips a single jig view for printing
 
 $fn = 48;
 eps = 0.01;
 
-block = [150, 90, 45]; // length, width, thickness of the 90 x 45 offcut
-ply = 12;              // cheek and end stop thickness
-cheek_hang = 50;       // how far the cheeks hang below the block
-stop_hang = 90;        // how far the end stop hangs below the block (full rail depth)
+// ---- MEASURE THESE WITH A RULER BEFORE PRINTING ----------------------------
+// The bars, as [length, width, height]. Width is the widest part, the top.
+bar_small = [140, 22.5, 22.2]; // MDG1000NP, 3 to 9.5 mm
+bar_large = [134, 25.4, 22.2]; // MDG2000NP, 10 to 14 mm
+// From the end of the bar with the SMALLEST hole to the centre of the hole we
+// use. These are guesses from the hole count. Replace them with your readings.
+hole_6_5_from_end = 78;  // MDG1000NP, the 6.5 hole
+hole_8_from_end = 110;   // MDG1000NP, the 8 hole
+hole_10_from_end = 8;    // MDG2000NP, the 10 hole
+// ----------------------------------------------------------------------------
 
-// Hole pairs. POST jigs: across the block at one place along it.
-// RAIL jig: along the block from the end stop, on the centre line.
-post_holes = [[75, 25], [75, 65]];
-rail_holes = [[block[0] - 25, 45], [block[0] - 65, 45]]; // end stop is at x = 150
-label_x = 30; // labels sit at this end, clear of the holes
+part_w = 90;       // posts and rails are 90 wide
+part_clear = 1;    // total gap between the cheeks and the wood. Tight? Raise it.
+cheek = 6;         // cheek thickness
+hang_post = 40;    // cheeks hang this far down a post
+hang_rail = 30;    // cheeks hang this far down a rail lying flat (45 thick)
+stop_hang = 50;    // RAIL end stop hangs this far, past the 45 mm rail end
+frame_h = 15;      // frame height. The bar stands 7 mm proud so you can grab it
+wall = 8;          // frame wall around a pocket
+pocket_clear = [2, 0.5]; // pocket is this much longer and wider than the bar
+engrave = 0.8;     // depth of the labels and arrows
+pair = [25, 65];   // the two holes, across a post or along a rail from its end
 
-wood = "burlywood";
-ply_colour = "wheat";
 ink = "black";
+plastic = "orange";
+steel = "gainsboro";
 post_colour = "steelblue";
 rail_colour = "lightpink";
 master_colour = "palegreen";
 
-module jig(name, bit, holes, end_stop = false) {
-  // block with the two holes
-  color(wood)
+cheek_in = part_clear / 2;             // cheek inner face, past the wood
+cheek_out = cheek_in + cheek;          // cheek outer face
+
+// A bar with its one working hole, lying along +x from the origin, small end
+// at x = 0.
+module bar(b, offset, bit) {
+  color(steel)
   difference() {
-    cube(block);
-    for (h = holes)
-      translate([h[0], h[1], -eps])
-      cylinder(d = bit, h = block[2] + 2 * eps);
+    cube(b);
+    translate([offset, b[1] / 2, -eps]) cylinder(d = bit, h = b[2] + 2 * eps);
   }
-
-  // cheeks, flush with the block top, hanging below
-  color(ply_colour)
-  for (y = [-ply, block[1]])
-    translate([0, y, -cheek_hang])
-    cube([block[0], ply, block[2] + cheek_hang]);
-
-  if (end_stop) {
-    // end stop across one end, hanging 90 below the block
-    color(ply_colour)
-    translate([block[0], -ply, -stop_hang])
-    cube([ply, block[1] + 2 * ply, block[2] + stop_hang]);
-  } else {
-    // pencil line across both cheeks through the hole centres
-    color(ink)
-    for (y = [-ply - eps, block[1] + ply - 1 + eps])
-      translate([holes[0][0] - 0.5, y, -cheek_hang])
-      cube([1, 1, block[2] + cheek_hang]);
-  }
-
-  // label on top
-  color(ink)
-  translate([label_x, block[1] / 2 + 8, block[2]])
-  linear_extrude(0.5)
-  text(name, size = 7, halign = "center", valign = "center");
-  color(ink)
-  translate([label_x, block[1] / 2 - 8, block[2]])
-  linear_extrude(0.5)
-  text(str(bit, " mm"), size = 6, halign = "center", valign = "center");
 }
 
-module post_m6() { jig("POST M6", 6.5, post_holes); }
-module post_m8() { jig("POST M8", 10, post_holes); }
-module rail_jig() { jig("RAIL", 8, rail_holes, end_stop = true); }
+// Engraved arrow in the frame top, pointing toward -x, tip at x.
+module arrow(x, y) {
+  translate([0, 0, frame_h - engrave])
+  linear_extrude(engrave + eps)
+  polygon([[x, y], [x + 5, y + 3.5], [x + 5, y - 3.5]]);
+}
+
+// Engraved label in the frame top, centred at [x, y], along x (rot = 0) or y.
+module label(txt, x, y, rot = 0) {
+  translate([x, y, frame_h - engrave])
+  linear_extrude(engrave + eps)
+  rotate(rot)
+  text(txt, size = 6, halign = "center", valign = "center");
+}
+
+// The index line at x = 0: a rib down the outside of each cheek and a notch
+// in its bottom edge, so the pencil line shows through.
+module index_rib(hang) {
+  color(ink)
+  for (y = [-cheek_out - 1, part_w + cheek_out])
+    translate([-0.6, y, -hang]) cube([1.2, 1, hang + frame_h]);
+}
+module index_notch(hang) {
+  for (y = [-cheek_out + cheek / 2, part_w + cheek_out - cheek / 2])
+    translate([0, y, -hang]) rotate([90, 0, 0]) rotate([0, 0, 45])
+    cube([3, 3, cheek + 2], center = true);
+}
+
+// POST jig: bar lies along the post. Two pockets at y = 25 and 65. The hole
+// lands at x = 0, on the index line.
+module post_jig(name, bit, b, offset) {
+  len = b[0] + pocket_clear[0];
+  wid = b[1] + pocket_clear[1];
+  xa = -offset;              // push wall. Bar end sits here, hole at x = 0.
+  x0 = xa - wall;
+  x1 = xa + len + wall;
+  color(plastic)
+  difference() {
+    union() {
+      translate([x0, -cheek_out, 0]) cube([x1 - x0, part_w + 2 * cheek_out, frame_h]);
+      for (y = [-cheek_out, part_w + cheek_in])
+        translate([x0, y, -hang_post]) cube([x1 - x0, cheek, hang_post]);
+    }
+    for (y = pair)
+      translate([xa, y - wid / 2, -eps]) cube([len, wid, frame_h + 2 * eps]);
+    arrow(xa - wall + 1.5, part_w / 2);
+    label(str(name, "  ", bit), (x0 + x1) / 2, part_w / 2);
+    index_notch(hang_post);
+  }
+  index_rib(hang_post);
+}
+
+// RAIL jig: bar lies across the rail. Two pockets at x = 25 and 65 from the
+// end stop. The hole lands at y = 45, the centre of the rail.
+module rail_jig(b, offset) {
+  len = b[0] + pocket_clear[0];
+  wid = b[1] + pocket_clear[1];
+  ya = part_w / 2 - offset;  // push wall. Bar end sits here, hole at y = 45.
+  y0 = ya - wall;
+  y1 = part_w + cheek_out;
+  x0 = -cheek;               // end stop
+  x1 = pair[1] + wid / 2 + wall;
+  color(plastic)
+  difference() {
+    union() {
+      translate([x0, y0, 0]) cube([x1 - x0, y1 - y0, frame_h]);
+      for (y = [-cheek_out, part_w + cheek_in])
+        translate([0, y, -hang_rail]) cube([x1, cheek, hang_rail]);
+      // end stop across the rail end
+      translate([x0, -cheek_out, -stop_hang]) cube([cheek, part_w + 2 * cheek_out, stop_hang]);
+      // floor under the part of the pockets that hangs past the rail
+      translate([x0, y0, -3]) cube([x1 - x0, -cheek_out - y0, 3]);
+    }
+    for (x = pair)
+      translate([x - wid / 2, ya, -eps]) cube([wid, len, frame_h + 2 * eps]);
+    translate([0, 0, 0]) rotate(90) arrow(ya - wall + 1.5, -part_w / 2);
+    label("RAIL  8", part_w / 2, (ya + y1) / 2, 90);
+  }
+}
+
+module post_m6() { post_jig("POST M6", 6.5, bar_small, hole_6_5_from_end); }
+module post_m8() { post_jig("POST M8", 10, bar_large, hole_10_from_end); }
+module rail_jig_m8() { rail_jig(bar_small, hole_8_from_end); }
+
+// Bars sitting in pocket 1 of each jig, for the pictures.
+module post_m6_bar() { translate([-hole_6_5_from_end, pair[0] - bar_small[1] / 2, 0]) bar(bar_small, hole_6_5_from_end, 6.5); }
+module post_m8_bar() { translate([-hole_10_from_end, pair[0] - bar_large[1] / 2, 0]) bar(bar_large, hole_10_from_end, 10); }
+module rail_bar() {
+  translate([pair[0] + bar_small[1] / 2, part_w / 2 - hole_8_from_end, 0]) rotate(90)
+  bar(bar_small, hole_8_from_end, 8);
+}
 
 // A length of 90 x 90 post lying along x, with a pencil line around it.
 module post_piece(length = 400, line_at = 200) {
@@ -104,51 +182,50 @@ module rail_end(length = 300, both_ends = false, colour = rail_colour) {
   color(colour)
   difference() {
     cube([length, 90, 45]);
-    for (h = rail_holes, end = both_ends ? [0, 1] : [1]) {
-      from_end = block[0] - h[0]; // 25 and 65
+    for (from_end = pair, end = both_ends ? [0, 1] : [1]) {
       x = end == 1 ? length - from_end : from_end;
-      translate([x, h[1], -eps]) cylinder(d = 8, h = 45 + 2 * eps);
-      translate([x, h[1], 45 - 20]) cylinder(d = 25, h = 20 + eps);
+      translate([x, 45, -eps]) cylinder(d = 8, h = 45 + 2 * eps);
+      translate([x, 45, 45 - 20]) cylinder(d = 25, h = 20 + eps);
     }
   }
 }
 
+// Flip a jig flat side down for printing.
+module printable() {
+  if (print) translate([0, 0, frame_h]) rotate([180, 0, 0]) children();
+  else children();
+}
+
 if (view == "all") {
-  // three jigs in a row, end stop toward the viewer
-  translate([0, 0, 0]) post_m6();
-  translate([0, 160, 0]) post_m8();
-  translate([0, 320, 0]) rail_jig();
+  // three jigs in a row, a bar in the first pocket of each
+  post_m6(); post_m6_bar();
+  translate([0, 140, 0]) { post_m8(); post_m8_bar(); }
+  translate([0, 360, 0]) { rail_jig_m8(); rail_bar(); }
 } else if (view == "post_m6") {
-  post_m6();
+  printable() post_m6();
 } else if (view == "post_m8") {
-  post_m8();
+  printable() post_m8();
 } else if (view == "rail") {
-  rail_jig();
+  printable() rail_jig_m8();
 } else if (view == "on_post") {
-  // POST M6 jig sitting on a post, cheek line on the pencil line
+  // POST M6 jig on a post, index line on the pencil line, bar in pocket 1
   post_piece(400, 200);
-  translate([200 - post_holes[0][0], 0, 90]) post_m6();
-  // the drill bit, in the hole
-  color("silver")
-  translate([200, post_holes[0][1], 0])
-  cylinder(d = 6.5, h = 90 + block[2] + 60);
+  translate([200, 0, 90]) { post_m6(); post_m6_bar(); }
+  color("silver") translate([200, pair[0], 0]) cylinder(d = 6.5, h = 90 + bar_small[2] + 60);
 } else if (view == "on_rail") {
-  // RAIL jig pushed onto the end of a rail, end stop against the end
-  translate([block[0] - 400, 0, 0]) rail_piece(400);
-  translate([0, 0, 45]) rail_jig();
-  // the drill bit, in the hole nearest the end
-  color("silver")
-  translate([rail_holes[0][0], rail_holes[0][1], 0])
-  cylinder(d = 8, h = 45 + block[2] + 60);
+  // RAIL jig on the end of a rail, end stop against the end, bar in pocket 1
+  rail_piece(400);
+  translate([0, 0, 45]) { rail_jig_m8(); rail_bar(); }
+  color("silver") translate([pair[0], part_w / 2, 0]) cylinder(d = 8, h = 45 + bar_small[2] + 60);
 } else if (view == "rail_end") {
   // the end of a finished rail, recess side up
   rail_end(200);
   // a bolt in the far hole: dome underneath, washer and nut in the recess
-  x = 200 - (block[0] - rail_holes[1][0]);
-  color("silver") translate([x, rail_holes[1][1], -3]) cylinder(d = 6, h = 3 + 45 - 20 + 15);
-  color("silver") translate([x, rail_holes[1][1], -3]) cylinder(d = 13, h = 3);
-  color("silver") translate([x, rail_holes[1][1], 45 - 20]) cylinder(d = 18, h = 1.6);
-  color("silver") translate([x, rail_holes[1][1], 45 - 20 + 1.6]) cylinder(d = 11, h = 6, $fn = 6);
+  x = 200 - pair[1];
+  color("silver") translate([x, 45, -3]) cylinder(d = 6, h = 3 + 45 - 20 + 15);
+  color("silver") translate([x, 45, -3]) cylinder(d = 13, h = 3);
+  color("silver") translate([x, 45, 45 - 20]) cylinder(d = 18, h = 1.6);
+  color("silver") translate([x, 45, 45 - 20 + 1.6]) cylinder(d = 11, h = 6, $fn = 6);
 } else if (view == "copy") {
   // the master rail (green, drilled both ends, recesses up) clamped on a
   // shorter blank. Lengths differ, so the master overhangs a little each end.
@@ -157,6 +234,8 @@ if (view == "all") {
   rail_piece(blank);
   translate([-(master - blank) / 2, 0, 45]) rail_end(master, both_ends = true, colour = master_colour);
   // the 8 mm bit in the near hole, tip dimpling the blank
-  x = -(master - blank) / 2 + (block[0] - rail_holes[0][0]);
-  color("silver") translate([x, rail_holes[0][1], 45 - 2]) cylinder(d = 8, h = 2 + 45 + 60);
+  x = -(master - blank) / 2 + pair[0];
+  color("silver") translate([x, 45, 45 - 2]) cylinder(d = 8, h = 2 + 45 + 60);
+} else {
+  assert(false, str("unknown view: ", view));
 }

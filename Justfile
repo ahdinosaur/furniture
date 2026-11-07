@@ -1,4 +1,5 @@
-# Justfile — re-renders the screenshots referenced from loft/README.md.
+# Justfile — re-renders the screenshots referenced from loft/README.md and
+# exports the printable jigs.
 #
 # Per-project recipes are prefixed `loft-`, `bed-`, `workout-` etc. to avoid
 # naming collisions as more subprojects grow Justfile recipes of their own.
@@ -7,6 +8,7 @@
 scad        := "loft/loft.scad"
 jigs_scad   := "loft/jigs.scad"
 loft_images := "loft/images"
+loft_stl    := "loft/stl"
 size        := "1600,1200"
 scheme      := "Cornfield"
 
@@ -117,7 +119,7 @@ loft-render-post:
 
 # --- drilling jigs (loft/jigs.scad) ---
 
-# All three jigs side by side, labelled
+# All three printed jigs side by side, a guide bar in one pocket of each
 loft-render-jigs:
     @mkdir -p {{loft_images}}
     openscad -o {{loft_images}}/jigs.png \
@@ -125,7 +127,7 @@ loft-render-jigs:
         --projection=p --viewall --autocenter \
         -D 'view="all"' {{jigs_scad}}
 
-# POST M6 jig sitting on a post, cheek line on the pencil line
+# POST M6 jig on a post, index line on the pencil line, bar in one pocket
 loft-render-jig-on-post:
     @mkdir -p {{loft_images}}
     openscad -o {{loft_images}}/jig-on-post.png \
@@ -133,7 +135,7 @@ loft-render-jig-on-post:
         --projection=p --viewall --autocenter \
         -D 'view="on_post"' {{jigs_scad}}
 
-# RAIL jig pushed onto the end of a rail, end stop against the end
+# RAIL jig on the end of a rail, end stop against the end, bar across the rail
 loft-render-jig-on-rail:
     @mkdir -p {{loft_images}}
     openscad -o {{loft_images}}/jig-on-rail.png \
@@ -156,6 +158,23 @@ loft-render-rail-copy:
         --imgsize={{size}} --colorscheme={{scheme}} \
         --projection=p --camera=190,45,45,40,0,25,1150 \
         -D 'view="copy"' {{jigs_scad}}
+
+# --- printable jigs (STL, flat side down, ready to slice) ---
+
+# Export all three jigs
+loft-stl-all: loft-stl-post-m6 loft-stl-post-m8 loft-stl-rail
+
+loft-stl-post-m6:
+    @mkdir -p {{loft_stl}}
+    openscad -o {{loft_stl}}/post-m6.stl -D 'view="post_m6"' -D 'print=true' {{jigs_scad}}
+
+loft-stl-post-m8:
+    @mkdir -p {{loft_stl}}
+    openscad -o {{loft_stl}}/post-m8.stl -D 'view="post_m8"' -D 'print=true' {{jigs_scad}}
+
+loft-stl-rail:
+    @mkdir -p {{loft_stl}}
+    openscad -o {{loft_stl}}/rail.stl -D 'view="rail"' -D 'print=true' {{jigs_scad}}
 
 # Remove all rendered PNGs. WARNING: these files are committed (via LFS).
 # After running this, `git status` will show them as deleted — restore with
