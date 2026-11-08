@@ -46,16 +46,22 @@ rail_tier3_lift = 20;
 safety_gap = 90; // between rail tiers, except 70 above tier 3
 support_height = 600;
 
+// Support panel bolts: pairs at these heights, head on the ply outside, nut
+// recessed in the post's inner face. Not drawn. README step 5 has the table.
+panel_bolt_back = [250, 550]; // back posts, through the long faces
+panel_bolt_side = [400, 700]; // side "a" posts, through the end faces
+
 // Bed panel. It runs 90 further at the side "a" end, with a notch around each
 // side "a" post, to close the slot between those posts. Breathing holes sit
 // in the two bays between the joists, laid out from the panel's centre lines
 // so a panel cut a few mm under size still misses the joists. See README step 10.
 panel_extension = b45x90[1];
+notch_clearance = 2; // the notch is cut 2 wider than the post, README step 10
 breathing_hole = 25;
 breathing_cols = [for (o = [-315, -215, -115, 115, 215, 315]) bed_width / 2 + o];
 breathing_rows = [for (k = [-6 : 6]) bed_length / 2 + k * 150];
 echo(bed_panel = [bed_length + panel_extension, bed_width],
-     notch = [panel_extension, b45x90[1]],
+     notch = [panel_extension, b45x90[1] + notch_clearance],
      breathing_holes = len(breathing_cols) * len(breathing_rows));
 
 // SAFETY: end gap is 60mm
@@ -212,9 +218,9 @@ module bed_panel() {
     panel_xy(bed_length + panel_extension, bed_width);
 
     // notches around the two side "a" posts
-    for (y = [-eps, bed_width - b45x90[1]])
+    for (y = [-eps, bed_width - b45x90[1] - notch_clearance])
       translate([-panel_extension - eps, y, -eps])
-      cube([panel_extension + eps, b45x90[1] + eps, panel_thickness + 2 * eps]);
+      cube([panel_extension + eps, b45x90[1] + notch_clearance + eps, panel_thickness + 2 * eps]);
 
     // breathing holes
     for (x = breathing_rows, y = breathing_cols)

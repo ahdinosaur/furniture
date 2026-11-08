@@ -18,7 +18,7 @@ is bolted, so it comes apart for moving.
 | Mattress | 2030 x 1070 mm, 10 mm clearance each side |
 | Ladder | 8 rungs on side "b", 240 mm gap between rungs |
 | Safety rail | 4 tiers front and back, 3 side rails on side "a". Gaps 90 mm (70 above the lowest tier) |
-| Bolts | 8x M8 (bed frame) + 44x M6 (rails), cup head, 2 per joint. Heads inside, nuts recessed outside |
+| Bolts | 8x M8 (bed frame) + 60x M6 (rails and panels), cup head, 2 per joint. Every nut in a recess, nothing sticks out |
 | Interchangeable | every long rail fits every long rail slot, either end first, recesses facing out. Same for side rails and supports. No labels. |
 
 **Build order**
@@ -27,7 +27,7 @@ is bolted, so it comes apart for moving.
 2. [Cut the ladder housings](#2-cut-the-ladder-housings-side-b-posts-only) into the two side "b" posts
 3. [Glue and screw the rungs](#3-glue-and-screw-the-rungs) to make the ladder
 4. [Print the 3 drilling jigs](#4-print-the-jigs)
-5. [Drill the posts](#5-drill-the-posts), all 52 holes
+5. [Drill the posts](#5-drill-the-posts), all 68 holes
 6. [Drill the rails and supports](#6-drill-the-rails-and-supports): one master each, copy the rest
 7. [Bolt each side together flat](#7-bolt-the-two-sides-together-flat) on sawhorses
 8. [Stand it up and fit the bed frame](#8-stand-it-up-and-fit-the-bed-frame)
@@ -86,8 +86,8 @@ Links:
 | Panel | Size | Notes |
 | --- | --- | --- |
 | Bed panel | 2140 x 1090 | nominal. Cut it to the frame in [step 10](#10-panels), 5 under the opening. 90 x 90 notch at each side "a" corner, 78 breathing holes. |
-| Back support panel | 2230 x 600 | cosmetic |
-| Side "a" support panel | 1090 x 600 | cosmetic |
+| Back support panel | 2230 x 600 | braces the frame against racking. 8 bolts |
+| Side "a" support panel | 1090 x 600 | same. 8 bolts |
 
 ### Glue and finish
 
@@ -119,10 +119,11 @@ Links:
 | --- | ---: | --- |
 | M8 x 130 cup head bolt, zinc | 8 (buy 10) | bed frame supports |
 | M6 x 130 cup head bolt, zinc | 44 (buy 50) | rails |
+| M6 x 100 cup head bolt, zinc | 16 (buy 20) | support panels |
 | M8 Nyloc nut | 8 | |
-| M6 Nyloc nut | 44 | |
+| M6 Nyloc nut | 60 | |
 | M8 flat washer, max 20 mm across | 8 | must fit in the 25 mm recess |
-| M6 flat washer, max 20 mm across | 44 | same |
+| M6 flat washer, max 20 mm across | 60 | same |
 
 - "Cup head" is the NZ term, also "coach bolt". The square neck under the
   dome bites the wood so only the nut turns.
@@ -146,17 +147,20 @@ The 20 mm recess is what makes 130 work: 15 mm of thread past the recess
 floor, about 10 mm of it used by washer and Nyloc.
 
 Stack a real post pair on a real rail and measure before you buy. Bolt
-length = stack minus 5.
+length = stack minus 5. Panel plus post is 102, so the panel bolts are 100.
 
-**Which way round.** Heads go on the inside of the loft, nuts on the
-outside. Every nut sits in a 25 mm recess, 20 mm deep, so nothing sticks out.
+**Which way round.** Rail and support heads go on the inside of the loft,
+nuts on the outside. Panel heads go on the outside, on the ply, nuts inside.
+Every nut sits in a 25 mm recess, 20 mm deep, so nothing sticks out.
 
 | Bolt | Head on | Nut in a recess in |
 | --- | --- | --- |
 | M6 rail bolts | the post, inner face | the rail, outer face |
 | M8 support bolts | the support | the post, outer end face |
+| M6 panel bolts | the panel, outside | the post, inner face |
 
-Nothing is ever cut into the ladder's inner face, where the rungs are.
+Nothing is cut into the ladder's inner face near a rung. The two back panel
+recesses at 250 and 550 sit between rungs, 100 mm clear of the housings.
 
 **Hole sizes.** The part under the bolt head gets a snug hole so the square
 neck bites. The part under the nut gets a loose hole so parts drilled
@@ -165,8 +169,12 @@ M6 neck never touches wood and the head spins when you tighten.
 
 | Bolt | Head side, snug | Nut side, loose |
 | --- | --- | --- |
-| M6 | post, 6.5 mm | rail, 8 mm |
-| M8 | support, 8.5 mm | post, 10 mm |
+| M6 rail | post, 6.5 mm | rail, 8 mm |
+| M8 support | support, 8.5 mm | post, 10 mm |
+| M6 panel | panel, 6.5 mm | post, 6.5 mm |
+
+The panel bolts are the exception to "loose under the nut": the panel is
+drilled through the post holes in place, so both are 6.5.
 
 **Why M8 for the bed frame, M6 for the rails.** The supports are the only
 joints holding people up. Each support end rests on a shelf block screwed to
@@ -186,7 +194,8 @@ path.
 | Supports to posts | 4 | 8x M8 |
 | Long rails to posts (8 rails x 2 ends) | 16 | 32x M6 |
 | Side rails to posts (3 rails x 2 ends) | 6 | 12x M6 |
-| **Total** | **26** | **52** |
+| Support panels to posts (2 panels x 2 posts x 2 heights) | 8 | 16x M6 |
+| **Total** | **34** | **68** |
 
 Ladder rungs are not bolted. They sit in glued and screwed housings.
 
@@ -267,7 +276,8 @@ are the same at this stage.
 the heights in [Drill the posts](#5-drill-the-posts). Hitting a screw with a
 long bit wrecks both.
 
-- Below 1450 mm: anywhere, 250 to 300 mm apart.
+- Below 1450 mm: 250 to 300 mm apart, but **not at 225 to 275, 375 to 425,
+  525 to 575 or 675 to 725.** The panel bolts go there.
 - Above 1450 mm, on all four posts: **only at 1750, 1990, 2170 and 2350.**
 
 **Side "b" posts also keep screws out of these bands.** The ladder housings
@@ -342,7 +352,7 @@ Three jigs. Two pockets each, 40 mm apart. One bar moves between them.
 
 | Jig | Bar | Bit | Hole position | Registers on | Used on |
 | --- | --- | --- | --- | --- | --- |
-| **POST M6** | MDG1000NP | 6.5 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | all 44 rail holes in the posts |
+| **POST M6** | MDG1000NP | 6.5 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | all 60 M6 holes in the posts, rails and panels |
 | **POST M8** | MDG2000NP | 10 mm | 25 and 65 across the post, both at the same height | a pencil line on the post | the 8 support holes in the posts |
 | **RAIL** | MDG1000NP | 8 mm | 25 and 65 from the end stop, both dead centre (45 up) | the end of the rail | both ends of the master long rail only |
 
@@ -413,6 +423,10 @@ needs that line in step 6.
 
 | What bolts here | Jig on this face | Height | Jig | Side "b" |
 | --- | --- | ---: | --- | --- |
+| Back panel | inner long face, **back posts only** | 250 | POST M6 | back post |
+| Side "a" panel | inner end face | 400 | POST M6 | side "a" only |
+| Back panel | inner long face, **back posts only** | 550 | POST M6 | back post |
+| Side "a" panel | inner end face | 700 | POST M6 | side "a" only |
 | Support | outer end face | 1670 | POST M8 | yes |
 | Long rail tier 3 (lowest) | inner long face | 1870 | POST M6 | yes |
 | Side rail, lowest | inner end face | 1940 | POST M6 | side "a" only |
@@ -422,9 +436,22 @@ needs that line in step 6.
 | Side rail, top | inner end face | 2300 | POST M6 | side "a" only |
 | Long rail tier 0 (top) | inner long face | 2390 | POST M6 | yes |
 
-Side "a" posts get 16 holes each, side "b" posts 10 each. 52 total. Each
-height is the middle of its rail. Long rail and side rail bolts are at least
-50 mm apart in height, so no bolts cross inside a post.
+Rail holes: 16 in each side "a" post, 10 in each side "b" post. Panel holes:
+8 in the side "a" back post, 4 in the side "b" back post, 4 in the side "a"
+front post. 68 total. Each height is the middle of its rail, or a panel bolt
+line. No two heights are closer than 50 mm, so no bolts cross inside a post.
+
+**Posts already laminated?** Look for lamination screws within 25 mm of a
+panel height. If one is there, move that pair up or down to miss it, still
+50 clear of the other pair and of any rung. The panel is drilled through the
+post holes later, so the two ends of a panel need not match.
+
+**Planning a bottom bunk later?** Its supports go on like the top ones: POST
+M8 jig, shelf blocks, 50 mm clear of every rung, screw and bolt in the post.
+Panel bolts or not, the rungs and their screws rule out a bunk near the floor.
+The clean bands are a support centre of 865 to 895 (deck top about 1020) or
+1150 to 1180 (deck top about 1300). The side "a" panel comes off to fit it and
+goes back over the recessed nuts.
 
 Why tier 3 is at 1825 to 1915, not 1805: its bolt must clear rung 1, which
 tops out at 1845, and the rung screws in that band. At 1870 it clears by 20.
@@ -445,12 +472,18 @@ both posts:
    on the bit for depth.
 3. Jig back on. Drill both holes right through.
 
+**Panel holes, 16.** Same as the support holes: jig on the inner face, recess
+first, then the 6.5 bit right through. The nut sits in this recess, the head
+on the panel outside.
+
 **Side "b" is a ladder, not a loose post.** Lay it flat on the sawhorses. The
 jig can't sit on the rung face, so for the long rail holes it goes on the
 **outer** long face instead, clamped. Drill until the bit tip just shows on
 the inner face, then finish the last bit from the inner face with the same
 bit. That keeps the mouth clean where the bolt head sits. The support holes
-go in the outer end faces as normal.
+go in the outer end faces as normal. The two back panel heights are between
+rungs, and the jig fits there, so they go in from the rung face like any
+other recess hole.
 
 ### 6. Drill the rails and supports
 
@@ -634,9 +667,17 @@ a clamped straightedge. Don't try to sand 2 m of edge.
 Want it cut before the frame is up? Cut 2135 x 1085 with 90 x (D + 2)
 notches, and expect to trim an edge.
 
-**Support panels.** Back panel on the back posts, side "a" panel on the side
-"a" posts, top edge at 800 mm. A few short countersunk screws into the posts.
-Cosmetic only, don't load them.
+**Support panels.** They brace the frame against racking. Without them the
+only thing stopping the long faces leaning is 16 bolt pairs 40 mm apart. They
+bolt on, so the bed still comes apart.
+
+1. Back panel on the outside of the back posts, top edge at 800, ends flush
+   with the posts' outer end faces. Clamp. Side "a" panel the same, on the
+   outside of the side "a" posts, ends flush with the posts' outer long faces.
+2. From inside, drill through each of the 8 post holes into the ply with the
+   long 6.5 bit, right through. The post hole keeps it straight.
+3. M6 x 100 from outside, head on the ply. Washer and Nyloc in the recess
+   inside.
 
 ### 11. Finish
 
@@ -650,10 +691,10 @@ assembled bed with a sander is awkward.
 
 ### After it's built
 
-- **Re-tighten all 52 nuts after 2 to 4 weeks**, and again each year. Timber
+- **Re-tighten all 68 nuts after 2 to 4 weeks**, and again each year. Timber
   shrinks under the washers.
-- **To move it**: take off the rails, lift out the panel and joists, unbolt
-  the two supports. Side "b" travels as one tall ladder piece. Any rail goes
+- **To move it**: take off the rails and the two support panels, lift out
+  the bed panel and joists, unbolt the two supports. Side "b" travels as one tall ladder piece. Any rail goes
   back in any slot, recesses out. The shelf blocks stay on the posts.
 
 ## Reference views
