@@ -209,14 +209,13 @@ Ladder rungs are not bolted. They sit in glued and screwed housings.
   - 10 to 14 mm (MDG2000NP) for the 10 hole:
     https://www.carbatec.co.nz/product/17558-big-gator-v-drill-guides-10-14mm
 - 3D printer, for the three jigs. The biggest is 170 x 105 mm.
-- "Long series" drill bits, 6.5, 8.5 and 10 mm. The standard long series
-  lengths (about 148, 165 and 184 mm) are enough. Normal bits are not: the
-  bit has to pass through the 22 mm guide and the 90 mm post with the chuck
-  still above the guide. The 8.5 goes through a post and a support, 135 mm,
-  so grip no more than 25 mm of its shank. Cheapest found: North Shore
-  Tooling, about $15 each plus GST:
+- "Long series" drill bits, 6.5, 8, 8.5 and 10 mm. The standard long series
+  lengths (about 148 to 184 mm) are enough. Normal bits are not: the bit has
+  to pass through the 22 mm guide and the 90 mm post, or through a template
+  and the part under it, with the chuck still above. The 8.5 goes through a
+  post and a support, 135 mm, so grip no more than 25 mm of its shank.
+  Cheapest found: North Shore Tooling, about $15 each plus GST:
   https://www.northtools.co.nz/products/categories/drill-bits/metric-long-series-drill-bits/
-- 8 mm bit, any length, for the rail holes
 - 11 mm bit, any length, only for opening a tight nut-side hole
 - 5.5 mm twist bit (screw clearance holes) and 4 mm twist bit (pilots)
 - Driver bit for the batten screws, usually square drive #3, check the box
@@ -505,7 +504,10 @@ rail for long rails, support "b" for side rails.
 2. Spin the 8 mm bit by hand in each template hole to dimple the blank.
    Template off.
 3. Forstner a 25 mm recess, **20 mm deep**, on each dimple.
-4. Drill the 4 holes right through with the 8 mm bit.
+4. Template back on, the same way. Look down each template hole: the blank's
+   recess should be under it. Clamp.
+5. Drill the 4 holes right through the template and the blank with the
+   long 8 mm bit. The template hole keeps the bit straight.
 
 ![The master long rail clamped on a blank, bit dimpling through one hole](./images/rail-copy.png)
 
