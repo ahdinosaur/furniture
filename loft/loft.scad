@@ -3,7 +3,7 @@
 // on the CLI, e.g. `openscad -D 'view="post"' loft.scad`. See the dispatch
 // block at the bottom of this file for the supported view names.
 
-view = "all"; // "all" | "side_a" | "side_b" | "bed_frame" | "safety_rails" | "post" | "post_blank"
+view = "all"; // "all" | "side_a" | "side_b" | "bed_frame" | "safety_rails" | "post" | "post_blank" | "bed_panel"
 
 
 eps = 0.01;
@@ -45,6 +45,18 @@ support_bottom = 200;
 rail_tier3_lift = 20;
 safety_gap = 90; // between rail tiers, except 70 above tier 3
 support_height = 600;
+
+// Bed panel. It runs 90 further at the side "a" end, with a notch around each
+// side "a" post, to close the slot between those posts. Breathing holes sit
+// in the two bays between the joists, laid out from the panel's centre lines
+// so a panel cut a few mm under size still misses the joists. See README step 10.
+panel_extension = b45x90[1];
+breathing_hole = 25;
+breathing_cols = [for (o = [-315, -215, -115, 115, 215, 315]) bed_width / 2 + o];
+breathing_rows = [for (k = [-6 : 6]) bed_length / 2 + k * 150];
+echo(bed_panel = [bed_length + panel_extension, bed_width],
+     notch = [panel_extension, b45x90[1]],
+     breathing_holes = len(breathing_cols) * len(breathing_rows));
 
 // SAFETY: end gap is 60mm
 echo(end_gap = ladder_gap - 2 * b45x90[1]);
@@ -178,9 +190,8 @@ module bed_frame(with_panel = true) {
   beam_xz(b45x90, bed_length);
 
   if (with_panel) {
-    color("orange")
     translate([0, 0, b45x90[1]])
-    panel_xy(bed_length, bed_width);
+    bed_panel();
   }
 
   // support sides
@@ -191,6 +202,25 @@ module bed_frame(with_panel = true) {
   color("cyan")
   translate([bed_length - b45x90[0], 0, -b45x90[1]])
   beam_yz(b45x90, bed_width);
+}
+
+// Side "b" end at x = bed_length, notched end at x = -panel_extension.
+module bed_panel() {
+  color("orange")
+  difference() {
+    translate([-panel_extension, 0, 0])
+    panel_xy(bed_length + panel_extension, bed_width);
+
+    // notches around the two side "a" posts
+    for (y = [-eps, bed_width - b45x90[1]])
+      translate([-panel_extension - eps, y, -eps])
+      cube([panel_extension + eps, b45x90[1] + eps, panel_thickness + 2 * eps]);
+
+    // breathing holes
+    for (x = breathing_rows, y = breathing_cols)
+      translate([x, y, -eps])
+      cylinder(d = breathing_hole, h = panel_thickness + 2 * eps, $fn = 32);
+  }
 }
 
 module front_support_panel() {
@@ -295,4 +325,5 @@ else if (view == "bed_frame")    bed_frame(with_panel = false);
 else if (view == "safety_rails") safety_rails();
 else if (view == "post")         rotate([0, 90, 0]) post(true);
 else if (view == "post_blank")   rotate([0, 90, 0]) post(false);
+else if (view == "bed_panel")    bed_panel();
 else assert(false, str("unknown view: ", view, " (see header for valid names)"));

@@ -85,7 +85,7 @@ Links:
 
 | Panel | Size | Notes |
 | --- | --- | --- |
-| Bed panel | 2140 x 1090 | cut it **last**, to the real opening. 90 x 90 notch at each side "a" corner so it reaches the side rail and closes the gap behind the posts. Needs breathing holes. |
+| Bed panel | 2140 x 1090 | nominal. Cut it to the frame in [step 10](#10-panels), 5 under the opening. 90 x 90 notch at each side "a" corner, 78 breathing holes. |
 | Back support panel | 2230 x 600 | cosmetic |
 | Side "a" support panel | 1090 x 600 | cosmetic |
 
@@ -590,17 +590,49 @@ If a nut won't reach the thread, the rail is on recess side in. Turn it over.
 
 ### 10. Panels
 
-**Bed panel.** Cut it now, to the real joist length and real post spacing,
-plus 90 mm at the side "a" end with a 90 x 90 notch at each corner. The extra
-90 covers the gap between the posts behind the side rails. Drill the breathing
-holes on a bench before fitting:
+![Bed panel from above, notched end on the left, breathing holes in two bands](./images/bed-panel.png)
 
-- 25 mm Forstner, about a 150 mm grid, 75 mm in from the edges. That is about
-  7 columns across by 13 rows along, around 90 holes.
-- The joists run lengthwise, so two of the columns land on joists. Skip those,
-  leaving about 65 useful holes.
-- Clamp scrap under the panel to stop blow-out.
-- Drops onto the joists. Gravity and the supports hold it. No fasteners.
+**Bed panel.** Cut it after step 9. The rails and the ladder set the opening,
+not the joists, so measure the frame, not the drawing. Nominal is 2140 x 1090
+with a 90 x 90 notch at each side "a" corner. The extra 90 closes the slot
+between the side "a" posts.
+
+Measure on the frame:
+
+| Call it | What | Tape from, tape to |
+| --- | --- | --- |
+| **A** | opening length | inner face of a side "a" post to inner face of the side "b" post, at joist height. Front and back, keep the smaller. |
+| **B** | opening width | inner face of the front tier 3 rail to inner face of the back one. Both ends, keep the smaller. |
+| **D** | post width | across a side "a" post, the face you see from the front. |
+
+Cut:
+
+| Cut | Size | Why |
+| --- | --- | ---: |
+| Panel | **A + 85** long, **B - 5** wide | 5 under the opening, so it drops in |
+| Notch, both corners of one end | **90** along the length, **D + 2** across | wraps the side "a" posts |
+
+Breathing holes, before fitting. They must miss the three joists, so mark
+them from the panel's centre lines, not from its edges. That way a panel a
+few mm under size still puts them in the right place.
+
+1. Across: measure the panel's width, halve it, draw the centre line along
+   the whole length.
+2. Along: measure from the notch faces to the far end, halve it, draw the
+   centre line across. Not from the end of the extension.
+3. Draw 6 lines along the panel: 115, 215 and 315 each side of the long
+   centre line.
+4. Draw 13 lines across: the short centre line, then every 150 out to 900
+   each side.
+5. 25 mm Forstner at every crossing. 78 holes. Clamp scrap under the panel
+   to stop blow-out.
+
+Fit: drop it onto the joists, notched end to side "a". Gravity and the rails
+hold it. No fasteners. If it binds, trim that edge with the circular saw along
+a clamped straightedge. Don't try to sand 2 m of edge.
+
+Want it cut before the frame is up? Cut 2135 x 1085 with 90 x (D + 2)
+notches, and expect to trim an edge.
 
 **Support panels.** Back panel on the back posts, side "a" panel on the side
 "a" posts, top edge at 800 mm. A few short countersunk screws into the posts.
@@ -642,8 +674,8 @@ The numbers in this README mirror the constants at the top of the file
 `bed_length = 2050`, `bed_width = 1090`, and so on). If you change one, update
 both. The README is a sibling source of truth, not generated. The housing
 shelf heights come from the `echo ladder_top=` output (shelf = `top` minus 90,
-a leftover name from before the housing rewrite). Bolts, recesses, shelf
-blocks and the bed panel notches are not in the model.
+a leftover name from before the housing rewrite). Bolts, recesses and shelf
+blocks are not in the model.
 
 ## Rendering
 

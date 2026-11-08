@@ -27,6 +27,7 @@ loft-render-all: loft-render-iso \
                  loft-render-safety-rails \
                  loft-render-post-blank \
                  loft-render-post \
+                 loft-render-bed-panel \
                  loft-render-jigs \
                  loft-render-jig-on-post \
                  loft-render-jig-on-rail \
@@ -116,6 +117,15 @@ loft-render-post:
         --imgsize={{size}} --colorscheme={{scheme}} \
         --projection=p --viewall --autocenter \
         -D 'view="post"' {{scad}}
+
+# The bed panel alone, from above: notched end and breathing holes.
+# Full render, not preview, so the thin notches draw cleanly.
+loft-render-bed-panel:
+    @mkdir -p {{loft_images}}
+    openscad -o {{loft_images}}/bed-panel.png \
+        --imgsize={{size}} --colorscheme={{scheme}} \
+        --projection=o --camera=0,0,0,0,0,0,0 --viewall --autocenter --render \
+        -D 'view="bed_panel"' {{scad}}
 
 # --- drilling jigs (loft/jigs.scad) ---
 
