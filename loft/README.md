@@ -209,9 +209,14 @@ Ladder rungs are not bolted. They sit in glued and screwed housings.
   - 10 to 14 mm (MDG2000NP) for the 10 hole:
     https://www.carbatec.co.nz/product/17558-big-gator-v-drill-guides-10-14mm
 - 3D printer, for the three jigs. The biggest is 170 x 105 mm.
-- Long drill bits. 6.5, 8.5 and 10 mm, 200 mm long (through a 90 mm post
-  and into the part behind it). 8 mm, 150 mm long (22 mm guide plus 45 mm
-  rail).
+- "Long series" drill bits, 6.5, 8.5 and 10 mm. The standard long series
+  lengths (about 148, 165 and 184 mm) are enough. Normal bits are not: the
+  bit has to pass through the 22 mm guide and the 90 mm post with the chuck
+  still above the guide. The 8.5 goes through a post and a support, 135 mm,
+  so grip no more than 25 mm of its shank. Cheapest found: North Shore
+  Tooling, about $15 each plus GST:
+  https://www.northtools.co.nz/products/categories/drill-bits/metric-long-series-drill-bits/
+- 8 mm bit, any length, for the rail holes
 - 11 mm bit, any length, only for opening a tight nut-side hole
 - 5.5 mm twist bit (screw clearance holes) and 4 mm twist bit (pilots)
 - Driver bit for the batten screws, usually square drive #3, check the box
